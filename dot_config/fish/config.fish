@@ -25,7 +25,7 @@ if status is-interactive
   abbr o xdg-open
   abbr t eza --tree --icons --git
 	abbr gaa git add --all
-	abbr gco git checkout
+	abbr gba git branch --all
   abbr gsc git switch -c
   abbr ytx yt-dlp -x
   abbr yta yt-dlp -x --output "%(autonumber)02d %(title)s.%(ext)s"

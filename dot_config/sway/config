@@ -33,7 +33,7 @@ floating_modifier $mod normal
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exit
-bindsym $mod+ctrl+q exec swaylock
+bindsym $mod+ctrl+q exec waylock
 bindsym $mod+ctrl+r exec loginctl reboot
 bindsym $mod+ctrl+p exec loginctl poweroff
 
@@ -112,8 +112,8 @@ bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@
 bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
 mode audio {
   bindsym space exec playerctl play-pause; mode default
-  bindsym $left exec playerctl next; mode default
-  bindsym $right exec playerctl previous; mode default
+  bindsym $left exec playerctl previous; mode default
+  bindsym $right exec playerctl next; mode default
   bindsym x exec playerctl stop
 
   bindsym m exec pactl set-sink-mute @DEFAULT_SINK@ toggle; mode default

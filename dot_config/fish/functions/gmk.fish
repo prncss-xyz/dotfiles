@@ -1,3 +1,4 @@
 function gmk
-  gh repo create prncss-xyz/(basename $PWD) --public --source=.
+  gh repo create (basename $PWD) --public --source=.
+  git push
 end

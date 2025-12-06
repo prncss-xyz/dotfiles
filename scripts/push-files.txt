@@ -1,4 +1,2 @@
-a
-b
-c
+.config/gh/hosts.yml
 
