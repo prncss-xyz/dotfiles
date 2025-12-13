@@ -2,4 +2,4 @@ bindsym $mod+t exec footclient
 bindsym $mod+shift+t exec footclient -e sh
 exec foot --server
 exec sh -c 'sleep 1; footclient --title=scratchpad'
-exec sh -c 'sleep 1; footclient'
+# exec sh -c 'sleep 1; footclient'
