@@ -12,6 +12,8 @@
 	editor = nvim -u ~/.config/nvim/prompter.vim --noplugin
 [pull]
 	rebase = true
+[merge]
+  ff = only
 [diff "jupyternotebook"]
 	command = git-nbdiffdriver diff
 [merge "jupyternotebook"]
