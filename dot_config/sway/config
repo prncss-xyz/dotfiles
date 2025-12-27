@@ -147,14 +147,14 @@ bindsym $mod+u exec echo
 bindsym $mod+w exec echo
 bindsym $mod+s exec echo
 
-exec swaync
-bindsym $mod+g exec swaync-client -t
-bindsym $mod+Shift+g exec swaync-client -t -sw
-
 for_window [app_id=^chromium$] inhibit_idle fullscreen
 for_window [app_id=^firefox$] inhibit_idle fullscreen
 for_window [app_id=^celluloid$] inhibit_idle fullscreen
 for_window [title=^scratchpad$] move scratchpad
+
+exec swaync
+bindsym $mod+g exec swaync-client -t
+bindsym $mod+Shift+g exec swaync-client -t -sw
 
 exec firefox
 exec wlsunset -S 07:00 -s 16:00
