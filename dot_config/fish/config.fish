@@ -27,6 +27,8 @@ if status is-interactive
 	abbr gaa git add --all
 	abbr gba git branch --all
   abbr gsc git switch -c
+  abbr grhh git reset --hard HEAD
+  abbr gch git checkout HEAD --
   abbr ytx yt-dlp -x
   abbr yta yt-dlp -x --output "%(autonumber)02d %(title)s.%(ext)s"
 

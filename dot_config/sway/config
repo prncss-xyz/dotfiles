@@ -16,7 +16,7 @@ input type:keyboard {
 seat * hide_cursor 10000
 output HDMI-A-3 scale 2
 
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+exec --no-startup-id random-bg.fish
 exec swayidle -w \
          timeout 300 'waylock -fork-on-lock' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -156,6 +156,8 @@ for_window [app_id=^firefox$] inhibit_idle fullscreen
 for_window [app_id=^celluloid$] inhibit_idle fullscreen
 for_window [title=^scratchpad$] move scratchpad
 
+exec /usr/bin/gnome-keyring-daemon --start
+exec dbus-update-activation-environment --all
 exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY
 exec gpg-connect-agent /bye
 
@@ -165,7 +167,7 @@ exec udiskie
 exec kdeconnectd
 exec syncthing serve --no-browser --no-restart --logflags=0
 exec pipewire
-exec /usr/bin/gnome-keyring-daemon --start
+exec /usr/libexec/polkit-gnome-authentication-agent-1
 exec waybar
 include ./foot
 include /etc/sway/config.d/*
