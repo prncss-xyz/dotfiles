@@ -1,6 +1,10 @@
 cd $HOME/.local/share/chezmoi/
 gh extension install gennaro-tedesco/gh-f
 git remote add origin git@github.com:prncss-xyz/chezmoi.git || true
+mkdir -p ~/.config/service/dbus
+ln -s /usr/share/examples/turnstile/dbus.run ~/.config/service/dbus/run
+ln -s /usr/share/examples/turnstile/dbus.check ~/.config/service/dbus/check
+
 cat <<EOF > ~/TODO.md
 - [ ] link syncthing
 - [ ] link KDEConnect

@@ -150,24 +150,23 @@ for_window [app_id=^firefox$] inhibit_idle fullscreen
 for_window [app_id=^celluloid$] inhibit_idle fullscreen
 for_window [title=^scratchpad$] move scratchpad
 
-exec /usr/bin/gnome-keyring-daemon --start
-exec dbus-update-activation-environment --all
-exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY
-exec gpg-connect-agent /bye
+# exec /usr/bin/gnome-keyring-daemon --start
+# exec gpg-connect-agent /bye
+# exec syncthing serve --no-browser --no-restart --logflags=0 &
 exec /usr/libexec/polkit-gnome-authentication-agent-1 &
 exec pipewire &
 exec kdeconnectd &
-exec syncthing serve --no-browser --no-restart --logflags=0 &
-
+exec dbus-update-activation-environment --all
+exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY
 exec --no-startup-id $HOME/.local/bin/random-sway-bg
-
 exec swaync
 bindsym $mod+g exec swaync-client -t
 bindsym $mod+Shift+g exec swaync-client -t -sw
-
-exec firefox
 exec wlsunset -S 07:00 -s 16:00
 exec udiskie
 exec waybar
+
+# autostart
+exec firefox
 include ./foot
 include /etc/sway/config.d/*

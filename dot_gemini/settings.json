@@ -10,15 +10,23 @@
   "mcpServers": {
     "context7": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
     },
     "ddg-search": {
       "command": "uvx",
-      "args": ["duckduckgo-mcp-server"]
+      "args": [
+        "duckduckgo-mcp-server"
+      ]
     },
     "serena": {
       "command": "uvx",
@@ -28,12 +36,17 @@
         "serena",
         "start-mcp-server",
         "--context",
-        "ide-assistant"
+        "ide-assistant",
+        "--enable-web-dashboard",
+        "False"
       ]
     },
     "allPepper-memory-bank": {
       "command": "npx",
-      "args": ["-y", "@allpepper/memory-bank-mcp@latest"],
+      "args": [
+        "-y",
+        "@allpepper/memory-bank-mcp@latest"
+      ],
       "env": {
         "MEMORY_BANK_ROOT": "$HOME/memory-bank"
       }
