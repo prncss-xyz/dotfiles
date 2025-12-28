@@ -16,7 +16,6 @@ input type:keyboard {
 seat * hide_cursor 10000
 output HDMI-A-3 scale 2
 
-exec --no-startup-id random-sway-bg.fish
 exec swayidle -w \
          timeout 300 'waylock -fork-on-lock' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -121,7 +120,6 @@ bindsym $mod+o mode audio
 exec pactl set-sink-volume @DEFAULT_SINK@ 30%
 exec pactl set-sink-mute @DEFAULT_SINK@ 0
 
-
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 mode lumino {
@@ -151,6 +149,17 @@ for_window [app_id=^chromium$] inhibit_idle fullscreen
 for_window [app_id=^firefox$] inhibit_idle fullscreen
 for_window [app_id=^celluloid$] inhibit_idle fullscreen
 for_window [title=^scratchpad$] move scratchpad
+
+exec /usr/bin/gnome-keyring-daemon --start
+exec dbus-update-activation-environment --all
+exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY
+exec gpg-connect-agent /bye
+exec /usr/libexec/polkit-gnome-authentication-agent-1 &
+exec pipewire &
+exec kdeconnectd &
+exec syncthing serve --no-browser --no-restart --logflags=0 &
+
+exec --no-startup-id $HOME/.local/bin/random-sway-bg
 
 exec swaync
 bindsym $mod+g exec swaync-client -t
