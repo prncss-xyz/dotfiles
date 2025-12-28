@@ -33,8 +33,8 @@ floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exit
 bindsym $mod+ctrl+q exec waylock
-bindsym $mod+ctrl+r exec loginctl reboot
-bindsym $mod+ctrl+p exec loginctl poweroff
+bindsym $mod+ctrl+r exec reboot
+bindsym $mod+ctrl+p exec poweroff
 
 bindsym $mod+a focus parent
 bindsym $mod+space focus mode_toggle
