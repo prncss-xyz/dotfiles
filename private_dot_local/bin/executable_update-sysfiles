@@ -1,2 +1,10 @@
 #!/usr/bin/env sh
-sudo rsync -Lr ~/.sysfiles/* /
+
+# use sudo or doas depending on which is available
+if command -v doas >/dev/null 2>&1; then
+    SUDO="doas"
+else
+    SUDO="sudo"
+fi
+
+$SUDO rsync -Lr ~/.sysfiles/* /
