@@ -16,10 +16,10 @@ input type:keyboard {
 seat * hide_cursor 10000
 output HDMI-A-3 scale 2
 
-exec swayidle -w \
-         timeout 300 'waylock -fork-on-lock' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'waylock -fork-on-lock'
+exec --no-startup-id swayidle -w \
+  timeout 300 'waylock -fork-on-lock' \
+  timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+  before-sleep 'waylock -fork-on-lock'
 
 bindsym $mod+Shift+q kill
 
@@ -32,9 +32,9 @@ floating_modifier $mod normal
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exit
-bindsym $mod+ctrl+q exec waylock
-bindsym $mod+ctrl+r exec doas reboot
-bindsym $mod+ctrl+p exec doas poweroff
+bindsym $mod+ctrl+q exec --no-startup-id waylock
+bindsym $mod+ctrl+r exec --no-startup-id doas reboot
+bindsym $mod+ctrl+p exec --no-startup-id doas poweroff
 
 bindsym $mod+a focus parent
 bindsym $mod+space focus mode_toggle
@@ -92,41 +92,41 @@ mode resize {
 }
 bindsym $mod+r mode resize
 
-bindsym --locked XF86AudioPlay exec playerctl --player playerctld play-pause
-bindsym --locked XF86AudioNext exec playerctl --player playerctld next
-bindsym XF86AudioPrev exec playerctl --player playerctld previous
-bindsym XF86AudioStop exec playerctl --player playerctld stop
-bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-mode audio {
-  bindsym space exec playerctl play-pause; mode default
-  bindsym $left exec playerctl previous; mode default
-  bindsym $right exec playerctl next; mode default
-  bindsym x exec playerctl stop
+bindsym --locked XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym --locked XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioStop exec --no-startup-id playerctl stop
 
-  bindsym m exec pactl set-sink-mute @DEFAULT_SINK@ toggle; mode default
-  bindsym $up exec pactl set-sink-volume @DEFAULT_SINK@ +4% 
-  bindsym $down exec pactl set-sink-volume @DEFAULT_SINK@ -4%
-  bindsym shift+$up exec pactl set-sink-volume @DEFAULT_SINK@ +12%
-  bindsym shift+$down exec pactl set-sink-volume @DEFAULT_SINK@ -12%
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 4%-
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 4%+
+bindsym --locked XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym --locked XF86AudioMicMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+mode audio {
+  bindsym space exec --no-startup-id playerctl play-pause; mode default
+  bindsym $left exec --no-startup-id playerctl previous; mode default
+  bindsym $right exec --no-startup-id playerctl next; mode default
+  bindsym x exec --no-startup-id playerctl stop
+
+  bindsym m exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+  bindsym $up exec --no-startup-id wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 4%+ 
+  bindsym $down exec --no-startup-id wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 4%-
+  bindsym shift+$up exec --no-startup-id wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 12%+
+  bindsym shift+$down exec --no-startup-id wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 12%-
 
   bindsym ctrl+c mode default
   bindsym escape mode default
   bindsym return mode default
 }
 bindsym $mod+o mode audio
-exec pactl set-sink-volume @DEFAULT_SINK@ 30%
-exec pactl set-sink-mute @DEFAULT_SINK@ 0
 
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 mode lumino {
-  bindsym $up exec brightnessctl set 2%+
-  bindsym $down exec brightnessctl set 2%-
-  bindsym shift+$up exec brightnessctl set 100%
-  bindsym shift+$down exec brightnessctl set 0%
+  bindsym $up exec --no-startup-id brightnessctl -e4 -n2 set 2%+
+  bindsym $down exec --no-startup-id brightnessctl set 2%-
+  bindsym shift+$up exec --no-startup-id brightnessctl set 100%
+  bindsym shift+$down exec --no-startup-id brightnessctl set 0%
   bindsym ctrl+c mode default
   bindsym escape mode default
   bindsym return mode default
@@ -134,6 +134,7 @@ mode lumino {
 bindsym $mod+i mode lumino
 
 bindsym Print exec grim
+bindsym $mod+s exec grim
 bindsym $mod+d exec fuzzel
 bindsym $mod+p exec PASSWORD_STORE_DIR=$HOME/Personal/pass/ tessen
 bindsym $mod+y exec firefox
@@ -143,24 +144,23 @@ bindsym $mod+e exec neovide
 bindsym $mod+h exec echo
 bindsym $mod+u exec echo
 bindsym $mod+w exec echo
-bindsym $mod+s exec echo
 
 for_window [app_id=^chromium$] inhibit_idle fullscreen
 for_window [app_id=^firefox$] inhibit_idle fullscreen
 for_window [app_id=^celluloid$] inhibit_idle fullscreen
 for_window [title=^scratchpad$] move scratchpad
 
-exec /usr/libexec/polkit-gnome-authentication-agent-1
-exec kdeconnectd
-exec dbus-update-activation-environment --all
-exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY
-exec --no-startup-id $HOME/.local/bin/random-sway-bg
-exec swaync
+exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1
+exec --no-startup-id kdeconnectd
+exec --no-startup-id dbus-update-activation-environment --all
+exec --no-startup-id dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY
+exec --no-startup-id .local/bin/random-wm-bg
+exec --no-startup-id swaync
 bindsym $mod+g exec swaync-client -t
 bindsym $mod+Shift+g exec swaync-client -t -sw
-exec wlsunset -S 07:00 -s 16:00
-exec udiskie
-exec waybar
+exec --no-startup-id wlsunset -S 07:00 -s 16:00
+exec --no-startup-id udiskie
+exec --no-startup-id waybar
 
 # autostart
 exec firefox

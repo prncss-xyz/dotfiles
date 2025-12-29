@@ -1,2 +1,1 @@
-# ~/.config/service/turnstile-ready/conf
 core_services="dbus"

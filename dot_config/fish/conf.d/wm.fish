@@ -3,7 +3,8 @@ if set -q WAYLAND_DISPLAY
 end
 
 set TTY1 (tty)
-# If running from tty1 start sway
+# if running from tty1 start wm
 if test "$TTY1" = "/dev/tty1"
   exec sway
+  # exec hyprland
 end
