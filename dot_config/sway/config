@@ -33,8 +33,8 @@ floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exit
 bindsym $mod+ctrl+q exec waylock
-bindsym $mod+ctrl+r exec reboot
-bindsym $mod+ctrl+p exec poweroff
+bindsym $mod+ctrl+r exec doas reboot
+bindsym $mod+ctrl+p exec doas poweroff
 
 bindsym $mod+a focus parent
 bindsym $mod+space focus mode_toggle
@@ -150,12 +150,8 @@ for_window [app_id=^firefox$] inhibit_idle fullscreen
 for_window [app_id=^celluloid$] inhibit_idle fullscreen
 for_window [title=^scratchpad$] move scratchpad
 
-# exec /usr/bin/gnome-keyring-daemon --start
-# exec gpg-connect-agent /bye
-# exec syncthing serve --no-browser --no-restart --logflags=0 &
-exec /usr/libexec/polkit-gnome-authentication-agent-1 &
-exec pipewire &
-exec kdeconnectd &
+exec /usr/libexec/polkit-gnome-authentication-agent-1
+exec kdeconnectd
 exec dbus-update-activation-environment --all
 exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY
 exec --no-startup-id $HOME/.local/bin/random-sway-bg
