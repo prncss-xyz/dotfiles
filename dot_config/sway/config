@@ -16,10 +16,6 @@ input type:keyboard {
 seat * hide_cursor 10000
 output HDMI-A-3 scale 2
 
-exec --no-startup-id swayidle -w \
-  timeout 300 'waylock -fork-on-lock' \
-  timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-  before-sleep 'waylock -fork-on-lock'
 
 bindsym $mod+Shift+q kill
 
@@ -30,8 +26,8 @@ bindsym $mod+Shift+q kill
 # mouse button for dragging.
 floating_modifier $mod normal
 
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exit
+bindsym $mod+ctrl+c reload
+bindsym $mod+ctrl+e exit
 bindsym $mod+ctrl+q exec --no-startup-id waylock
 bindsym $mod+ctrl+r exec --no-startup-id doas reboot
 bindsym $mod+ctrl+p exec --no-startup-id doas poweroff
@@ -150,6 +146,10 @@ for_window [app_id=^firefox$] inhibit_idle fullscreen
 for_window [app_id=^celluloid$] inhibit_idle fullscreen
 for_window [title=^scratchpad$] move scratchpad
 
+exec --no-startup-id swayidle -w \
+  timeout 300 'waylock -fork-on-lock' \
+  timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+  before-sleep 'waylock -fork-on-lock'
 exec /usr/libexec/polkit-gnome-authentication-agent-1
 exec kdeconnectd
 exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
