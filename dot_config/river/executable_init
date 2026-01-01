@@ -21,14 +21,13 @@ riverctl keyboard-layout -options "caps:escape" ca
 riverctl map normal Super+Control E close
 riverctl map normal Super+Control Q spawn waylock
 riverctl map normal Super+Control C spawn .config/river/init
+
 riverctl map normal Super F toggle-fullscreen
 
-# riverctl map normal Super $UP focus-view up
-# riverctl map normal Super $DOWN focus-view down
-# riverctl map normal Super $LEFT focus-view left
-# riverctl map normal Super $RIGHT focus-view right
 riverctl map normal Super $UP focus-view next
 riverctl map normal Super $DOWN focus-view previous
+riverctl map normal Super $LEFT focus-view left
+riverctl map normal Super $RIGHT focus-view right
 riverctl map normal Super+Shift $UP swap next
 riverctl map normal Super+Shift $DOWN swap previous
 riverctl map normal Super Return zoom
@@ -145,12 +144,6 @@ riverctl map normal Super+Shift comma set-view-tags 4
 riverctl map normal Super+Shift period set-view-tags 8
 riverctl map normal Super+Shift eacute set-view-tags 16
 
-riverctl map normal Super+Control n toggle-focused-tags 1
-riverctl map normal Super+Control m toggle-focused-tags 2
-riverctl map normal Super+Control comma toggle-focused-tags 4
-riverctl map normal Super+Control period toggle-focused-tags 8
-riverctl map normal Super+Control eacute toggle-focused-tags 16
-
 riverctl map normal Super A focus-previous-tags
 riverctl map normal Super+Shift A send-to-previous-tags
 all_tags=$(((1 << 32) - 1))
@@ -171,29 +164,19 @@ riverctl rule-add -app-id org.freedesktop.Xwayland ssd
 
 riverctl default-layout rivertile
 
-riverctl map normal Super D spawn fuzzel
-riverctl map normal Super E spawn neovide
-riverctl map normal Super T spawn footclient
-riverctl map normal Super U spawn "footclient yazi"
-riverctl map normal Super Y spawn .local/bin/browser
-riverctl map normal Super P spawn "PASSWORD_STORE_DIR=$HOME/Personal/pass/ tessen"
-riverctl map normal Super N spawn "makoctl dismiss"
-riverctl map normal Super+Shift N spawn "makoctl dismiss --all"
-riverctl map normal Super V spawn "footclient mvl imv"
-
-riverctl map normal Print exec grim
-riverctl map normal Super S exec grim
+riverctl map normal Print spawn grim
+riverctl map normal Super S spawn grim
 riverctl map normal Super D spawn fuzzel
 riverctl map normal Super E spawn neovide
 riverctl map normal Super T spawn footclient
 riverctl map normal Super Y spawn .local/bin/browser
-riverctl map normal Super P spawn "PASSWORD_STORE_DIR=$HOME/Personal/pass/ tessen"
+riverctl map normal Super P spawn "STORE_DIR=$HOME/Personal/pass/ tessen"
 riverctl map normal Super G spawn "swaync"
 riverctl map normal Super+Shift G spawn "swaync-client -t"
 
 spawn_once way-displays >/tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1
 
-spawn_once rivertile
+spawn_once rivertile -view-padding 4 -outer-padding 0
 # spawn_once river-tag-overlay
 spawn_once foot --server
 spawn_once swayidle -w \
@@ -205,10 +188,12 @@ spawn_once kdeconnectd
 spawn_once dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
 spawn_once turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
 sv restart polkit-gnome
-spawn_once .local/bin/random-wm-bg
 spawn_once swaync
-bindsym $mod+g exec swaync-client -t
-bindsym $mod+Shift+g exec swaync-client -t -sw
+bindsym $mod+g spawn swaync-client -t
+bindsym $mod+Shift+g spawn swaync-client -t -sw
 spawn_once wlsunset -S 07:00 -s 16:00
 spawn_once udiskie
-spawn_once waybar
+
+$HOME/.local/bin/random-wm-bg &
+waybar &
+firefox &
