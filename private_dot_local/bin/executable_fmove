@@ -1,0 +1,49 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <filename>"
+    exit 1
+fi
+
+FILE="$1"
+
+if [ ! -e "$FILE" ]; then
+    echo "Error: File '$FILE' does not exist."
+    exit 1
+fi
+
+# Get the directory containing the file
+DIR=$(dirname "$FILE")
+
+# Run fzf with print-query
+# --print-query prints the query string as the first line
+OUTPUT=$(find "$DIR" -mindepth 1 -type d | fzf --print-query --header="Move $(basename "$FILE") to (type to create new):")
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -eq 130 ]; then
+    echo "Cancelled."
+    exit 0
+fi
+
+# Extract query and selection
+QUERY=$(echo "$OUTPUT" | head -n1)
+SELECTION=$(echo "$OUTPUT" | tail -n +2)
+
+if [ -n "$SELECTION" ]; then
+    DEST="$SELECTION"
+    echo "Moving to existing directory: $DEST"
+elif [ -n "$QUERY" ]; then
+    DEST="$DIR/$QUERY"
+    echo "Creating new directory: $DEST"
+    mkdir -p "$DEST"
+else
+    echo "No destination selected."
+    exit 1
+fi
+
+if [ -d "$DEST" ]; then
+    mv -v "$FILE" "$DEST/"
+else
+    echo "Error: Destination '$DEST' is not a directory."
+    exit 1
+fi

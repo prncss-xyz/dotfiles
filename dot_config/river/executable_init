@@ -6,15 +6,15 @@ spawn_once() {
 
 UP=K
 DOWN=J
-LEFT=L
-RIGHT=semicolon
+LEFT=semicolon
+RIGHT=L
 NEXT=N
 PREVIOUS=P
 
 O_UP=I
 O_DOWN=U
-O_LEFT=O
-O_RIGHT=P
+O_LEFT=P
+O_RIGHT=O
 
 riverctl keyboard-layout -options "caps:escape" ca
 
@@ -167,7 +167,7 @@ riverctl default-layout rivertile
 riverctl map normal Print spawn grim
 riverctl map normal Super S spawn grim
 riverctl map normal Super D spawn fuzzel
-riverctl map normal Super E spawn neovide
+riverctl map normal Super E spawn "fish -c neovide" # we need this to have paths properly setup
 riverctl map normal Super T spawn footclient
 riverctl map normal Super Y spawn .local/bin/browser
 riverctl map normal Super P spawn "STORE_DIR=$HOME/Personal/pass/ tessen"

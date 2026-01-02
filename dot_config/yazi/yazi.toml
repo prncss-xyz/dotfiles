@@ -1,0 +1,4 @@
+[opener]
+open = [
+  { run = "opener %s", orphan = true, desc = "Open" },
+]

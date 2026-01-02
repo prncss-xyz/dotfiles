@@ -6,7 +6,8 @@ prepend_keymap = [
 	{ on = ":", run = "forward", desc = "Forward to next directory" },
 	{ on = "é", run = "find --smart", desc = "Find next file" },
 	{ on = "É", run = "find --previous --smart", desc = "Find previous file" },
-  { on = "<a-o>", run = "plugin zoxide", desca= "zoxide"},
+	{ on = "<a-o>", run = "plugin zoxide", desca= "zoxide"},
+	{ on = "M", run = "shell 'fmove \"$@\"' --block", desc = "Move file with fzf" },
   # { on = "/", run = "shell --interactive", desc = "Run a shell command" },
 	# { on = "$", run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
 ]
