@@ -8,6 +8,7 @@
     "hyprland/submap",
     "sway/workspaces",
     "hyprland/workspaces",
+    "mpris"
   ],
   "modules-center": [
     "sway/window",
@@ -34,6 +35,16 @@
     "swap-icon-label": false,
     "max-length": 90,
     "tooltip": false
+  },
+  "mpris": {
+    "format": "{player_icon} {artist} - {title}",
+    "player-icons": {
+      "default": "",
+      "mpd": "󰎆"
+    },
+    "status-icons": {
+      "paused": ""
+    }
   },
   "temperature": {
     "thermal-zone": 3,
