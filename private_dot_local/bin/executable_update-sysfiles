@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
-doas rsync -Lr ~/.sysfiles/* /
-doas chmod 0400 /etc/doas.conf
-doas chown root:root /etc/doas.conf
+sudo rsync -Lr ~/.sysfiles/* /
+# doas chmod 0400 /etc/doas.conf
+# doas chown root:root /etc/doas.conf

@@ -1,5 +1,8 @@
 #!/bin/sh
 
+dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
+turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
+
 spawn_once() {
   pgrep -f "${1}" >/dev/null || riverctl spawn "${*}"
 }
@@ -97,8 +100,8 @@ for mode in normal locked; do
   riverctl map $mode None XF86MonBrightnessUp spawn 'brightnessctl set 2%+'
   riverctl map $mode None XF86MonBrightnessDown spawn 'brightnessctl set 2%-'
 
-  riverctl map $mode Super+Control R spawn reboot
-  riverctl map $mode Super+Control P spawn poweroff
+  riverctl map $mode Super+Control R spawn sudo /usr/sbin/reboot
+  riverctl map $mode Super+Control P spawn sudo /usr/sbin/poweroff
   riverctl map $mode Super+Control E exit
 done
 
@@ -184,10 +187,8 @@ spawn_once swayidle -w \
   timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
   before-sleep 'waylock -fork-on-lock'
 spawn_once /usr/libexec/polkit-gnome-authentication-agent-1
-spawn_once kdeconnectd
-spawn_once dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
-spawn_once turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
 sv restart polkit-gnome
+spawn_once kdeconnectd
 spawn_once swaync
 bindsym $mod+g spawn swaync-client -t
 bindsym $mod+Shift+g spawn swaync-client -t -sw

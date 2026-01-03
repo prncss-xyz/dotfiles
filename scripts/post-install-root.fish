@@ -9,4 +9,3 @@ for service in bluetoothd dbus dhcpd iwd sshd seatd tlp turnstiled
 end
 ln -sf /usr/share/fontconfig/conf.avail/10-nerd-font-symbols.conf /etc/fonts/conf.avail/
 xbps-reconfigure -f fontconfig
-

@@ -28,9 +28,9 @@ floating_modifier $mod normal
 
 bindsym $mod+ctrl+c reload
 bindsym $mod+ctrl+e exit
-bindsym $mod+ctrl+q exec --no-startup-id waylock
-bindsym $mod+ctrl+r exec --no-startup-id doas reboot
-bindsym $mod+ctrl+p exec --no-startup-id doas poweroff
+bindsym $mod+ctrl+q exec waylock
+bindsym $mod+ctrl+r exec sudo /usr/sbin/reboot
+bindsym $mod+ctrl+p exec sudo /usr/sbin/poweroff
 
 bindsym $mod+a focus parent
 bindsym $mod+space focus mode_toggle
