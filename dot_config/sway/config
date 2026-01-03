@@ -53,13 +53,13 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym $mod+return scratchpad show
+bindsym $mod+h scratchpad show
 bindsym $mod+n workspace number 1
 bindsym $mod+m workspace number 2
 bindsym $mod+comma workspace number 3
 bindsym $mod+period workspace number 4
 bindsym $mod+eacute workspace number 5
-bindsym $mod+Shift+return move scratchpad
+bindsym $mod+Shift+h move scratchpad
 bindsym $mod+Shift+n move container to workspace number 1
 bindsym $mod+Shift+m move container to workspace number 2
 bindsym $mod+Shift+comma move container to workspace number 3
@@ -155,7 +155,7 @@ exec kdeconnectd
 exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
 exec turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
 exec_always sv restart polkit-gnome
-exec --no-startup-id .local/bin/random-wm-bg
+exec --no-startup-id .local/bin/random-wallpaper
 exec --no-startup-id swaync
 bindsym $mod+g exec swaync-client -t
 bindsym $mod+Shift+g exec swaync-client -t -sw

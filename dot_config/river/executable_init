@@ -195,6 +195,6 @@ bindsym $mod+Shift+g spawn swaync-client -t -sw
 spawn_once wlsunset -S 07:00 -s 16:00
 spawn_once udiskie
 
-$HOME/.local/bin/random-wm-bg &
+$HOME/.local/bin/random-wallpaper &
 waybar &
 firefox &

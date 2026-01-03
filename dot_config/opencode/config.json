@@ -19,7 +19,7 @@
         "-c",
         "MORPH_API_KEY=$(morphllm.com/quarknoir@gmail.com) pnpm dlx @morphllm/morphmcp"
       ],
-      "enabled": true
+      "enabled": false
     },
     "codemod": {
       "type": "local",
@@ -33,7 +33,7 @@
     }
   },
   "tools": {
-    "edit": false,
-    "grep": false
+    "edit": true,
+    "grep": true
   }
 }

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+wallpaper_dir="${1:-$HOME/Personal/wallpapers}"
+swaybg_pid=""
+
+while true; do
+	img=$(fd -t f -e jpg -e png . "$wallpaper_dir" | shuf -n 1)
+	if [ -f "$img" ]; then
+		# swaymsg output "*" bg "$img" fill
+		swaybg -i "$img" -m fill &
+		[ -n "$swaybg_pid" ] && kill "$swaybg_pid" 2>/dev/null
+		swaybg_pid=$!
+		sleep 1200
+	else
+		exit 1
+	fi
+done

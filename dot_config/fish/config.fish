@@ -25,6 +25,7 @@ if status is-interactive
   abbr o xdg-open
   abbr t eza --tree --icons --git
 	abbr gaa git add --all
+  abbr gcam 'git add --all; git commit --amend --no-edit'
 	abbr gba git branch --all
   abbr gsc git switch -c
   abbr grhh git reset --hard HEAD
