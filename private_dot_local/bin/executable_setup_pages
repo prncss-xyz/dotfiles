@@ -1,0 +1,5 @@
+#!/usr/bin/fish
+
+upload_secrets
+gh api --method PATCH repos/:owner/:repo/pages -f "build_type=workflow"
+

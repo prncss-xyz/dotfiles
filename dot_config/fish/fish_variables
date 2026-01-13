@@ -3,11 +3,10 @@
 SETUVAR --export EDITOR:nvim
 SETUVAR --export PASSWORD_STORE_CHARACTER_SET:a\x2dzA\x2dZ0\x2d9\x7e\x21\x5c\x40\x23\x5c\x24\x25\x5e\x26\x2a\x28\x29\x2d_\x3d\x2b\x5b\x5d\x7b\x7d\x3b\x3a\x2c\x2e\x3c\x3e\x3f
 SETUVAR --export PASSWORD_STORE_GENERATED_LENGTH:20
-SETUVAR __fish_initialized:3800
+SETUVAR __fish_initialized:4300
 SETUVAR _fisher_franciscolourenco_2F_done_files:\x7e/\x2econfig/fish/conf\x2ed/done\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1efranciscolourenco/done\x1erose\x2dpine/fish
 SETUVAR _fisher_rose_2D_pine_2F_fish_files:\x7e/\x2econfig/fish/themes/Ros\u00e9\x20Pine\x20Dawn\x2etheme\x1e\x7e/\x2econfig/fish/themes/Ros\u00e9\x20Pine\x20Moon\x2etheme\x1e\x7e/\x2econfig/fish/themes/Ros\u00e9\x20Pine\x2etheme
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_features:no\x2dkeyboard\x2dprotocols
-SETUVAR fish_key_bindings:fish_default_key_bindings

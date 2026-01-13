@@ -100,8 +100,8 @@ for mode in normal locked; do
   riverctl map $mode None XF86MonBrightnessUp spawn 'brightnessctl set 2%+'
   riverctl map $mode None XF86MonBrightnessDown spawn 'brightnessctl set 2%-'
 
-  riverctl map $mode Super+Control R spawn sudo /usr/sbin/reboot
-  riverctl map $mode Super+Control P spawn sudo /usr/sbin/poweroff
+  riverctl map $mode Super+Control R spawn 'sudo /usr/sbin/reboot'
+  riverctl map $mode Super+Control P spawn 'sudo /usr/sbin/poweroff'
   riverctl map $mode Super+Control E exit
 done
 
@@ -173,7 +173,7 @@ riverctl map normal Super D spawn fuzzel
 riverctl map normal Super E spawn "fish -c neovide" # we need this to have paths properly setup
 riverctl map normal Super T spawn footclient
 riverctl map normal Super Y spawn .local/bin/browser
-riverctl map normal Super P spawn "STORE_DIR=$HOME/Personal/pass/ tessen"
+riverctl map normal Super P spawn 'fish -c STORE_DIR=$HOME/Personal/pass/ tessen'
 riverctl map normal Super G spawn "swaync"
 riverctl map normal Super+Shift G spawn "swaync-client -t"
 
@@ -182,10 +182,10 @@ spawn_once way-displays
 spawn_once rivertile -view-padding 4 -outer-padding 0
 # spawn_once river-tag-overlay
 spawn_once foot --server
-spawn_once swayidle -w \
+swayidle -w \
   timeout 300 'waylock -fork-on-lock' \
   timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-  before-sleep 'waylock -fork-on-lock'
+  before-sleep 'waylock -fork-on-lock' &
 spawn_once /usr/libexec/polkit-gnome-authentication-agent-1
 sv restart polkit-gnome
 spawn_once kdeconnectd
@@ -196,5 +196,5 @@ spawn_once wlsunset -S 07:00 -s 16:00
 spawn_once udiskie
 
 $HOME/.local/bin/random-wallpaper &
-waybar &
-firefox &
+spawn_once waybar
+spawn_once firefox
