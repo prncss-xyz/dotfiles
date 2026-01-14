@@ -1,12 +1,12 @@
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "a63550b"
-hash = "c2021386289a0cbb3e152a052f67c177"
+rev = "eca1861"
+hash = "e519d894e94ded741e06aae4d4775981"
 
 [[plugin.deps]]
 use = "Ape/smart-enter"
-rev = "7b84c89"
-hash = "43eb1a1f2291795fb5b0b2ce1206ebee"
+rev = "eff8665"
+hash = "dfe8be84be3a3d5d42c38d0a6d74f206"
 
 [[flavor.deps]]
 use = "Mintass/rose-pine"
