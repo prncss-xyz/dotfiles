@@ -1,9 +1,9 @@
-function zoxide-interactive
-    set -l result (zoxide query -i)
+function zoxide_interactive
+    zoxide query -i | read -l result
     if test -n "$result"
-        cd "$result"
+        cd -- "$result"
     end
     commandline -f repaint
 end
 
-bind \eo __zoxide_interactive
+bind \eo zoxide_interactive
