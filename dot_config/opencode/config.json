@@ -46,40 +46,5 @@
   "tools": {
     "edit": true,
     "grep": true
-  },
-  "lsp": {
-    "vtsls": {
-      "command": [
-        "vtsls",
-        "--stdio"
-      ],
-      "extensions": [
-        ".ts",
-        ".tsx",
-        ".js",
-        ".jsx"
-      ],
-      "settings": {
-        "typescript": {
-          "tsserver": {
-            "maxTsServerMemory": 8192
-          }
-        },
-        "vtsls": {
-          "autoUseWorkspaceTsdk": true,
-          "enableMoveToFileCodeAction": true
-        }
-      }
-    },
-    "bashls": {
-      "command": [
-        "bash-language-server",
-        "start"
-      ],
-      "extensions": [
-        ".sh",
-        ".bash"
-      ]
-    }
   }
 }
