@@ -7,8 +7,3 @@ hash = "e519d894e94ded741e06aae4d4775981"
 use = "Ape/smart-enter"
 rev = "eff8665"
 hash = "dfe8be84be3a3d5d42c38d0a6d74f206"
-
-[[flavor.deps]]
-use = "Mintass/rose-pine"
-rev = "8343340"
-hash = "d92db727dc16db9357f0dcda2758170c"
