@@ -7,6 +7,9 @@ set -x PNPM_HOME $HOME/.local/share/pnpm
 set -x PATH "$PATH:$PNPM_HOME:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.luarocks/bin"
 set -x PASSWORD_STORE_DIR $PERSONAL/pass
 set -x DISPLAY :1
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
 
 if status is-interactive
   fish_config theme choose Rosé\ Pine
@@ -36,5 +39,4 @@ if status is-interactive
   fzf --fish | source
 	starship init fish | source
   zoxide init fish | source
-
 end
