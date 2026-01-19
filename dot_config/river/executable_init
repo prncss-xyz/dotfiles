@@ -1,6 +1,6 @@
 #!/bin/sh
 
-dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
+dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH --systemd --all
 turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
 
 spawn_once() {
@@ -172,6 +172,7 @@ riverctl map normal Super S spawn grim
 riverctl map normal Super D spawn fuzzel
 riverctl map normal Super E spawn "fish -c neovide" # we need this to have paths properly setup
 riverctl map normal Super T spawn footclient
+riverctl map normal Super+Shift T spawn "footclient -e bash"
 riverctl map normal Super Y spawn .local/bin/browser
 riverctl map normal Super P spawn 'fish -c STORE_DIR=$HOME/Personal/pass/ tessen'
 riverctl map normal Super G spawn "swaync"
