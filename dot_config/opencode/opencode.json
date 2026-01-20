@@ -3,25 +3,40 @@
   "plugin": [
     "opencode-antigravity-auth@latest",
     "@tarquinen/opencode-dcp@latest",
-    "@mohak34/opencode-notifier@latest"
+    "@mohak34/opencode-notifier@latest",
+    "@franlol/opencode-md-table-formatter@0.0.3",
+    "opencode-websearch-cited@1.2.0"
   ],
   "permission": {
     "bash": {
-      "ast-grep *": "allow",
-    },
+      "*": "ask",
+      "ast-grep *": "allow"
+    }
   },
   "provider": {
     "google": {
+      "options": {
+        "websearch_cited": {
+          "model": "gemini-2.5-flash"
+        }
+      },
       "models": {
         "antigravity-gemini-3-pro": {
           "name": "Gemini 3 Pro (Antigravity)",
+          "attachment": true,
           "limit": {
             "context": 1048576,
             "output": 65535
           },
           "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
           },
           "variants": {
             "low": {
@@ -33,14 +48,21 @@
           }
         },
         "antigravity-gemini-3-flash": {
+          "attachment": true,
           "name": "Gemini 3 Flash (Antigravity)",
           "limit": {
             "context": 1048576,
             "output": 65536
           },
           "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
           },
           "variants": {
             "minimal": {
@@ -64,8 +86,14 @@
             "output": 64000
           },
           "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
           }
         },
         "antigravity-claude-sonnet-4-5-thinking": {
@@ -75,8 +103,14 @@
             "output": 64000
           },
           "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
           },
           "variants": {
             "low": {
@@ -98,8 +132,14 @@
             "output": 64000
           },
           "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
           },
           "variants": {
             "low": {
@@ -121,8 +161,14 @@
             "output": 65536
           },
           "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
           }
         },
         "gemini-2.5-pro": {
@@ -132,8 +178,14 @@
             "output": 65536
           },
           "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
           }
         },
         "gemini-3-flash-preview": {
@@ -143,8 +195,14 @@
             "output": 65536
           },
           "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
           }
         },
         "gemini-3-pro-preview": {
@@ -154,8 +212,14 @@
             "output": 65535
           },
           "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
           }
         }
       }
@@ -164,13 +228,11 @@
   "mcp": {
     "context7": {
       "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
-      "enabled": true
+      "url": "https://mcp.context7.com/mcp"
     },
     "gh_grep": {
       "type": "remote",
-      "url": "https://mcp.grep.app",
-      "enabled": true
+      "url": "https://mcp.grep.app"
     },
     "morph": {
       "type": "local",
@@ -183,12 +245,20 @@
     },
     "codemod": {
       "type": "local",
-      "command": ["pnpm", "dlx", "codemod@latest", "mcp"],
+      "command": [
+        "pnpm",
+        "dlx",
+        "codemod@latest",
+        "mcp"
+      ],
       "enabled": false
     },
     "duckduckgo": {
       "type": "local",
-      "command": ["uvx", "duckduckgo-mcp-server"],
+      "command": [
+        "uvx",
+        "duckduckgo-mcp-server"
+      ],
       "enabled": false
     }
   },

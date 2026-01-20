@@ -137,7 +137,6 @@ bindsym $mod+y exec firefox
 bindsym $mod+e exec neovide
 
 # unused
-bindsym $mod+h exec echo
 bindsym $mod+u exec echo
 bindsym $mod+w exec echo
 
