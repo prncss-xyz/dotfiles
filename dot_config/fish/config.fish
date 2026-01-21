@@ -10,6 +10,7 @@ set -x DISPLAY :1
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+set --export SUPERMEMORY_API_KEY (pass show supermemory.ai/prncss-xyz)
 
 if status is-interactive
   fish_config theme choose Rosé\ Pine

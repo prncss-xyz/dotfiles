@@ -5,15 +5,12 @@
     "clock",
     "sway/mode",
     "river/mode",
-    "hyprland/submap",
     "sway/workspaces",
-    "hyprland/workspaces",
     "mpris"
   ],
   "modules-center": [
     "sway/window",
     "river/window",
-    "hyprland/window",
   ],
   "modules-right": [
     "cpu",

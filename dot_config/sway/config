@@ -149,10 +149,19 @@ exec --no-startup-id swayidle -w \
   timeout 300 'waylock -fork-on-lock' \
   timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
   before-sleep 'waylock -fork-on-lock'
+
+# Set the desktop environment variable
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+# Start the portal backend (optional if your distro handles this via dbus)
+exec /usr/libexec/xdg-desktop-portal -r
 exec /usr/libexec/polkit-gnome-authentication-agent-1
 exec kdeconnectd
-exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
-exec turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
+exec pipewire
+exec wireplumber
+exec pipewire-pulse
+
+# exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY --systemd --all
+# exec turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
 exec_always sv restart polkit-gnome
 exec --no-startup-id .local/bin/random-wallpaper
 exec --no-startup-id swaync

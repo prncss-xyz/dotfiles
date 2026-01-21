@@ -5,7 +5,9 @@
     "@tarquinen/opencode-dcp@latest",
     "@mohak34/opencode-notifier@latest",
     "@franlol/opencode-md-table-formatter@0.0.3",
-    "opencode-websearch-cited@1.2.0"
+    "opencode-websearch-cited@1.2.0",
+    "@nick-vi/opencode-type-inject",
+    "opencode-supermemory@latest"
   ],
   "permission": {
     "bash": {
