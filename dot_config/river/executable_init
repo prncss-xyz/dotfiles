@@ -1,8 +1,5 @@
 #!/bin/sh
 
-dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH --systemd --all
-turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
-
 spawn_once() {
   pgrep -f "${1}" >/dev/null || riverctl spawn "${*}"
 }
@@ -178,6 +175,8 @@ riverctl map normal Super P spawn 'fish -c STORE_DIR=$HOME/Personal/pass/ tessen
 riverctl map normal Super G spawn "swaync"
 riverctl map normal Super+Shift G spawn "swaync-client -t"
 
+dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY --systemd --all
+turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
 spawn_once way-displays
 
 spawn_once rivertile -view-padding 4 -outer-padding 0
