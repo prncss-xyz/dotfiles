@@ -3,25 +3,25 @@
   "google_auth": false,
   "agents": {
     "Sisyphus": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      "model": "gemini-3-pro-preview-high"
     },
     "librarian": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      "model": "gemini-3-pro-preview-high"
     },
     "explore": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "gemini-3-flash-preview"
     },
     "oracle": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      "model": "gemini-3-pro-preview-high"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      "model": "gemini-3-pro-preview-high"
     },
     "document-writer": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "gemini-3-flash-preview"
     },
     "multimodal-looker": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "gemini-3-flash-preview"
     }
   }
 }
