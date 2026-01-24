@@ -7,7 +7,7 @@
     "@franlol/opencode-md-table-formatter@0.0.3",
     "opencode-websearch-cited@1.2.0",
     "@nick-vi/opencode-type-inject",
-    "opencode-supermemory@latest"
+    "opencode-agent-memory@0.1.0"
   ],
   "permission": {
     "bash": {
@@ -236,20 +236,29 @@
       "type": "remote",
       "url": "https://mcp.grep.app"
     },
+    "talivy": {
+      "type": "local",
+      "command": [
+        "sh",
+        "-c",
+        "TAVILY_API_KEY=$(pass show talivy/prncss-xyz) bun x tavily-mcp@latest"
+      ],
+      "enabled": true
+    },
     "morph": {
       "type": "local",
       "command": [
         "sh",
         "-c",
-        "MORPH_API_KEY=$(morphllm.com/quarknoir@gmail.com) pnpm dlx @morphllm/morphmcp"
+        "MORPH_API_KEY=$(morphllm.com/quarknoir@gmail.com) bun x @morphllm/morphmcp"
       ],
       "enabled": false
     },
     "codemod": {
       "type": "local",
       "command": [
-        "pnpm",
-        "dlx",
+        "bun",
+        "x",
         "codemod@latest",
         "mcp"
       ],
