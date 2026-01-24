@@ -23,5 +23,6 @@
     "multimodal-looker": {
       "model": "gemini-3-flash-preview"
     }
-  }
+  },
+  "replace-plan": false
 }

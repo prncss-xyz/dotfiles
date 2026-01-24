@@ -7,7 +7,8 @@
     "@franlol/opencode-md-table-formatter@0.0.3",
     "opencode-websearch-cited@1.2.0",
     "@nick-vi/opencode-type-inject",
-    "opencode-agent-memory@0.1.0"
+    "opencode-agent-memory@0.1.0",
+    "oh-my-opencode@latest"
   ],
   "permission": {
     "bash": {

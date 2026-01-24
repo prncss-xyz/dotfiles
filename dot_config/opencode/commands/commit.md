@@ -1,7 +1,6 @@
 ---
 description: Commit changes
 agent: build
-model: gemini-3-flash-preview
 ---
 
 Generate a commit message and perform the commit following these rules explicitly:
