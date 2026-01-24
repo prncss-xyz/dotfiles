@@ -82,7 +82,7 @@ There are no enforced CI linters, but you should adhere to these standards:
 ## 4. Working with Templates
 
 When editing `.tmpl` files, recognize the context:
-```go
+```
 {{- if eq .chezmoi.os "linux" -}}
 # Linux specific config
 alias ls='ls --color=auto'
@@ -106,10 +106,9 @@ alias ls='ls --color=auto'
 
 ## 6. Safety & Security Guidelines
 
-1.  **Secrets:** NEVER commit secrets (API keys, passwords, private keys) directly to the repo.
+1.  **Secrets:** NEVER write secrets (API keys, passwords, private keys) directly to the repo.
 2.  **Destructive Actions:**
-    - `chezmoi apply` overwrites local files. Always check diffs.
-    - `chezmoi update` pulls from git and applies.
+    - never call chezmoi apply or chezmoi update.
 3.  **Idempotency:**
     - Scripts in `run_onchange_` or `run_once_` should be idempotent.
     - Example: Don't append to a file blindly; check if the line exists first (or let chezmoi handle the file content entirely).
@@ -120,10 +119,6 @@ alias ls='ls --color=auto'
 2.  **Read:** Read the content. Check if it is a template (`.tmpl`).
 3.  **Edit:** Modify the source file.
     - *Note:* Do not edit the file in `~/.config` directly if you are asked to "update the repo". Edit the file here in the chezmoi source.
-4.  **Verify:**
-    - If the user asks to apply the changes, run `chezmoi apply --dry-run` first.
-    - Then run `chezmoi apply` if the dry run looks correct.
-5.  **Commit:** If asked to commit, use standard git commands.
 
 ## 8. Common Gotchas
 
