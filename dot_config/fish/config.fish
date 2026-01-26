@@ -1,17 +1,3 @@
-gpg-connect-agent updatestartuptty /bye > /dev/null
-set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-set -x GPG_TTY (tty)
-set -x RIPGREP_CONFIG_PATH $HOME/.config/rg/config
-set -x HOSTNAME (hostname)
-set -x PNPM_HOME $HOME/.local/share/pnpm
-set -x PATH "$PATH:$PNPM_HOME:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.luarocks/bin"
-set -x PASSWORD_STORE_DIR $PERSONAL/pass
-set -x DISPLAY :1
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-set --export SUPERMEMORY_API_KEY (pass show supermemory.ai/prncss-xyz)
-
 if status is-interactive
   fish_config theme choose Rosé\ Pine
   set fish_greeting ""

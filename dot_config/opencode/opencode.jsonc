@@ -1,0 +1,246 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "opencode-antigravity-auth@latest",
+    "@tarquinen/opencode-dcp@latest",
+    "@mohak34/opencode-notifier@latest",
+    "@franlol/opencode-md-table-formatter@0.0.3",
+    "opencode-websearch-cited@1.2.0",
+    "@nick-vi/opencode-type-inject",
+    "opencode-supermemory@latest",
+    // "opencode-agent-memory@0.1.0",
+    // "oh-my-opencode@latest"
+  ],
+  "permission": {
+    "bash": {
+      "*": "ask",
+      "ast-grep *": "allow",
+      "ls *": "allow",
+      "pwd": "allow",
+      "git status": "allow",
+      "git log *": "allow",
+      "git diff *": "allow",
+      "rg *": "allow",
+      "grep *": "allow",
+      "fd *": "allow",
+      "find *": "allow",
+      "cat *": "allow",
+      "bat *": "allow",
+      "echo *": "allow",
+      "type *": "allow",
+      "uname *": "allow",
+      "xbps-query -l": "allow",
+      "pnpm vitest *": "allow",
+      "pnpm build": "allow",
+      "pnpm run build": "allow",
+      "pnpm check:*": "allow",
+      "pnpm run check:*": "allow",
+      "pnpm lint:*": "allow",
+      "pnpm run lint:*": "allow",
+      "pnpm verify:*": "allow",
+      "pnpm run verify:*": "allow",
+      "pnpm fix:*": "allow",
+      "pnpm run fix:*": "allow",
+    },
+  },
+  "provider": {
+    "google": {
+      "options": {
+        "websearch_cited": {
+          "model": "gemini-2.5-flash",
+        },
+      },
+      "models": {
+        "antigravity-gemini-3-pro": {
+          "name": "Gemini 3 Pro (Antigravity)",
+          "attachment": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65535,
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
+          "variants": {
+            "low": {
+              "thinkingLevel": "low",
+            },
+            "high": {
+              "thinkingLevel": "high",
+            },
+          },
+        },
+        "antigravity-gemini-3-flash": {
+          "attachment": true,
+          "name": "Gemini 3 Flash (Antigravity)",
+          "limit": {
+            "context": 1048576,
+            "output": 65536,
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
+          "variants": {
+            "minimal": {
+              "thinkingLevel": "minimal",
+            },
+            "low": {
+              "thinkingLevel": "low",
+            },
+            "medium": {
+              "thinkingLevel": "medium",
+            },
+            "high": {
+              "thinkingLevel": "high",
+            },
+          },
+        },
+        "antigravity-claude-sonnet-4-5": {
+          "name": "Claude Sonnet 4.5 (Antigravity)",
+          "limit": {
+            "context": 200000,
+            "output": 64000,
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
+        },
+        "antigravity-claude-sonnet-4-5-thinking": {
+          "name": "Claude Sonnet 4.5 Thinking (Antigravity)",
+          "limit": {
+            "context": 200000,
+            "output": 64000,
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
+          "variants": {
+            "low": {
+              "thinkingConfig": {
+                "thinkingBudget": 8192,
+              },
+            },
+            "max": {
+              "thinkingConfig": {
+                "thinkingBudget": 32768,
+              },
+            },
+          },
+        },
+        "antigravity-claude-opus-4-5-thinking": {
+          "name": "Claude Opus 4.5 Thinking (Antigravity)",
+          "limit": {
+            "context": 200000,
+            "output": 64000,
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
+          "variants": {
+            "low": {
+              "thinkingConfig": {
+                "thinkingBudget": 8192,
+              },
+            },
+            "max": {
+              "thinkingConfig": {
+                "thinkingBudget": 32768,
+              },
+            },
+          },
+        },
+        "gemini-2.5-flash": {
+          "name": "Gemini 2.5 Flash (Gemini CLI)",
+          "limit": {
+            "context": 1048576,
+            "output": 65536,
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
+        },
+        "gemini-2.5-pro": {
+          "name": "Gemini 2.5 Pro (Gemini CLI)",
+          "limit": {
+            "context": 1048576,
+            "output": 65536,
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
+        },
+        "gemini-3-flash-preview": {
+          "name": "Gemini 3 Flash Preview (Gemini CLI)",
+          "limit": {
+            "context": 1048576,
+            "output": 65536,
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
+        },
+        "gemini-3-pro-preview": {
+          "name": "Gemini 3 Pro Preview (Gemini CLI)",
+          "limit": {
+            "context": 1048576,
+            "output": 65535,
+          },
+          "modalities": {
+            "input": ["text", "image", "pdf"],
+            "output": ["text"],
+          },
+        },
+      },
+    },
+  },
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+    },
+    "gh_grep": {
+      "type": "remote",
+      "url": "https://mcp.grep.app",
+    },
+    "talivy": {
+      "type": "local",
+      "command": [
+        "sh",
+        "-c",
+        "TAVILY_API_KEY=$(pass show talivy/prncss-xyz) bun x tavily-mcp@latest",
+      ],
+      "enabled": true,
+    },
+    "morph": {
+      "type": "local",
+      "command": [
+        "sh",
+        "-c",
+        "MORPH_API_KEY=$(morphllm.com/quarknoir@gmail.com) bun x @morphllm/morphmcp",
+      ],
+      "enabled": false,
+    },
+    "codemod": {
+      "type": "local",
+      "command": ["bun", "x", "codemod@latest", "mcp"],
+      "enabled": false,
+    },
+    "duckduckgo": {
+      "type": "local",
+      "command": ["uvx", "duckduckgo-mcp-server"],
+      "enabled": false,
+    },
+  },
+  "tools": {
+    "edit": true,
+    "grep": true,
+  },
+}
