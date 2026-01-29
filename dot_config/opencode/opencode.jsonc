@@ -5,7 +5,7 @@
     "@tarquinen/opencode-dcp@latest",
     "@mohak34/opencode-notifier@latest",
     "@franlol/opencode-md-table-formatter@0.0.3",
-    "opencode-websearch-cited@1.2.0",
+    // "opencode-websearch-cited@1.2.0",
     "@nick-vi/opencode-type-inject",
     "opencode-supermemory@latest",
     // "opencode-agent-memory@0.1.0",
@@ -20,6 +20,7 @@
       "git status": "allow",
       "git log *": "allow",
       "git diff *": "allow",
+      "sed *": "allow",
       "rg *": "allow",
       "grep *": "allow",
       "fd *": "allow",
@@ -219,6 +220,15 @@
       ],
       "enabled": true,
     },
+    "exa-local": {
+      "type": "local",
+      "command": [
+        "sh",
+        "-c",
+        "EXA_API_KEY=$(pass show exa.ai/juliette.lamarche.xyz@gmail.com) bun x exa-mcp-server",
+      ],
+      "enabled": true
+    },
     "morph": {
       "type": "local",
       "command": [
@@ -226,7 +236,7 @@
         "-c",
         "MORPH_API_KEY=$(morphllm.com/quarknoir@gmail.com) bun x @morphllm/morphmcp",
       ],
-      "enabled": false,
+      "enabled": true,
     },
     "codemod": {
       "type": "local",
