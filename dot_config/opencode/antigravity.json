@@ -1,0 +1,4 @@
+{
+  "account_selection_strategy": "sticky",
+  "pid_offset_enabled": true
+}
