@@ -9,6 +9,8 @@ export PATH="$PATH:$PNPM_HOME:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.luarocks/
 {{ if ne .chezmoi.os "darwin" -}}
 export GRIM_DEFAULT_DIR=$HOME/Media/Pictures/Captures
 export PERSONAL=$HOME/Personal
-export PASSWORD_STORE_DIR=$PERSONAL/pass
 export SUPERMEMORY_API_KEY={{ output "pass" "show" "supermemory.ai/prncss-xyz" | trim }}
+export MORPH={{ output "pass" "show" "morphllm.com/quarknoir@gmail.com" | trim }}
+export EXA={{ output "pass" "show" "exa.ai/juliette.lamarche.xyz@gmail.com" | trim }}
+export TAVILY={{ output "pass" "show" "talivy/prncss-xyz" | trim }}
 {{ end -}}
