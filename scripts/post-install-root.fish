@@ -1,3 +1,4 @@
+# FIXME:
 rsync -Lr ~/.sysfiles/* / # update-sysfiles
 chsh -s /bin/fish
 xbps-install -Syu nonfree

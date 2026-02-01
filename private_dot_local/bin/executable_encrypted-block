@@ -1,8 +1,0 @@
-#!/usr/bin/sh
-
-if [ -d "/data/data/com.termux" ]; then
-  echo "na"
-  exit 0
-fi
-blk=$(lsblk -no PKNAME,TYPE|rg crypt|cut -d ' ' -f 1)
-blkid -s UUID -o value /dev/$blk

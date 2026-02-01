@@ -1,0 +1,29 @@
+#!/usr/bin/sh
+
+if [ -n "$HOSTED" ]; then
+  echo "na"
+  exit 0
+fi
+blk=$(lsblk -no PKNAME,TYPE | rg crypt | cut -d ' ' -f 1)
+id=$(blkid -s UUID -o value /dev/$blk)
+cmd='"${CMDLINE[*]}"'
+
+mkdir -p $HOME/sysfiles/etc/dracut.conf.d
+cat <<EOF > $HOME/sysfiles/etc/dracut.conf.d/host.conf
+hostonly=yes
+compress=lz4
+uefi=yes
+early_microcode=yes
+CMDLINE=(
+  rd.luks.uuid=${id}
+  rd.lvm.lv=MyVolGroup/root
+  rd.luks.allow-discards
+  root=/dev/mapper/MyVolGroup-root
+  rootfstype=ext4
+  rootflags=rw,relatime
+  apparmor=1
+  security=apparmor
+)
+kernel_cmdline=${cmd}
+unset CMDLINE
+EOF

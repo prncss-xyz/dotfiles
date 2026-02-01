@@ -1,6 +1,11 @@
 {{- $hostname := promptStringOnce . "hostname" "hostname" -}}
-{{- $termux := promptBoolOnce . "termux" "Am I inside termux?" -}}
+{{- $hosted := promptBoolOnce . "hosted" "Is the system hosted?" -}}
 
 [data]
     hostname = {{ $hostname | quote }}
-    termux = {{ $termux | quote }}
+    username = "prncss"
+    hosted = {{ $hosted | quote }}
+    fullname = "Juliette Lamarche"
+    email = "juliette.lamarche.xyz@gmail.com"
+    github_user = "prncss-xyz"
+    git_signkey = "03385F0C896240A240C49F8CF1D6B54A3C0D429B"

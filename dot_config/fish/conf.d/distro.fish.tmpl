@@ -5,8 +5,8 @@ set -x PERSONAL "$HOME/storage/shared/Personal"
 abbr pi pkg install -y
 abbr pr pkg remove -Ry
 abbr pu pkg update && pkg upgrade
-abbr pdv pd sh void --user prncss
-abbr pda pd sh alpine --user prncss
+abbr pdv pd sh void --user {{ .username }}
+abbr pda pd sh alpine --user {{ .username }}
 {{ end -}}
 {{ if eq .chezmoi.os "darwin" -}}
 abbr pi brew install

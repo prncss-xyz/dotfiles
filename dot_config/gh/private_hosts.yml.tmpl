@@ -2,5 +2,5 @@
 github.com:
     git_protocol: ssh
     oauth_token: {{ output "pass" "show" "github.com/prncss-xyz/token" | trim }}
-    user: prncss-xyz
+    user: {{ .github_user }}
 {{ end -}}
