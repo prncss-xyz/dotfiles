@@ -1,4 +1,5 @@
 {{- if eq .chezmoi.os "linux" -}}
+{{- if eq .termux "false" -}}
 hostonly=yes
 compress=lz4
 uefi=yes
@@ -15,4 +16,5 @@ CMDLINE=(
 )
 kernel_cmdline="${CMDLINE[*]}"
 unset CMDLINE
+{{- end }}
 {{- end }}
