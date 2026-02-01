@@ -1,6 +1,6 @@
 {{ if ne .chezmoi.os "darwin" -}}
 github.com:
     git_protocol: ssh
-    oauth_token: {{ output "pass" "show" "github.com/prncss-xyz/token" | trim }}
+    oauth_token: {{ pass "github.com/prncss-xyz/token" }}
     user: {{ .github_user }}
 {{ end -}}
