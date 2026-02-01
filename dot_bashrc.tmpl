@@ -14,3 +14,6 @@ export MORPH_API_KEY={{ pass "morphllm.com/quarknoir@gmail.com" }}
 export EXA_API_KEY={{ pass "exa.ai/juliette.lamarche.xyz@gmail.com" }}
 export TAVILY_API_KEY={{ pass "talivy/prncss-xyz" }}
 {{ end -}}
+{{ if eq .termux "TERMUX" -}}
+export TERMUX=TERMUX
+{{ end -}}
