@@ -77,7 +77,7 @@ passwd prncss
 
 su prncss
 cd
-chezmoi init prncss-xyz --apply
+chezmoi init prncss-xyz --apply --source projects/dotfiles
 fish
 
 

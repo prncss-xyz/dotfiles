@@ -1,3 +1,19 @@
 README.md
 AGENTS.md
 prettier.config.js
+{{ if eq .hosted "false" -}}
+sysfiles/
+{{- end }}
+{{- if eq .chezmoi.os "darwin" }}
+.claude/
+.gemini/
+.ssh/
+.windsurf/
+.gnupg/
+.ssh/
+.github/
+.config/chromium-flags.conf
+{{- end }}
+{{- if eq .chezmoi.os "linux" -}}
+.hammerspoon/
+{{- end }}

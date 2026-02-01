@@ -1,5 +1,8 @@
 {{- $hostname := promptStringOnce . "hostname" "hostname" -}}
 {{- $hosted := promptBoolOnce . "hosted" "Is the system hosted?" -}}
+{{- $sourceDir := joinPath .chezmoi.homeDir "projects" "dotfiles" -}}
+
+sourceDir = {{ $sourceDir | quote }}
 
 [data]
     hostname = {{ $hostname | quote }}
@@ -9,3 +12,6 @@
     email = "juliette.lamarche.xyz@gmail.com"
     github_user = "prncss-xyz"
     git_signkey = "03385F0C896240A240C49F8CF1D6B54A3C0D429B"
+
+[edit]
+    command = "nvim"
