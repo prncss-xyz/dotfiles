@@ -4,7 +4,7 @@ gh auth setup-git
 dracut_setup
 
 # pnpm ls -g --depth=0
-pnpm i -g fsouza/prettierd @github/copilot @vtsls/language-server bash-language-server graphql-language-service-cli knip opencode-ai vscode-langservers-extracted 
+pnpm i -g @fsouza/prettierd @github/copilot @vtsls/language-server bash-language-server graphql-language-service-cli knip opencode-ai vscode-langservers-extracted --allow-build=fsouza/prettierd
 # uv tool list
 uv install yamllint
 gh extension install gennaro-tedesco/gh-f

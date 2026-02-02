@@ -66,7 +66,7 @@ hwclock --systohc
 
 ````bash
 setfont ter-132b
-echo "wheel ALL=(ALL) ALL">>/etc/sudoers
+echo "%wheel ALL=(ALL) ALL">>/etc/sudoers
 
 echo "permit :wheel" > /etc/doas.conf
 chmod 0400 /etc/doas.conf
