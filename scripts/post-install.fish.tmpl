@@ -3,10 +3,11 @@ git remote add origin git@github.com:{{ .github_user }}/chezmoi.git || true
 gh auth setup-git
 dracut_setup
 
+ya pkg install
 # pnpm ls -g --depth=0
-pnpm i -g @fsouza/prettierd @github/copilot @vtsls/language-server bash-language-server graphql-language-service-cli knip opencode-ai vscode-langservers-extracted --allow-build=fsouza/prettierd
+pnpm i -g @fsouza/prettierd @github/copilot @vtsls/language-server bash-language-server graphql-language-service-cli knip opencode-ai vscode-langservers-extracted --allow-build=@fsouza/prettierd
 # uv tool list
-uv install yamllint
+uv tool install yamllint
 gh extension install gennaro-tedesco/gh-f
 curl -fsSL https://claude.ai/install.sh | bash
 # gpg --armor --export-secret-keys {{ .email }} | gpg --symmetric --cipher-algo AES256 -o private_key.asc.gpg
