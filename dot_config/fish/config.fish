@@ -21,12 +21,11 @@ if status is-interactive
 	abbr gba git branch --all
   abbr gsc git switch -c
   abbr gc git commit -m
-  abbr gcn git commit --no-verify -m
-  abbr gc! git commit --amend --no-edit
-  abbr gcn! git commit --amend --no-verify --no-edit
   abbr gf git fetch
   abbr gp git push
   abbr gl git pull
+  abbr ggg "git add .; git commit --allow-empty-message -m ''"
+  abbr gggp "git add .; git commit --allow-empty-message -m ''; git push"
   abbr gstd git stash drop
   abbr gstl git stash list
   abbr gstp git stash pop
