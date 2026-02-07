@@ -14,10 +14,19 @@ if status is-interactive
   abbr n nvim
   abbr o xdg-open
   abbr t eza --tree --icons --git
+  # https://github.com/jhillyerd/plugin-git/blob/83a0a865d5031c436d47c9e3ab3a269b5d601615/functions/__git.init.fish#L6
+  abbr g git
 	abbr gaa git add --all
   abbr gcam 'git add --all; git commit --amend --no-edit'
 	abbr gba git branch --all
   abbr gsc git switch -c
+  abbr gc git commit -m
+  abbr gp git push
+  abbr gpl git pull
+  abbr gstd git stash drop
+  abbr gstl git stash list
+  abbr gstp git stash pop
+  abbr gsts git stash show --text
   abbr grhh git reset --hard HEAD
   abbr gch git checkout HEAD --
   abbr ytx yt-dlp -x
