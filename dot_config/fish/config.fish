@@ -20,7 +20,6 @@ if status is-interactive
 	abbr gaa git add --all
 	abbr gba git branch --all
   abbr gsc git switch -c
-  abbr gc git commit -m
   abbr gf git fetch
   abbr gp git push
   abbr gl git pull

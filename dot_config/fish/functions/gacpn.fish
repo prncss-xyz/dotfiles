@@ -1,5 +1,5 @@
 function gacpn
   git add .
-  git commit --no-verify -m "$argv"
+  gcn "$argv"
   git push
 end
