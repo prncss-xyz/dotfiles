@@ -1,4 +1,4 @@
-function cdp
+function cdu
     set -l dir (pwd)
 
     while true

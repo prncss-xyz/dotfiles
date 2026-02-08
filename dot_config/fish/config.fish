@@ -36,6 +36,7 @@ if status is-interactive
   abbr wtr git worktree remove
   abbr ytx yt-dlp -x
   abbr yta yt-dlp -x --output "%(autonumber)02d %(title)s.%(ext)s"
+  abbr cdp cd $HOME/projects/
 
   fzf --fish | source
 	starship init fish | source
