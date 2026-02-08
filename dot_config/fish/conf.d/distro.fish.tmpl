@@ -15,14 +15,12 @@ abbr pu brew update; brew upgrade; brew cleanup
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
-set -x GRIM_DEFAULT_DIR $HOME/Media/Pictures/Captures
-set -x PERSONAL $HOME/Personal
 {{ if eq .chezmoi.osRelease.name "Void" -}}
 abbr pi sudo xbps-install -y
 abbr pr sudo xbps-remove -Ry
 abbr pu sudo xbps-install -Syu
 {{ end -}}
-{{ if eq .chezmoi.osRelease.name "Apline" -}}
+{{ if eq .chezmoi.osRelease.name "Alpine" -}}
 abbr pi sudo apk add
 abbr pr sudo apk del
 abbr pu sudo apk update; doas apk upgrade -U -a
