@@ -1,5 +1,6 @@
 function gc
-  if test -n "$argv"
+  read -P "Message: " -l msg
+  if test -n "$msg"
     set -l prefixes \
     "feat" \
     "fix" \
@@ -21,7 +22,7 @@ function gc
 
     set -l prefix (string split ":" $selected)[1]
 
-    git commit -m "$prefix: $argv"
+    git commit -m "$prefix: $msg" $argv
   else
       git commit --amend --no-edit
   end
