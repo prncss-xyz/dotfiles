@@ -4,10 +4,9 @@
     "@tarquinen/opencode-dcp",
     "@mohak34/opencode-notifier",
     "@franlol/opencode-md-table-formatter",
-    // "opencode-websearch-cited",
     "@nick-vi/opencode-type-inject",
-    // "opencode-supermemory",
-    // "opencode-agent-memory",
+    "opencode-agent-memory",
+    "github:JRedeker/opencode-morph-fast-apply"
     // "oh-my-opencode"
   ],
   "permission": {
@@ -46,11 +45,7 @@
   "mcp": {
     "context7": {
       "type": "local",
-      "command": [
-        "bun",
-        "x",
-        "@upstash/context7-mcp"
-      ],
+      "command": ["bun", "x", "@upstash/context7-mcp"],
       "enabled": true,
     },
     "gh_grep": {
@@ -59,47 +54,22 @@
     },
     "talivy": {
       "type": "local",
-      "command": [
-        "bun",
-        "x",
-        "tavily-mcp@latest"
-      ],
+      "command": ["bun", "x", "tavily-mcp@latest"],
       "enabled": true,
     },
     "exa": {
       "type": "local",
-      "command": [
-        "bux",
-        "x",
-        "exa-mcp-server"
-      ],
-      "enabled": true,
-    },
-    "morph": {
-      "type": "local",
-      "command": [
-        "bun",
-        "x",
-        "@morphllm/morphmcp"
-      ],
+      "command": ["bux", "x", "exa-mcp-server"],
       "enabled": true,
     },
     "codemod": {
       "type": "local",
-      "command": [
-        "bun",
-        "x",
-        "codemod@latest",
-        "mcp"
-      ],
+      "command": ["bun", "x", "codemod@latest", "mcp"],
       "enabled": false,
     },
     "duckduckgo": {
       "type": "local",
-      "command": [
-        "uvx",
-        "duckduckgo-mcp-server"
-      ],
+      "command": ["uvx", "duckduckgo-mcp-server"],
       "enabled": false,
     },
   },
@@ -107,4 +77,7 @@
     "edit": true,
     "grep": true,
   },
+  "instructions": [
+    ".opencode/node_modules/opencode-morph-fast-apply/MORPH_INSTRUCTIONS.md",
+  ],
 }

@@ -15,7 +15,3 @@ Warp Grep: warp-grep is a subagent that takes in a search string and tries to fi
 ## Coding
 
 - Prefer functional programming over imperative programming.
-
-## Fast Apply
-
-IMPORTANT: Use \`edit_file\` over \`str_replace\` or full file writes. It works with partial code snippets—no need for full file content.
