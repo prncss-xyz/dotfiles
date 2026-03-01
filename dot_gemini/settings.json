@@ -1,4 +1,8 @@
 {
+  "experimental": {
+    "plan": true,
+    "enableAgents": true
+  },
   "security": {
     "auth": {
       "selectedType": "oauth-personal"
@@ -9,47 +13,25 @@
   },
   "mcpServers": {
     "context7": {
-      "command": "npx",
+      "command": "bun",
       "args": [
-        "-y",
+        "x",
         "@upstash/context7-mcp"
       ]
     },
-    "sequential-thinking": {
-      "command": "npx",
+    "talivy": {
+      "command": "bun",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
+        "x",
+        "tavily-mcp@latest"
       ]
     },
-    "ddg-search": {
-      "command": "uvx",
+    "exa": {
+      "command": "bun",
       "args": [
-        "duckduckgo-mcp-server"
+        "x",
+        "exa-mcp-server"
       ]
-    },
-    "serena": {
-      "command": "uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/oraios/serena.git",
-        "serena",
-        "start-mcp-server",
-        "--context",
-        "ide-assistant",
-        "--enable-web-dashboard",
-        "False"
-      ]
-    },
-    "allPepper-memory-bank": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@allpepper/memory-bank-mcp@latest"
-      ],
-      "env": {
-        "MEMORY_BANK_ROOT": "$HOME/memory-bank"
-      }
     }
   }
 }

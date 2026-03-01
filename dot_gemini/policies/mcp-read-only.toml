@@ -1,0 +1,6 @@
+[[rule]]
+mcpName = "*"
+toolAnnotations = { readOnlyHint = true }
+decision = "allow"
+priority = 100
+modes = ["plan"]

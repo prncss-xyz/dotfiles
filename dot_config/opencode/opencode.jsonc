@@ -6,7 +6,7 @@
     "@franlol/opencode-md-table-formatter",
     // "opencode-websearch-cited",
     "@nick-vi/opencode-type-inject",
-    "opencode-supermemory",
+    // "opencode-supermemory",
     // "opencode-agent-memory",
     // "oh-my-opencode"
   ],
@@ -45,8 +45,13 @@
   },
   "mcp": {
     "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
+      "type": "local",
+      "command": [
+        "bun",
+        "x",
+        "@upstash/context7-mcp"
+      ],
+      "enabled": true,
     },
     "gh_grep": {
       "type": "remote",
@@ -54,27 +59,47 @@
     },
     "talivy": {
       "type": "local",
-      "command": ["bun", "x", "tavily-mcp@latest"],
+      "command": [
+        "bun",
+        "x",
+        "tavily-mcp@latest"
+      ],
       "enabled": true,
     },
-    "exa-local": {
+    "exa": {
       "type": "local",
-      "command": ["bux", "x", "exa-mcp-server"],
+      "command": [
+        "bux",
+        "x",
+        "exa-mcp-server"
+      ],
       "enabled": true,
     },
     "morph": {
       "type": "local",
-      "command": ["bun", "x", "@morphllm/morphmcp"],
+      "command": [
+        "bun",
+        "x",
+        "@morphllm/morphmcp"
+      ],
       "enabled": true,
     },
     "codemod": {
       "type": "local",
-      "command": ["bun", "x", "codemod@latest", "mcp"],
+      "command": [
+        "bun",
+        "x",
+        "codemod@latest",
+        "mcp"
+      ],
       "enabled": false,
     },
     "duckduckgo": {
       "type": "local",
-      "command": ["uvx", "duckduckgo-mcp-server"],
+      "command": [
+        "uvx",
+        "duckduckgo-mcp-server"
+      ],
       "enabled": false,
     },
   },
