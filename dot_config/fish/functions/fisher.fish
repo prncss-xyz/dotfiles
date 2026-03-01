@@ -80,7 +80,9 @@ function fisher --argument-names cmd --description "A plugin manager for Fish"
                 set --local source (command mktemp -d)
                 set --append source_plugins $source
 
-                command mkdir -p $source/{completions,conf.d,themes,functions}
+                for dir in completions conf.d themes functions
+                    command mkdir -p $source/$dir
+                end
 
                 $fish_path --command "
                     if test -e $plugin
@@ -151,7 +153,9 @@ function fisher --argument-names cmd --description "A plugin manager for Fish"
             end
 
             if set --query update_plugins[1] || set --query install_plugins[1]
-                command mkdir -p $fisher_path/{functions,themes,conf.d,completions}
+                for dir in functions themes conf.d completions
+                    command mkdir -p $fisher_path/$dir
+                end
             end
 
             for plugin in $update_plugins $install_plugins

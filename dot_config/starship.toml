@@ -2,18 +2,6 @@
 
 palette = "rose-pine"
 
-[git_status]
-disabled = true
-
-## https://github.com/starship/starship/issues/6417 seams not to be fixed
-
-[custom.git_status]
-command = 's=""; git diff --quiet 2>/dev/null || s="${s}!"; git diff --cached --quiet 2>/dev/null || s="${s}+"; [ -n "$(git ls-files --others --exclude-standard 2>/dev/null | head -1)" ] && s="${s}?"; [ -n "$s" ] && echo "[$s]"'
-when = "git rev-parse --is-inside-work-tree 2>/dev/null | grep -q true"
-style = "bold love"
-format = "[$output ]($style)"
-shell = ["bash", "--noprofile", "--norc"]
-
 [palettes.rose-pine]
 overlay = '#26233a'
 love = '#eb6f92'
@@ -22,3 +10,5 @@ rose = '#ebbcba'
 pine = '#31748f'
 foam = '#9ccfd8'
 iris = '#c4a7e7'
+
+## https://github.com/starship/starship/issues/6417 seams not to be fixed

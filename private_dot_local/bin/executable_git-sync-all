@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+REPOS=(
+    "$HOME/projects/notes/"
+    "$HOME/projects/nvim/"
+    "$HOME/projects/dotfiles/"
+)
+
+for repo in "${REPOS[@]}"; do
+    cd "$repo" || continue
+    git-sync
+done

@@ -10,8 +10,6 @@ Follow this routing logic for all information retrieval tasks:
 - Local Codebase Intelligence: For any query regarding the current project’s structure, function locations, or local implementations, use warp-grep. This allows for intelligent ripgrep operations that keep the main context window lean.
 - Global Code Patterns: Use gh_grep to search public GitHub repositories when you need to see real-world implementations of a library or how other developers solve a specific architectural problem in the wild.
 
-Warp Grep: warp-grep is a subagent that takes in a search string and tries to find relevant context. Best practice is to use it at the beginning of codebase explorations to fast track finding relevant files/lines. Do not use it to pin point keywords, but use it for broader semantic queries. "Find the XYZ flow", "How does XYZ work", "Where is XYZ handled?", "Where is <error message> coming from?"
-
 ## Coding
 
 - Prefer functional programming over imperative programming.
