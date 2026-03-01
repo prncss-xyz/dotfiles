@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+git config --bool branch.main.sync true
+git config --bool branch.main.syncNewFiles true
