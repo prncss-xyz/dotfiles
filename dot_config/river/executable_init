@@ -190,8 +190,6 @@ spawn_once /usr/libexec/polkit-gnome-authentication-agent-1
 sv restart polkit-gnome
 spawn_once kdeconnectd
 spawn_once swaync
-bindsym $mod+g spawn swaync-client -t
-bindsym $mod+Shift+g spawn swaync-client -t -sw
 spawn_once wlsunset -S 07:00 -s 16:00
 spawn_once udiskie
 
