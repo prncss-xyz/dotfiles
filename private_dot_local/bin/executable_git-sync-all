@@ -10,3 +10,5 @@ for repo in "${REPOS[@]}"; do
 	cd "$repo" || continue
 	git-sync
 done
+
+chezmoi apply

@@ -59,7 +59,7 @@
     },
     "exa": {
       "type": "local",
-      "command": ["bux", "x", "exa-mcp-server"],
+      "command": ["bun", "x", "exa-mcp-server"],
       "enabled": true,
     },
     "codemod": {
