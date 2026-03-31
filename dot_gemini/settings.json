@@ -14,7 +14,7 @@
       "enabled": true,
       "maxAge": "30d",
       "warningAcknowledged": true
-    }
+    },
     "previewFeatures": true
   },
   "mcpServers": {

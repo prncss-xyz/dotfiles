@@ -13,3 +13,4 @@ Follow this routing logic for all information retrieval tasks:
 ## Coding
 
 - Prefer functional programming over imperative programming.
+- In typescript, when importing functions, prefer named imports e.g. `useState` vs `React.useState`.
