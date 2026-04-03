@@ -6,7 +6,7 @@
     "@franlol/opencode-md-table-formatter",
     "@nick-vi/opencode-type-inject",
     "opencode-agent-memory",
-    "github:JRedeker/opencode-morph-fast-apply"
+    "github:JRedeker/opencode-morph-fast-apply",
     // "oh-my-opencode"
   ],
   "permission": {

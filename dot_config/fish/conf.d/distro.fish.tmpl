@@ -2,26 +2,26 @@
 set -x BROWSER termux-open-url
 set -x PERSONAL "$HOME/storage/shared/Personal"
 
-abbr pi pkg install -y
+abbr pa pkg install -y
 abbr pr pkg remove -Ry
 abbr pu pkg update && pkg upgrade
 abbr pdv pd sh void --user {{ .username }}
 abbr pda pd sh alpine --user {{ .username }}
 {{ end -}}
 {{ if eq .chezmoi.os "darwin" -}}
-abbr pi brew install
+abbr pa brew install
 abbr pr brew remove
 abbr pu brew update; brew upgrade; brew cleanup
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
 {{ if eq .chezmoi.osRelease.name "Void" -}}
-abbr pi sudo xbps-install -y
+abbr pa sudo xbps-install -y
 abbr pr sudo xbps-remove -Ry
 abbr pu sudo xbps-install -Syu
 {{ end -}}
 {{ if eq .chezmoi.osRelease.name "Alpine" -}}
-abbr pi sudo apk add
+abbr pa sudo apk add
 abbr pr sudo apk del
 abbr pu sudo apk update; doas apk upgrade -U -a
 {{ end -}}
