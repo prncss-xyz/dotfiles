@@ -1,4 +1,5 @@
 _my_/
 .envrc
 ltex.*
+.pi-lens/
 **/.claude/settings.local.json
