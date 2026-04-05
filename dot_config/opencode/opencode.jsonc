@@ -55,7 +55,7 @@
       "type": "remote",
       "url": "https://mcp.grep.app",
     },
-    "talivy": {
+    "tavily": {
       "type": "local",
       "command": ["bun", "x", "tavily-mcp@latest"],
       "enabled": true,

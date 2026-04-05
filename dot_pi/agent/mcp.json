@@ -1,0 +1,53 @@
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp @latest"]
+    },
+    "context7": {
+      "type": "local",
+      "command": [
+        "bun",
+        "x",
+        "@upstash/context7-mcp"
+      ]
+    },
+    "gh_grep": {
+      "type": "remote",
+      "url": "https://mcp.grep.app"
+    },
+    "tavily": {
+      "type": "local",
+      "command": [
+        "bun",
+        "x",
+        "tavily-mcp@latest"
+      ]
+    },
+    "exa": {
+      "type": "local",
+      "command": [
+        "bun",
+        "x",
+        "exa-mcp-server"
+      ],
+      "enabled": true
+    },
+    "codemod": {
+      "type": "local",
+      "command": [
+        "bun",
+        "x",
+        "codemod@latest",
+        "mcp"
+      ]
+    },
+    "duckduckgo": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "duckduckgo-mcp-server"
+      ]
+    }
+  }
+}
