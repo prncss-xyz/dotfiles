@@ -1,0 +1,88 @@
+{
+  "success": true,
+  "clones": [
+    {
+      "fileA": "dot_config/yazi/flavors/rose-pine.yazi/tmtheme.xml",
+      "startA": 126,
+      "fileB": "dot_config/yazi/flavors/rose-pine.yazi/tmtheme.xml",
+      "startB": 113,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "dot_config/yazi/flavors/rose-pine.yazi/tmtheme.xml",
+      "startA": 191,
+      "fileB": "dot_config/yazi/flavors/rose-pine.yazi/tmtheme.xml",
+      "startB": 139,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "dot_config/yazi/flavors/rose-pine.yazi/tmtheme.xml",
+      "startA": 204,
+      "fileB": "dot_config/yazi/flavors/rose-pine.yazi/tmtheme.xml",
+      "startB": 178,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "dot_config/yazi/flavors/rose-pine.yazi/tmtheme.xml",
+      "startA": 230,
+      "fileB": "dot_config/yazi/flavors/rose-pine.yazi/tmtheme.xml",
+      "startB": 65,
+      "lines": 12,
+      "tokens": 0
+    },
+    {
+      "fileA": "dot_agents/skills/react-hook-form-zod/templates/shadcn-form.tsx",
+      "startA": 295,
+      "fileB": "dot_agents/skills/react-hook-form-zod/templates/shadcn-form.tsx",
+      "startB": 270,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "dot_agents/skills/react-hook-form-zod/templates/shadcn-form.tsx",
+      "startA": 312,
+      "fileB": "dot_agents/skills/react-hook-form-zod/templates/shadcn-form.tsx",
+      "startB": 291,
+      "lines": 20,
+      "tokens": 0
+    },
+    {
+      "fileA": "dot_agents/skills/react-hook-form-zod/templates/basic-form.tsx",
+      "startA": 234,
+      "fileB": "dot_agents/skills/react-hook-form-zod/templates/basic-form.tsx",
+      "startB": 100,
+      "lines": 16,
+      "tokens": 0
+    },
+    {
+      "fileA": "dot_agents/skills/react-hook-form-zod/templates/async-validation.tsx",
+      "startA": 102,
+      "fileB": "dot_agents/skills/react-hook-form-zod/templates/basic-form.tsx",
+      "startB": 241,
+      "lines": 18,
+      "tokens": 0
+    },
+    {
+      "fileA": "dot_agents/skills/react-hook-form-zod/templates/async-validation.tsx",
+      "startA": 338,
+      "fileB": "dot_agents/skills/react-hook-form-zod/templates/async-validation.tsx",
+      "startB": 290,
+      "lines": 26,
+      "tokens": 0
+    },
+    {
+      "fileA": "dot_agents/skills/react-hook-form-zod/templates/advanced-form.tsx",
+      "startA": 171,
+      "fileB": "dot_agents/skills/react-hook-form-zod/templates/async-validation.tsx",
+      "startB": 88,
+      "lines": 16,
+      "tokens": 0
+    }
+  ],
+  "duplicatedLines": 150,
+  "totalLines": 5420,
+  "percentage": 2.77
+}
