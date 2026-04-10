@@ -12,7 +12,8 @@
     "sessionRetention": {
       "enabled": true,
       "maxAge": "30d",
-      "warningAcknowledged": true
+      "warningAcknowledged": true,
+      "policyFile": "mcp-read-only.toml"
     }
   },
   "mcpServers": {
@@ -21,21 +22,24 @@
       "args": [
         "x",
         "@upstash/context7-mcp"
-      ]
+      ],
+      "trust": true
     },
     "tavily": {
       "command": "bun",
       "args": [
         "x",
         "tavily-mcp@latest"
-      ]
+      ],
+      "trust": true
     },
     "exa": {
       "command": "bun",
       "args": [
         "x",
         "exa-mcp-server"
-      ]
+      ],
+      "trust": true
     },
     "serena": {
       "command": "uvx",
@@ -48,7 +52,8 @@
         "ide-assistant",
         "--enable-web-dashboard",
         "false"
-      ]
+      ],
+      "trust": true
     }
   }
 }

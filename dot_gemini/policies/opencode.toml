@@ -1,0 +1,46 @@
+# Trust all MCP servers and tools by default
+[[rule]]
+mcpName = "*"
+toolName = "*"
+decision = "allow"
+priority = 100
+
+# Shell command authorizations matching opencode's configuration
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = [
+  "ast-grep",
+  "ls",
+  "pwd",
+  "git status",
+  "git log",
+  "git diff",
+  "git commit",
+  "git add",
+  "git push",
+  "sed",
+  "rg",
+  "grep",
+  "fd",
+  "find",
+  "cat",
+  "bat",
+  "echo",
+  "type",
+  "uname",
+  "xbps-query -l",
+  "pnpm vitest",
+  "pnpm build",
+  "pnpm run build",
+  "pnpm check:",
+  "pnpm run check:",
+  "pnpm lint:",
+  "pnpm run lint:",
+  "pnpm verify:",
+  "pnpm run verify:",
+  "pnpm fix:",
+  "pnpm run fix:"
+]
+decision = "allow"
+priority = 100
+allowRedirection = true
