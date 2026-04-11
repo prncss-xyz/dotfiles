@@ -5,6 +5,8 @@
   "defaultThinkingLevel": "medium",
   "packages": [
     "npm:pi-lens",
+    "npm:pi-sandbox",
+    "npm:pi-subagents",
     "npm:pi-mcp-adapter"
   ]
 }
