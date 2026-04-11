@@ -3,12 +3,11 @@ if status is-interactive
   set fish_greeting ""
   abbr c bat  
   abbr cm chezmoi
-  abbr cmi chezmoi add
-  abbr cmr chezmoi forget
-  abbr cmap chezmoi apply
+  abbr cma chezmoi add
+  abbr cmd chezmoi diff
   abbr cme chezmoi edit
-  abbr cmcd chezmoi cd
-  abbr cmdd chezmoi diff
+  abbr cmr chezmoi forget
+  abbr cmu chezmoi apply
 	abbr d ddgr --rev
 	abbr dw BROWSER=w3m ddgr --rev
   abbr n nvim

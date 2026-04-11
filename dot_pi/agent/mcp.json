@@ -1,47 +1,43 @@
 {
-  "mcpServers": {
-    "chrome-devtools": {
-      "command": "bun",
-      "args": [
-        "x",
-        "chrome-devtools-mcp@latest"
-      ]
-    },
-    "context7": {
-      "command": "bun",
-      "args": [
-        "x",
-        "@upstash/context7-mcp"
-      ]
-    },
-    "tavily": {
-      "command": "bun",
-      "args": [
-        "x",
-        "tavily-mcp@latest"
-      ]
-    },
-    "exa": {
-      "command": "bun",
-      "args": [
-        "x",
-        "exa-mcp-server"
-      ],
-      "enabled": true
-    },
-    "codemod": {
-      "command": "bun",
-      "args": [
-        "x",
-        "codemod@latest",
-        "mcp"
-      ]
-    },
-    "duckduckgo": {
-      "command": "uvx",
-      "args": [
-        "duckduckgo-mcp-server"
-      ]
-    }
-  }
+	"mcpServers": {
+		"chrome-devtools": {
+			"command": "bun",
+			"args": ["x", "chrome-devtools-mcp@latest"]
+		},
+		"context7": {
+			"command": "bun",
+			"args": ["x", "@upstash/context7-mcp"]
+		},
+		"tavily": {
+			"command": "bun",
+			"args": ["x", "tavily-mcp@latest"]
+		},
+		"exa": {
+			"command": "bun",
+			"args": ["x", "exa-mcp-server"],
+			"enabled": true
+		},
+		"codemod": {
+			"command": "bun",
+			"args": ["x", "codemod@latest", "mcp"]
+		},
+		"duckduckgo": {
+			"command": "uvx",
+			"args": ["duckduckgo-mcp-server"]
+		},
+		"nvim": {
+			"command": "cargo",
+			"args": [
+				"run",
+				"--",
+				"--log-file",
+				".nvim-mcp.log",
+				"--log-level",
+				"debug",
+				"--connect",
+				"auto"
+			],
+			"enabled": true
+		}
+	}
 }
