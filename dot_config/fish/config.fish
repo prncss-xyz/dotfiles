@@ -37,6 +37,8 @@ if status is-interactive
   abbr yta yt-dlp -x --output "%(autonumber)02d %(title)s.%(ext)s"
   abbr cdp cd $HOME/projects/
 
+  abbr gsa git-sync-all
+
   fzf --fish | source
 	starship init fish | source
   zoxide init fish | source
