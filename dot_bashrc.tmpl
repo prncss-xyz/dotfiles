@@ -10,10 +10,18 @@ export PATH="$PATH:$PNPM_HOME:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.luarocks/
 {{ if ne .chezmoi.os "darwin" -}}
 export GRIM_DEFAULT_DIR=$HOME/Media/Pictures/Captures
 export PERSONAL=$HOME/Personal
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/supermemory.ai/prncss-xyz.gpg")) -}}
 export SUPERMEMORY_API_KEY={{ pass "supermemory.ai/prncss-xyz" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/morphllm.com/quarknoir@gmail.com.gpg")) -}}
 export MORPH_API_KEY={{ pass "morphllm.com/quarknoir@gmail.com" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/exa.ai/juliette.lamarche.xyz@gmail.com.gpg")) -}}
 export EXA_API_KEY={{ pass "exa.ai/juliette.lamarche.xyz@gmail.com" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/talivy/prncss-xyz.gpg")) -}}
 export TAVILY_API_KEY={{ pass "talivy/prncss-xyz" }}
+{{- end }}
 {{ end -}}
 {{ if eq .hosted "true" -}}
 export hosted=HOSTED
