@@ -17,3 +17,4 @@ sysfiles/
 {{- if eq .chezmoi.os "linux" -}}
 .hammerspoon/
 {{- end }}
+node_modules/

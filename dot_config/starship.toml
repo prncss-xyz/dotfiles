@@ -11,4 +11,7 @@ pine = '#31748f'
 foam = '#9ccfd8'
 iris = '#c4a7e7'
 
+[cmd_duration]
+min_time = 1000
+
 ## https://github.com/starship/starship/issues/6417 seams not to be fixed

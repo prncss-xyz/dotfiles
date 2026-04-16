@@ -1,10 +1,10 @@
-{{ if ne .chezmoi.os "darwin" -}}
+{{- if ne .chezmoi.os "darwin" }}
 github.com:
     git_protocol: ssh
-{{ if (stat (joinPath .chezmoi.homeDir ".password-store/github.com/prncss-xyz/token.gpg")) -}}
+{{- if (stat (joinPath .chezmoi.homeDir ".password-store/github.com/prncss-xyz/token.gpg")) }}
     oauth_token: {{ pass "github.com/prncss-xyz/token" }}
-{{- else -}}
+{{- else }}
     oauth_token: dummy
 {{- end }}
     user: {{ .github_user }}
-{{ end -}}
+{{- end }}

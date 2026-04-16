@@ -25,19 +25,18 @@
 			"command": "uvx",
 			"args": ["duckduckgo-mcp-server"]
 		},
-		"nvim": {
-			"command": "cargo",
-			"args": [
-				"run",
-				"--",
-				"--log-file",
-				".nvim-mcp.log",
-				"--log-level",
-				"debug",
-				"--connect",
-				"auto"
-			],
-			"enabled": true
-		}
+    "serena": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena.git",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "ide-assistant",
+        "--enable-web-dashboard",
+        "false"
+      ]
+    }
 	}
 }

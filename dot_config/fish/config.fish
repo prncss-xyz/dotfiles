@@ -10,6 +10,7 @@ if status is-interactive
   abbr cmu chezmoi apply
 	abbr d ddgr --rev
 	abbr dw BROWSER=w3m ddgr --rev
+  abbr l eza --icons --git
   abbr n nvim
   abbr o xdg-open
   abbr t eza --tree --icons --git
