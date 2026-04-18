@@ -1,9 +1,6 @@
 {
   "lastChangelogVersion": "0.67.3",
-  "shellPath": "/usr/bin/fish",
-  "packages": [
-    "npm:pi-sandbox",
-    "npm:pi-subagents",
-    "npm:pi-mcp-adapter"
-  ]
+  "packages": ["npm:pi-sandbox", "npm:pi-subagents", "npm:pi-mcp-adapter"],
+  "defaultProvider": "opencode",
+  "defaultModel": "big-pickle"
 }

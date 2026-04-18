@@ -1,5 +1,8 @@
 _my_/
+_my/
 .envrc
 ltex.*
 .pi-lens/
 **/.claude/settings.local.json
+.serena/
+.nvim.lua
