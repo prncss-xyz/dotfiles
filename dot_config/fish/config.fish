@@ -35,7 +35,7 @@ if status is-interactive
   abbr gwt git worktree
   abbr gwtr git worktree remove
   abbr ytx yt-dlp -x
-  abbr yta yt-dlp -x --output "%(autonumber)02d %(title)s.%(ext)s"
+  abbr yta 'yt-dlp -x --output "%(autonumber)02d %(title)s.%(ext)s"'
   abbr cdp cd $HOME/projects/
 
   abbr gsa git-sync-all

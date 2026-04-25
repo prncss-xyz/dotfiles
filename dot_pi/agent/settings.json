@@ -1,6 +1,10 @@
 {
-  "lastChangelogVersion": "0.67.3",
-  "packages": ["npm:pi-sandbox", "npm:pi-subagents", "npm:pi-mcp-adapter"],
+  "lastChangelogVersion": "0.69.0",
+  "packages": [
+    "npm:pi-sandbox",
+    "npm:pi-subagents",
+    "npm:pi-mcp-adapter"
+  ],
   "defaultProvider": "opencode",
   "defaultModel": "big-pickle"
 }
