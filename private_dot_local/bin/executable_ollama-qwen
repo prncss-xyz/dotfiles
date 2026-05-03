@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Ensure the custom model is created with the desired parameters
+ollama create qwen2.5-coder-custom -f "$HOME/.config/ollama/Modelfile-qwen" > /dev/null
+
+OLLAMA_VULKAN=1 \
+OLLAMA_HOST=127.0.0.1:8012 \
+OLLAMA_FLASH_ATTENTION=1 \
+ollama run qwen2.5-coder-custom

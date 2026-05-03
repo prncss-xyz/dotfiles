@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Configuration
+PLAN_FILE="plan.md"
+MAX_RETRIES=5
+# Define your verification command (format, lint, and test)
+CHECK_CMD="pnpm run verify"
+
+echo "--- i) Executing tasks in $PLAN_FILE ---"
+
+# Initial execution call
+# We pass the plan file and instruct the model to implement it
+pi < $PLAN_FILE
+
+echo "--- ii) Entering Verification and Fix Loop ---"
+
+count=0
+success=false
+
+while [ $count -lt $MAX_RETRIES ]; do
+    ((count++))
+    echo "--- Attempt $count: Running $CHECK_CMD ---"
+    
+    # Execute the checks
+    eval "$CHECK_CMD"
+    
+    if [ $? -eq 0 ]; then
+        echo "--- All checks passed successfully! ---"
+        success=true
+        break
+    else
+        echo "--- Errors found. Requesting PI Harness to fix... ---"
+        
+        # Provide the failure context back to the model
+        pi "The command '$CHECK_CMD' failed. Please analyze the logs, fix the errors, and ensure the code follows the project's type-safety and style standards."
+    fi
+done
+
+if [ "$success" = false ]; then
+    echo "--- Failed to resolve errors after $MAX_RETRIES attempts. Manual review required. ---"
+    exit 1
+fi

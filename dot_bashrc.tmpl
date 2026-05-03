@@ -22,6 +22,36 @@ export EXA_API_KEY={{ pass "exa.ai/juliette.lamarche.xyz@gmail.com" }}
 {{ if (stat (joinPath .chezmoi.homeDir ".password-store/talivy/prncss-xyz.gpg")) -}}
 export TAVILY_API_KEY={{ pass "talivy/prncss-xyz" }}
 {{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/groq.com/juliette.lamarche.xyz@gmail.com/keys/nvim.gpg")) -}}
+export GROQ_API_KEY={{ pass "groq.com/juliette.lamarche.xyz@gmail.com/keys/nvim" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/cerebras.ai/key/prncss-xyz.gpg")) -}}
+export CEREBRAS_API_KEY={{ pass "cerebras.ai/key/prncss-xyz" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/opencode.ai/key/prncss-xyz.gpg")) -}}
+export OPENCODE_API_KEY={{ pass "opencode.ai/key/prncss-xyz" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/mistral.ai/juliette.lamarche.xyz@gmail.com/keys/codestral.gpg")) -}}
+export CODESTRAL_API_KEY={{ pass "mistral.ai/juliette.lamarche.xyz@gmail.com/keys/codestral" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/mistral.ai/juliette.lamarche.xyz@gmail.com/keys/nvim.gpg")) -}}
+export MISTRAL_API_KEY={{ pass "mistral.ai/juliette.lamarche.xyz@gmail.com/keys/nvim" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/openrouter.ai/keys/prncss-xyz.gpg")) -}}
+export OPENROUTER_API_KEY={{ pass "openrouter.ai/keys/prncss-xyz" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/openrouter.ai/keys/prncss-xyz.gpg")) -}}
+export NVIDIA_API_KEY={{ pass "nvidia.com/juliette.lamarche.xyz@gmai.com/keys/prncss-xyz" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/google.com/juliette.lamarche.xyz@gmail.com/keys/nvim.gpg")) -}}
+export GEMINI_API_KEY={{ pass "google.com/juliette.lamarche.xyz@gmail.com/keys/nvim" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/inceptionlabs.ai/prncss-xyz/key.gpg")) -}}
+export INCEPTION_API_KEY={{ pass "inceptionlabs.ai/prncss-xyz/key" }}
+{{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/ollama.com/keys/prncss-xyz.gpg")) -}}
+export OLLAMA_API_KEY={{ pass "ollama.com/keys/prncss-xyz" }}
+{{- end }}
 {{ end -}}
 {{ if eq .hosted "true" -}}
 export hosted=HOSTED

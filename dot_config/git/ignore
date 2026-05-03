@@ -5,4 +5,5 @@ ltex.*
 .pi-lens/
 **/.claude/settings.local.json
 .serena/
+.vectorcode/
 .nvim.lua
