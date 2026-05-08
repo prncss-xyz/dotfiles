@@ -56,6 +56,3 @@ export OLLAMA_API_KEY={{ pass "ollama.com/keys/prncss-xyz" }}
 {{ if eq .hosted "true" -}}
 export hosted=HOSTED
 {{ end -}}
-if [ -x "$(command -v ~/.local/bin/mise)" ]; then
-  eval "$(~/.local/bin/mise activate bash)"
-fi
