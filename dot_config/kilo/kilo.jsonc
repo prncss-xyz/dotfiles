@@ -1,5 +1,8 @@
 {
   "$schema": "https://kilo.ai/config.schema.json",
+  "experimental": {
+    "semantic_indexing": true
+  },
   "plugin": [
     "@tarquinen/opencode-dcp",
     "@mohak34/opencode-notifier",
@@ -81,5 +84,12 @@
     "grep": "allow",
     "glob": "allow",
     "read": "allow"
+  },
+    "indexing": {
+    "enabled": true,
+    "provider": "huggingface",
+    "model": "salesforce/SFR-Embedding-Code-2B_R",
+    "vectorStore": "lancedb",
+    "lancedb": {}
   }
 }
