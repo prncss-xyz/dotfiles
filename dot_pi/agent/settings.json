@@ -2,7 +2,6 @@
   "lastChangelogVersion": "0.69.0",
   "packages": [
     "npm:pi-sandbox",
-    "npm:pi-subagents",
     "npm:pi-mcp-adapter"
   ],
   "defaultProvider": "opencode",
