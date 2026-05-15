@@ -1,20 +1,5 @@
-#!/usr/bin/env sh
+#!/usr/bin/env fish
 
-# Ensure bubblewrap is installed
-if not command -sq bwrap
-    echo "Error: bubblewrap is not installed. Run: sudo xbps-install -S bubblewrap"
-    return 1
-end
-
-# Define the command to run (the first argument)
-set -l cmd $argv[1]
-
-# Define the rest of the arguments
-set -l args $argv[2..-1]
-
-# Bubblewrap execution
-# We bind the essential musl/system paths
-# We unshare-all to drop network/PID/IPC unless explicitly needed
 bwrap \
     --ro-bind /usr/bin /usr/bin \
     --ro-bind /usr/lib /usr/lib \
@@ -22,11 +7,11 @@ bwrap \
     --proc /proc \
     --dev /dev \
     --unshare-all \
-    --share-net \
     --die-with-parent \
     --chdir (pwd) \
     --bind (pwd) (pwd) \
+    --ro-bind-try $HOME/.local/share/nvim/lazy $HOME/.local/share/nvim/lazy \
     --tmpfs /tmp \
     --tmpfs /run \
     --setenv HOME (pwd) \
-    $cmd $args
+    $argv
