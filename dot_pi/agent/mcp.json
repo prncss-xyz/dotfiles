@@ -25,9 +25,6 @@
       "command": "uvx",
       "args": ["duckduckgo-mcp-server"]
     },
-    "vectorcode": {
-      "command": "vectorcode-mcp-server"
-    },
     "serena": {
       "command": "uvx",
       "args": [

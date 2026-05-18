@@ -1,0 +1,17 @@
+{
+  "filesystem": {
+    "denyRead": ["/Users", "/home"],
+    "allowRead": [
+      ".", 
+      "~/.config", 
+      "~/.local", 
+      "~/.local/.bun/bin", 
+      "~/.cargo/bin", 
+      "~/.luarocks/bin", 
+      "~/.vite-plus/bin"
+    ],
+    "denyRead": [],
+    "allowWrite": [".", "/tmp"],
+    "denyWrite": []
+  }
+}
