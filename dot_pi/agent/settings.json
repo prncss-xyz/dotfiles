@@ -1,11 +1,11 @@
 {
-  "lastChangelogVersion": "0.75.1",
+"lastChangelogVersion": "0.75.5",
+"npmCommand": ["pnpm"],
   "packages": [
     "npm:pi-sandbox",
+    "npm:pi-subagents",
     "npm:pi-mcp-adapter",
     "npm:context-mode",
     "npm:@juicesharp/rpiv-ask-user-question"
-  ],
-  "defaultProvider": "opencode",
-  "defaultModel": "big-pickle"
+  ]
 }

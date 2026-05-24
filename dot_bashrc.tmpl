@@ -7,7 +7,7 @@ export HOSTNAME=$(hostname)
 export NPM_CONFIG_PREFIX=$HOME/.local
 export PNPM_HOME=$HOME/.local/share/pnpm
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$PATH:$PNPM_HOME:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.luarocks/bin:$BUN_INSTALL/bin"
+export PATH="$PATH:$HOME/.local/share/pnpm/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.luarocks/bin:$BUN_INSTALL/bin"
 {{ if ne .chezmoi.os "darwin" -}}
 export GRIM_DEFAULT_DIR=$HOME/Media/Pictures/Captures
 export PERSONAL=$HOME/Personal
