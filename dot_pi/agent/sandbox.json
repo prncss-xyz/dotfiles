@@ -3,6 +3,7 @@
     "denyRead": ["/Users", "/home"],
     "allowRead": [
       ".", 
+      "~/.agents", 
       "~/.config", 
       "~/.local", 
       "~/.local/.bun/bin", 
