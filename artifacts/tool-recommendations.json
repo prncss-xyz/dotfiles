@@ -1,0 +1,27 @@
+{
+  "recommendedProcesses": [
+    "cradle/project-install",
+    "gsd/discuss",
+    "gsd/execute",
+    "gsd/audit"
+  ],
+  "recommendedSkills": [
+    "context-mode",
+    "mermaid-diagrams"
+  ],
+  "recommendedAgents": [],
+  "recommendedMethodology": "gsd (Get Stuff Done) - lightweight workflow suitable for dotfiles maintenance",
+  "justifications": {
+    "cradle/project-install": "Already in progress - sets up babysitter for this project",
+    "gsd/discuss": "Discuss and plan dotfile changes before executing",
+    "gsd/execute": "Execute routine dotfile updates with orchestration",
+    "gsd/audit": "Audit dotfile state and consistency across machines",
+    "context-mode": "Available skill for context-aware analysis of project state",
+    "mermaid-diagrams": "Available skill for visualizing dotfile architecture and workflows"
+  },
+  "prioritized": {
+    "mustHave": ["cradle/project-install"],
+    "niceToHave": ["gsd/discuss", "gsd/execute", "gsd/audit"]
+  },
+  "remediations": []
+}

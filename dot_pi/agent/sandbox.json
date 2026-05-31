@@ -1,18 +1,22 @@
 {
   "filesystem": {
-    "denyRead": ["/Users", "/home"],
-    "allowRead": [
-      ".", 
-      "~/.agents", 
-      "~/.config", 
-      "~/.local", 
-      "~/.local/.bun/bin", 
-      "~/.cargo/bin", 
-      "~/.luarocks/bin", 
-      "~/.vite-plus/bin"
-    ],
     "denyRead": [],
-    "allowWrite": [".", "/tmp"],
+    "allowRead": [
+      ".",
+      "~/.agents",
+      "~/.config",
+      "~/.local",
+      "~/.cargo/bin",
+      "~/.luarocks/bin",
+      "~/.vite-plus/bin",
+      "~/.pi/agent"
+      "/home/prncss/.a5c",
+      "/home/prncss/.pi/agent"
+    ],
+    "allowWrite": [
+      ".",
+      "/tmp/**"
+    ],
     "denyWrite": []
   }
 }

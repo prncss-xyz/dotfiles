@@ -1,5 +1,3 @@
-# AGENT.md
-
 This file provides guidance to agents.
 
 ## What This Is

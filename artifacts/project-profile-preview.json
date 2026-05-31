@@ -1,0 +1,106 @@
+{
+  "profile": {
+    "projectName": "dotfiles",
+    "description": "Personal dotfiles managed by chezmoi — fish shell, neovim, ghostty, river/sway, Void Linux (runit), plus macOS and Alpine targets",
+    "goals": [
+      {"id": "goal-automation-1", "description": "Automate routine dotfile maintenance workflows (sync, template updates, multi-machine orchestration)", "category": "automation", "priority": "high", "status": "new"},
+      {"id": "goal-learn-1", "description": "Learn babysitter platform and its orchestration capabilities", "category": "learning", "priority": "medium", "status": "new"}
+    ],
+    "techStack": {
+      "languages": [
+        {"name": "fish", "role": "primary shell"},
+        {"name": "Lua", "role": "neovim configuration"},
+        {"name": "JavaScript", "role": "tooling scripts"}
+      ],
+      "frameworks": [
+        {"name": "chezmoi", "version": "latest", "category": "dotfile management"},
+        {"name": "fish-shell", "category": "shell"},
+        {"name": "starship", "category": "prompt"},
+        {"name": "fzf", "category": "fuzzy finder"},
+        {"name": "zoxide", "category": "directory jumper"},
+        {"name": "ghostty", "category": "terminal emulator"},
+        {"name": "river", "category": "window manager (Wayland)"},
+        {"name": "sway", "category": "window manager (Wayland)"}
+      ],
+      "databases": [],
+      "infrastructure": [
+        {"name": "runit", "category": "init system"},
+        {"name": "pass", "category": "password store"},
+        {"name": "GPG", "category": "encryption"}
+      ],
+      "buildTools": ["just"],
+      "packageManagers": ["pnpm", "xbps", "brew", "apt", "cargo", "uv"]
+    },
+    "architecture": {
+      "pattern": "chezmoi dotfiles monorepo",
+      "modules": [
+        {"name": "config", "path": "dot_config/", "description": "XDG config directories"},
+        {"name": "shell-profiles", "path": "dot_bashrc.tmpl", "description": "Shell init scripts"},
+        {"name": "scripts", "path": "scripts/", "description": "Post-install automation"},
+        {"name": "bin", "path": "private_dot_local/bin/", "description": "User binaries"},
+        {"name": "sysfiles", "path": "sysfiles/", "description": "System-level config"}
+      ],
+      "entryPoints": ["~/.config/fish/config.fish", "scripts/post-install.fish.tmpl"],
+      "dataFlow": "chezmoi apply -> templates processed -> files deployed to $HOME; sysfiles/ -> rsync to /"
+    },
+    "team": [
+      {"name": "Juliette Lamarche", "role": "sole maintainer", "responsibilities": ["dotfile maintenance", "config management", "system administration"]}
+    ],
+    "workflows": [
+      {
+        "name": "dotfile-management",
+        "description": "Add, update, and sync dotfiles across machines",
+        "steps": ["chezmoi add <file>", "chezmoi diff", "chezmoi apply", "git commit", "git push"],
+        "triggers": ["manual", "multi-machine-sync"]
+      },
+      {
+        "name": "post-install",
+        "description": "New machine bootstrap",
+        "steps": ["clone repo", "run post-install.fish", "run post-install-root.fish", "sync sysfiles/"],
+        "triggers": ["new-machine"]
+      }
+    ],
+    "processes": [],
+    "tools": {
+      "linting": [{"name": "ripgrep", "config": ".ripgreprc"}],
+      "testing": [],
+      "formatting": [{"name": "prettier", "config": "prettier.config.js"}]
+    },
+    "services": [],
+    "externalIntegrations": [],
+    "cicd": {"babysitterIntegration": {"enabled": false}},
+    "painPoints": [
+      {"id": "pp-multios-1", "description": "Config across Linux/Void, macOS, Alpine via chezmoi templates", "severity": "medium", "category": "maintenance", "discoveredVia": "git-history-and-interview"}
+    ],
+    "bottlenecks": [
+      {"id": "bn-multiwm-1", "description": "Dual sway/river config maintenance", "impact": "medium", "location": "dot_config/sway, dot_config/river", "frequency": "ongoing"}
+    ],
+    "conventions": {
+      "naming": {"chezmoi": "dot_ prefix, private_ for sensitive, executable_ prefix"},
+      "git": {"strategy": "trunk-based", "commitStyle": "conventional + chezmoi-auto"},
+      "codeStyle": {"general": "minimalist, functional", "fish": "abbreviations over aliases, functions"},
+      "importOrder": [],
+      "errorHandling": "scripts use exit codes, GPG signing enforced",
+      "testingConventions": "no formal test framework",
+      "additionalRules": ["GPG signing on all commits", "chezmoi templates for OS-conditional content", "Secrets via pass at apply-time"]
+    },
+    "repositories": [
+      {"url": "~/projects/dotfiles", "role": "primary", "vcs": "git", "hosting": "self-managed"}
+    ],
+    "claudeMdInstructions": [
+      "This project uses chezmoi for dotfile management",
+      "Files use chezmoi naming: dot_ config, private_ sensitive, executable_ scripts, .tmpl templates",
+      "GPG signing enforced on all git operations",
+      "Primary shell is fish on Void Linux (runit init); also targets macOS and Alpine",
+      "Secrets retrieved via pass at apply-time"
+    ],
+    "installedSkills": [],
+    "installedAgents": [],
+    "installedProcesses": [],
+    "createdAt": "2026-05-30T22:40:15.000Z",
+    "updatedAt": "2026-05-30T22:40:15.000Z",
+    "version": 1
+  },
+  "changesSummary": "New project profile created for dotfiles repo. All data derived from repo analysis, git mining, and user interview.",
+  "sourcesUsed": ["repo-structure-analysis", "tools-services-analysis", "git-history-mining", "user-interview"]
+}

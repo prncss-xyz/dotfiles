@@ -1,11 +1,19 @@
 {
-"lastChangelogVersion": "0.75.5",
-"npmCommand": ["pnpm"],
+  "lastChangelogVersion": "0.78.0",
+  "npmCommand": [
+    "pnpm"
+  ],
   "packages": [
     "npm:pi-sandbox",
-    "npm:pi-subagents",
     "npm:pi-mcp-adapter",
     "npm:context-mode",
-    "npm:@juicesharp/rpiv-ask-user-question"
-  ]
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-btw",
+    "npm:@observal/pi-insights",
+    "npm:pi-hermes-memory",
+    "npm:pi-skill-palette",
+    "npm:@a5c-ai/babysitter-pi"
+  ],
+  "defaultProvider": "opencode",
+  "defaultModel": "big-pickle"
 }
