@@ -22,14 +22,14 @@ riverctl map normal Super+Control E close
 riverctl map normal Super+Control Q spawn waylock
 riverctl map normal Super+Control C spawn .config/river/init
 
-riverctl map normal Super F toggle-fullscreen
+riverctl map normal Super f toggle-fullscreen
 
 riverctl map normal Super $UP focus-view next
 riverctl map normal Super $DOWN focus-view previous
 riverctl map normal Super $LEFT focus-view left
 riverctl map normal Super $RIGHT focus-view right
-riverctl map normal Super+Shift $UP swap next
-riverctl map normal Super+Shift $DOWN swap previous
+riverctl map normal Super Shift $UP swap next
+riverctl map normal Super Shift $DOWN swap previous
 riverctl map normal Super Return zoom
 
 riverctl map normal Super Period focus-output next
@@ -38,7 +38,7 @@ riverctl map normal Super+Shift Period send-to-output next
 riverctl map normal Super+Shift Comma send-to-output previous
 
 riverctl declare-mode adjust
-riverctl map normal Super R enter-mode adjust
+riverctl map normal Super r enter-mode adjust
 riverctl map adjust None Escape enter-mode normal
 riverctl map adjust None $LEFT send-layout-cmd rivertile "main-ratio -0.05"
 riverctl map adjust None $RIGHT send-layout-cmd rivertile "main-ratio +0.05"
@@ -50,7 +50,7 @@ riverctl map adjust None $O_DOWN send-layout-cmd rivertile "main-location bottom
 riverctl map adjust None $O_LEFT send-layout-cmd rivertile "main-location left"
 
 riverctl declare-mode float
-riverctl map normal Super Q enter-mode float
+riverctl map normal Super q enter-mode float
 riverctl map float None Escape enter-mode normal
 # toggle
 riverctl map float Super Space toggle-float
@@ -103,12 +103,12 @@ for mode in normal locked; do
 done
 
 riverctl declare-mode audio
-riverctl map normal Super O enter-mode audio
+riverctl map normal Super o enter-mode audio
 riverctl map audio None Escape enter-mode normal
 riverctl map audio None $UP spawn 'pactl set-sink-volume @DEFAULT_SINK@ +4%'
 riverctl map audio None $DOWN spawn 'pactl set-sink-volume @DEFAULT_SINK@ -4%'
-riverctl map audio Shif $UP spawn 'pactl set-sink-volume @DEFAULT_SINK@ +12%'
-riverctl map audio Shif $DOWN spawn 'pactl set-sink-volume @DEFAULT_SINK@ -12%'
+riverctl map audio Shift $UP spawn 'pactl set-sink-volume @DEFAULT_SINK@ +12%'
+riverctl map audio Shift $DOWN spawn 'pactl set-sink-volume @DEFAULT_SINK@ -12%'
 riverctl map audio None M spawn 'pactl set-sink-mute \@DEFAULT_SINK@ toggle'
 riverctl map audio None space spawn 'playerctl play-pause'
 riverctl map audio None $LEFT spawn 'playerctl previous'
@@ -116,7 +116,7 @@ riverctl map audio None $RIGHT spawn 'playerctl next'
 riverctl map audio None x spawn 'playerctl stop'
 
 riverctl declare-mode lumino
-riverctl map normal Super I enter-mode lumino
+riverctl map normal Super i enter-mode lumino
 riverctl map lumino None Escape enter-mode normal
 riverctl map lumino None $UP spawn 'brightnessctl set 2%+'
 riverctl map lumino None $DOWN spawn 'brightnessctl set 2%-'
@@ -132,20 +132,21 @@ riverctl hide-cursor when-typing enabled
 
 riverctl set-repeat 50 300
 
-riverctl map normal Super n set-focused-tags 1
-riverctl map normal Super m set-focused-tags 2
+riverctl map normal Super Shift D spawn 'fish -c "darkman toggle"'
+riverctl map normal Super N set-focused-tags 1
+riverctl map normal Super M set-focused-tags 2
 riverctl map normal Super comma set-focused-tags 4
 riverctl map normal Super period set-focused-tags 8
 riverctl map normal Super eacute set-focused-tags 16
 
-riverctl map normal Super+Shift n set-view-tags 1
-riverctl map normal Super+Shift m set-view-tags 2
-riverctl map normal Super+Shift comma set-view-tags 4
-riverctl map normal Super+Shift period set-view-tags 8
-riverctl map normal Super+Shift eacute set-view-tags 16
+riverctl map normal Super Shift n set-view-tags 1
+riverctl map normal Super Shift m set-view-tags 2
+riverctl map normal Super Shift comma set-view-tags 4
+riverctl map normal Super Shift period set-view-tags 8
+riverctl map normal Super Shift eacute set-view-tags 16
 
 riverctl map normal Super A focus-previous-tags
-riverctl map normal Super+Shift A send-to-previous-tags
+riverctl map normal Super Shift A send-to-previous-tags
 all_tags=$(((1 << 32) - 1))
 # focus all tags
 riverctl map normal Super 0 set-focused-tags $all_tags
@@ -167,13 +168,13 @@ riverctl default-layout rivertile
 riverctl map normal Print spawn grim
 riverctl map normal Super S spawn grim
 riverctl map normal Super D spawn fuzzel
-riverctl map normal Super E spawn "fish -c neovide" # we need this to have paths properly setup
+riverctl map normal Super E spawn 'fish -c "neovide"' # we need this to have paths properly setup
 riverctl map normal Super T spawn footclient
-riverctl map normal Super+Shift T spawn "footclient -e bash"
+riverctl map normal Super Shift T spawn "footclient -e bash"
 riverctl map normal Super Y spawn .local/bin/browser
-riverctl map normal Super P spawn 'fish -c STORE_DIR=$HOME/Personal/pass/ tessen'
+riverctl map normal Super P spawn 'fish -c "STORE_DIR=$HOME/Personal/pass/ tessen"'
 riverctl map normal Super G spawn "swaync"
-riverctl map normal Super+Shift G spawn "swaync-client -t"
+riverctl map normal Super Shift G spawn "swaync-client -t"
 
 dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY --systemd --all
 turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
