@@ -1,16 +1,34 @@
 #!/bin/bash
 
 # ADR creation script
-# Usage: adr <path> <title...>
+# Usage: adr [-s superseded_path] <path> <title...>
 # Filename template: YYYYMMDD-UUUU {slug(title)}.adr.md
 
+SUPERSEDED_PATH=""
+while getopts "s:" opt; do
+    case $opt in
+        s) SUPERSEDED_PATH="$OPTARG" ;;
+        *) echo "Usage: $0 [-s superseded_path] <path> <title...>"; exit 1 ;;
+    esac
+done
+shift $((OPTIND - 1))
+
 if [ "$#" -lt 2 ]; then
-    echo "Usage: $0 <path> <title...>"
+    echo "Usage: $0 [-s superseded_path] <path> <title...>"
     exit 1
 fi
 
 DEST_DIR="$1"
 TITLE="${*:2}"
+
+if [ -n "$SUPERSEDED_PATH" ]; then
+    if [ ! -f "$SUPERSEDED_PATH" ]; then
+        echo "Error: Superseded file not found: $SUPERSEDED_PATH"
+        exit 1
+    fi
+    OLD_TITLE=$(grep "^# " "$SUPERSEDED_PATH" | head -n 1 | sed 's/^# //')
+    OLD_FILENAME=$(basename "$SUPERSEDED_PATH")
+fi
 
 # 1. YYYYMMDD (UTC)
 DATE_PART=$(date -u +"%Y%m%d")
@@ -42,11 +60,79 @@ FILEPATH="${DEST_DIR}/${FILENAME}"
 mkdir -p "$DEST_DIR"
 
 # 5. Content
-cat <<EOF > "$FILEPATH"
-# ${TITLE}
+{
+    if [ -n "$SUPERSEDED_PATH" ]; then
+        echo "---"
+        echo "supersedes: ${OLD_FILENAME}"
+        echo "---"
+        echo ""
+    fi
+    echo "# ${TITLE}"
+    echo ""
+    echo "## Context"
+    echo ""
+} > "$FILEPATH"
 
-## Context
+# 6. Function to upsert frontmatter
+upsert_frontmatter() {
+    local target_file="$1"
+    local key="$2"
+    local value="$3"
+    
+    # Check if file has frontmatter (starts with --- and has another ---)
+    if head -n 1 "$target_file" | grep -q "^---$"; then
+        # File has frontmatter
+        local end_line=$(grep -n "^---$" "$target_file" | sed -n '2p' | cut -d: -f1)
+        if [ -n "$end_line" ]; then
+            # Extract frontmatter
+            local tmp_fm=$(mktemp)
+            sed -n "2,$((end_line - 1))p" "$target_file" > "$tmp_fm"
+            
+            if grep -q "^${key}:" "$tmp_fm"; then
+                # Key exists, check if it's already a list or single value
+                if grep -q "^${key}: \[.*\]" "$tmp_fm"; then
+                    # It's a flow style list, append to it
+                    sed -i "s/^${key}: \[\(.*\)\]/${key}: [\1, ${value}]/" "$tmp_fm"
+                elif grep -A 1 "^${key}:" "$tmp_fm" | grep -q "^  - "; then
+                    # It's a block style list, append a new line
+                    sed -i "/^${key}:/a \  - ${value}" "$tmp_fm"
+                else
+                    # It's a single value, convert to block list
+                    local old_val=$(grep "^${key}:" "$tmp_fm" | cut -d: -f2- | sed 's/^[[:space:]]*//')
+                    sed -i "s/^${key}:.*/${key}:\n  - ${old_val}\n  - ${value}/" "$tmp_fm"
+                fi
+            else
+                # Key doesn't exist, append it to frontmatter
+                echo "${key}: ${value}" >> "$tmp_fm"
+            fi
+            
+            # Reconstruct file
+            local final_tmp=$(mktemp)
+            echo "---" > "$final_tmp"
+            cat "$tmp_fm" >> "$final_tmp"
+            echo "---" >> "$final_tmp"
+            sed "1,${end_line}d" "$target_file" >> "$final_tmp"
+            mv "$final_tmp" "$target_file"
+            rm "$tmp_fm"
+            return
+        fi
+    fi
+    
+    # No frontmatter or malformed, prepend new one
+    local final_tmp=$(mktemp)
+    {
+        echo "---"
+        echo "${key}: ${value}"
+        echo "---"
+        echo ""
+        cat "$target_file"
+    } > "$final_tmp"
+    mv "$final_tmp" "$target_file"
+}
 
-EOF
+# 7. Update superseded ADR
+if [ -n "$SUPERSEDED_PATH" ]; then
+    upsert_frontmatter "$SUPERSEDED_PATH" "superseded" "$FILENAME"
+fi
 
 echo "Created ADR: $FILEPATH"

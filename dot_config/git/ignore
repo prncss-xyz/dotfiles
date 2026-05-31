@@ -7,3 +7,5 @@ ltex.*
 .serena/
 .vectorcode/
 .nvim.lua
+.a5c/
+node_modules/
