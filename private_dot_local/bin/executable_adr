@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# ADR creation script
+# Usage: adr <path> <title...>
+# Filename template: YYYYMMDD-UUUU {slug(title)}.adr.md
+
+if [ "$#" -lt 2 ]; then
+    echo "Usage: $0 <path> <title...>"
+    exit 1
+fi
+
+DEST_DIR="$1"
+TITLE="${*:2}"
+
+# 1. YYYYMMDD (UTC)
+DATE_PART=$(date -u +"%Y%m%d")
+
+# 2. UUUU (Base 36 of seconds since midnight UTC)
+# Total seconds since midnight UTC
+H=$(date -u +"%-H")
+M=$(date -u +"%-M")
+S=$(date -u +"%-S")
+SECONDS_SINCE_MIDNIGHT=$((H * 3600 + M * 60 + S))
+
+CHARS="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+VAL=$SECONDS_SINCE_MIDNIGHT
+UUUU=""
+for i in {1..4}; do
+    IDX=$((VAL % 36))
+    UUUU="${CHARS:IDX:1}$UUUU"
+    VAL=$((VAL / 36))
+done
+
+# 3. Slugify title
+# Replace non-alphanumeric with hyphen, lowercase, collapse multiple hyphens
+SLUG=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed -e 's/[^a-z0-9]/-/g' -e 's/--*/-/g' -e 's/^-//' -e 's/-$//')
+
+FILENAME="${DATE_PART}-${UUUU} ${SLUG}.adr.md"
+FILEPATH="${DEST_DIR}/${FILENAME}"
+
+# 4. Create directory if not exists
+mkdir -p "$DEST_DIR"
+
+# 5. Content
+cat <<EOF > "$FILEPATH"
+# ${TITLE}
+
+## Context
+
+EOF
+
+echo "Created ADR: $FILEPATH"
