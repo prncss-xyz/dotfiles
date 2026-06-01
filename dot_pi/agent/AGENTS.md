@@ -6,6 +6,10 @@
 - at the end of each plan, list of unresolved questions, if any
 - flag edge cases, unstated assumptions, and things that may be overlooked in my requests
 
+## Sandox
+
+You only have write access to the current directory and to `/tmp`.
+
 ## Coding
 
 - never commit changes unless explicitly asked to

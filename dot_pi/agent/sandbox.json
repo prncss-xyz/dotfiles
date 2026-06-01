@@ -9,7 +9,7 @@
       "~/.cargo/bin",
       "~/.luarocks/bin",
       "~/.vite-plus/bin",
-      "~/.pi/agent"
+      "~/.pi/agent",
       "/home/prncss/.a5c",
       "/home/prncss/.pi/agent"
     ],

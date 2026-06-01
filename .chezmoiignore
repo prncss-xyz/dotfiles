@@ -18,5 +18,4 @@ sysfiles/
 .hammerspoon/
 {{- end }}
 node_modules/
-.a5c/
 artifacts/

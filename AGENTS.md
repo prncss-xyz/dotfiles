@@ -2,17 +2,7 @@ This file provides guidance to agents.
 
 ## What This Is
 
-Personal dotfiles managed by [chezmoi](https://www.chezmoi.io/). The source directory is `~/projects/dotfiles` (not the default `~/.local/share/chezmoi`). Files here use chezmoi naming conventions (`dot_`, `private_`, `executable_`, `.tmpl`) and are applied to the home directory.
-
-## Key Commands
-
-```bash
-chezmoi apply          # apply dotfiles to $HOME
-chezmoi diff           # preview changes before applying
-chezmoi add <file>     # add a file from $HOME to this repo (use absolute path to the target, e.g. ~/.npmrc)
-chezmoi edit <file>    # edit the source for a managed file
-chezmoi cd             # cd into source directory
-```
+Personal dotfiles managed by [chezmoi](https://www.chezmoi.io/). The source directory is `~/projects/dotfiles` (not the default `~/.local/share/chezmoi`). Files here use chezmoi naming conventions (`dot_`, `private_`, `executable_`, `.tmpl`) and are applied to the home directory. Never directly change the attributes of a file, use these prefix instead.
 
 ## Template System
 
