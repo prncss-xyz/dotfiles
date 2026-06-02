@@ -13,11 +13,6 @@
         "x",
         "tavily-mcp@latest"
       ]
-      {{- if (stat (joinPath .chezmoi.homeDir ".password-store/talivy/prncss-xyz.gpg")) }},
-      "env": {
-        "TAVILY_API_KEY": "{{ pass "talivy/prncss-xyz" }}"
-      }
-      {{- end }}
     },
     "exa": {
       "command": "bun",
@@ -25,11 +20,6 @@
         "x",
         "exa-mcp-server"
       ]
-      {{- if (stat (joinPath .chezmoi.homeDir ".password-store/exa.ai/juliette.lamarche.xyz@gmail.com.gpg")) }},
-      "env": {
-        "EXA_API_KEY": "{{ pass "exa.ai/juliette.lamarche.xyz@gmail.com" }}"
-      }
-      {{- end }}
     },
     "serena": {
       "command": "uvx",

@@ -103,7 +103,7 @@ for mode in normal locked; do
 done
 
 riverctl declare-mode audio
-riverctl map normal Super o enter-mode audio
+riverctl map normal Super O enter-mode audio
 riverctl map audio None Escape enter-mode normal
 riverctl map audio None $UP spawn 'pactl set-sink-volume @DEFAULT_SINK@ +4%'
 riverctl map audio None $DOWN spawn 'pactl set-sink-volume @DEFAULT_SINK@ -4%'
@@ -113,10 +113,10 @@ riverctl map audio None M spawn 'pactl set-sink-mute \@DEFAULT_SINK@ toggle'
 riverctl map audio None space spawn 'playerctl play-pause'
 riverctl map audio None $LEFT spawn 'playerctl previous'
 riverctl map audio None $RIGHT spawn 'playerctl next'
-riverctl map audio None x spawn 'playerctl stop'
+riverctl map audio None X spawn 'playerctl stop'
 
 riverctl declare-mode lumino
-riverctl map normal Super i enter-mode lumino
+riverctl map normal Super I enter-mode lumino
 riverctl map lumino None Escape enter-mode normal
 riverctl map lumino None $UP spawn 'brightnessctl set 2%+'
 riverctl map lumino None $DOWN spawn 'brightnessctl set 2%-'
@@ -139,11 +139,11 @@ riverctl map normal Super comma set-focused-tags 4
 riverctl map normal Super period set-focused-tags 8
 riverctl map normal Super eacute set-focused-tags 16
 
-riverctl map normal Super Shift n set-view-tags 1
-riverctl map normal Super Shift m set-view-tags 2
-riverctl map normal Super Shift comma set-view-tags 4
-riverctl map normal Super Shift period set-view-tags 8
-riverctl map normal Super Shift eacute set-view-tags 16
+riverctl map normal Super+Shift N set-view-tags 1
+riverctl map normal Super+Shift M set-view-tags 2
+riverctl map normal Super+Shift comma set-view-tags 4
+riverctl map normal Super+Shift period set-view-tags 8
+riverctl map normal Super+Shift eacute set-view-tags 16
 
 riverctl map normal Super A focus-previous-tags
 riverctl map normal Super Shift A send-to-previous-tags
