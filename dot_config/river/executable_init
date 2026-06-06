@@ -132,7 +132,7 @@ riverctl hide-cursor when-typing enabled
 
 riverctl set-repeat 50 300
 
-riverctl map normal Super Shift D spawn 'fish -c "darkman toggle"'
+riverctl map normal Super+Shift D spawn 'sh -c "darkman toggle"'
 riverctl map normal Super N set-focused-tags 1
 riverctl map normal Super M set-focused-tags 2
 riverctl map normal Super comma set-focused-tags 4
@@ -168,13 +168,13 @@ riverctl default-layout rivertile
 riverctl map normal Print spawn grim
 riverctl map normal Super S spawn grim
 riverctl map normal Super D spawn fuzzel
-riverctl map normal Super E spawn 'fish -c "neovide"' # we need this to have paths properly setup
+riverctl map normal Super E spawn 'sh -c "neovide"' # we need this to have paths properly setup
 riverctl map normal Super T spawn footclient
-riverctl map normal Super Shift T spawn "footclient -e bash"
+riverctl map normal Super+Shift T spawn "footclient -e bash"
 riverctl map normal Super Y spawn .local/bin/browser
-riverctl map normal Super P spawn 'fish -c "STORE_DIR=$HOME/Personal/pass/ tessen"'
+riverctl map normal Super P spawn 'sh -c "STORE_DIR=$HOME/Personal/pass/ tessen"'
 riverctl map normal Super G spawn "swaync"
-riverctl map normal Super Shift G spawn "swaync-client -t"
+riverctl map normal Super+Shift G spawn "swaync-client -t"
 
 dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY --systemd --all
 turnstile-update-runit-env XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY DISPLAY SWAYSOCK PATH
