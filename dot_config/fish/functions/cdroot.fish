@@ -1,4 +1,4 @@
-function cdu
+function cdroot
     set -l dir (pwd)
 
     while true

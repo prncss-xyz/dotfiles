@@ -1,0 +1,46 @@
+{
+  "allowNonWorkspaceAccess": true,
+  "colorScheme": "colorblind-friendly dark",
+  "permissions": {
+    "allow": [
+      "command(git log)",
+      "command(which)",
+      "command(find)",
+      "command(oxlint)",
+      "command(npm info)",
+      "command(nvim)",
+      "command(git diff)",
+      "mcp(serena/activate_project)",
+      "mcp(tavily/tavily_search)",
+      "command(stylua)",
+      "command(tsgo)",
+      "command(vp)",
+      "command(pnpm add)",
+      "command(pnpm knip)",
+      "command(npx)",
+      "command(git show)",
+      "command(git status)",
+      "command(chezmoi)",
+      "command(git add)",
+      "command(git commit)",
+      "command(vpr)",
+      "command(grep)",
+      "command(pnpm list)",
+      "command(pnpm build)",
+      "mcp(context7/resolve-library-id)",
+      "mcp(context7/query-docs)",
+      "command(pnpm typegen)",
+      "command(pnpm run)"
+    ]
+  },
+  "statusLine": {
+    "type": "",
+    "command": "",
+    "enabled": true
+  },
+  "trustedWorkspaces": [
+    "/home/prncss/projects/funtoyz/scopes",
+    "/home/prncss/projects/dotfiles",
+    "/home/prncss/projects/nvim"
+  ]
+}

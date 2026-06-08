@@ -10,6 +10,7 @@
       "~/.luarocks/bin",
       "~/.vite-plus/bin",
       "~/.pi/agent",
+      "~/projects",
       "/home/prncss/.a5c",
       "/home/prncss/.pi/agent"
     ],
