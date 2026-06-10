@@ -1,0 +1,38 @@
+#!/bin/sh
+
+prefixes="feat
+fix
+docs
+style
+refactor
+perf
+test
+chore
+ci
+build"
+
+selected=$(printf "%s\n" "$prefixes" | fzf --height=40% --prompt="Select commit type: ")
+
+if [ -z "$selected" ]; then
+  echo "Commit cancelled"
+  exit 1
+fi
+
+if [ -t 0 ]; then
+  printf "Scope (optional): "
+  read -r scope
+  printf "Message: "
+  read -r msg
+else
+  printf "Scope (optional): "
+  read -r scope < /dev/tty
+  printf "Message: "
+  read -r msg < /dev/tty
+fi
+
+prefix="${selected%%:*}"
+if [ -n "$scope" ]; then
+  prefix="${prefix}(${scope})"
+fi
+
+exec git commit -m "$prefix: $msg" "$@"

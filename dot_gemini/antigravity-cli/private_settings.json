@@ -30,7 +30,10 @@
       "mcp(context7/resolve-library-id)",
       "mcp(context7/query-docs)",
       "command(pnpm typegen)",
-      "command(pnpm run)"
+      "command(pnpm run)",
+      "command(pnpm tsc)",
+      "command(pnpm check:tsc)",
+      "command(pnpm check:knip)"
     ]
   },
   "statusLine": {
