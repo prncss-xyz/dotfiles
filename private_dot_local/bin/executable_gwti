@@ -1,0 +1,15 @@
+#!/bin/sh
+REPO="$1"
+if [ -z "$REPO" ]; then
+  echo "Usage: gwti <repo>"
+  exit 1
+fi
+
+DIR="${REPO##*/}"
+mkdir -p "$HOME/projects/$DIR"
+cd "$HOME/projects/$DIR" || exit 1
+
+gh repo clone "$REPO" .bare -- --bare
+echo "gitdir: ./.bare" > .git
+BRANCH=$(git --git-dir=.bare symbolic-ref --short HEAD)
+gwta "$BRANCH"
