@@ -1,6 +1,7 @@
 {
   "allowNonWorkspaceAccess": true,
   "colorScheme": "colorblind-friendly dark",
+  "model": "Gemini 3.1 Pro (High)",
   "permissions": {
     "allow": [
       "command(git log)",
@@ -33,7 +34,21 @@
       "command(pnpm run)",
       "command(pnpm tsc)",
       "command(pnpm check:tsc)",
-      "command(pnpm check:knip)"
+      "command(pnpm check:knip)",
+      "command(pnpm check:test)",
+      "command(sort)",
+      "command(tail)",
+      "command(pnpm vp)",
+      "command(pnpm vitest)",
+      "command(pnpm info)",
+      "command(cat)",
+      "command(git symbolic-ref)",
+      "command(git rev-parse)",
+      "command(git branch)",
+      "command(luac)",
+      "command(pnpm exec)",
+      "command(curl -s http://localhost:8080)",
+      "command(ls)"
     ]
   },
   "statusLine": {
