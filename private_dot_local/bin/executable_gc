@@ -30,6 +30,11 @@ else
   read -r msg < /dev/tty
 fi
 
+if [ -z "$msg" ]; then
+  echo "Commit cancelled"
+  exit 1
+fi
+
 prefix="${selected%%:*}"
 if [ -n "$scope" ]; then
   prefix="${prefix}(${scope})"

@@ -1,1 +1,1 @@
-gpg-connect-agent /bye
+gpg-connect-agent updatestartuptty /bye > /dev/null
