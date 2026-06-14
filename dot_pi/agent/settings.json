@@ -15,6 +15,6 @@
     "npm:@a5c-ai/babysitter-pi",
     "npm:pi-lens"
   ],
-  "defaultProvider": "opencode",
-  "defaultModel": "big-pickle"
+  "defaultProvider": "openrouter",
+  "defaultModel": "z-ai/glm-4.5-air"
 }

@@ -30,7 +30,6 @@ abbr gsts git stash show --text
 abbr grhh git reset --hard HEAD
 abbr gch git checkout HEAD --
 abbr gwt git worktree
-abbr gwtr git worktree remove
 abbr ytx yt-dlp -x
 abbr yta 'yt-dlp -x --output "%(autonumber)02d %(title)s.%(ext)s"'
 abbr cdp cd $HOME/projects/
