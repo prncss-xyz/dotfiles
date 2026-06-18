@@ -1,4 +1,4 @@
-abbr c bat  
+abbr c bat
 abbr cm chezmoi
 abbr cma chezmoi add
 abbr cmd chezmoi diff

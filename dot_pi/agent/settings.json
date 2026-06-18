@@ -15,6 +15,7 @@
     "npm:@a5c-ai/babysitter-pi",
     "npm:pi-lens"
   ],
-  "defaultProvider": "openrouter",
-  "defaultModel": "z-ai/glm-4.5-air"
+  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4-pro",
+  "defaultThinkingLevel": "high"
 }
