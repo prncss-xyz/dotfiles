@@ -3,7 +3,7 @@ function __fzf_complete
 
     set -l selected (
         complete --do-complete (commandline -b) |
-        fzf --select-1 --exit-0 --query="$token" --height=~40% --layout=reverse
+        fzf --select-1 --exit-0 --query="$token" --height=~40% --layout=reverse --bind=tab:accept
     )
 
     set -l completion (string split \t -- "$selected")[1]
