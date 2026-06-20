@@ -1,9 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export fish_greeting:
-SETUVAR --export EDITOR:nvim
-SETUVAR --export PASSWORD_STORE_CHARACTER_SET:a\x2dzA\x2dZ0\x2d9\x7e\x21\x5c\x40\x23\x5c\x24\x25\x5e\x26\x2a\x28\x29\x2d_\x3d\x2b\x5b\x5d\x7b\x7d\x3b\x3a\x2c\x2e\x3c\x3e\x3f
-SETUVAR --export PASSWORD_STORE_GENERATED_LENGTH:20
 SETUVAR __fish_initialized:4300
 SETUVAR _fisher_franciscolourenco_2F_done_files:\x7e/\x2econfig/fish/conf\x2ed/done\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
