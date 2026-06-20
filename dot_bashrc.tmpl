@@ -1,5 +1,6 @@
 # Environment variables from config.fish
 export SCARF_ANALYTICS=false
+export GODEBUG=netdns=cgo
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export GPG_TTY=$(tty)
 export RIPGREP_CONFIG_PATH=$HOME/.config/rg/config
@@ -41,7 +42,7 @@ export MISTRAL_API_KEY={{ pass "mistral.ai/juliette.lamarche.xyz@gmail.com/keys/
 {{ if (stat (joinPath .chezmoi.homeDir ".password-store/openrouter.ai/keys/prncss-xyz.gpg")) -}}
 export OPENROUTER_API_KEY={{ pass "openrouter.ai/keys/prncss-xyz" }}
 {{- end }}
-{{ if (stat (joinPath .chezmoi.homeDir ".password-store/openrouter.ai/keys/prncss-xyz.gpg")) -}}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/nvidia.com/juliette.lamarche.xyz@gmai.com/keys/prncss-xyz.gpg")) -}}
 export NVIDIA_API_KEY={{ pass "nvidia.com/juliette.lamarche.xyz@gmai.com/keys/prncss-xyz" }}
 {{- end }}
 {{ if (stat (joinPath .chezmoi.homeDir ".password-store/google.com/juliette.lamarche.xyz@gmail.com/keys/nvim.gpg")) -}}
@@ -56,7 +57,10 @@ export INCEPTION_API_KEY={{ pass "inceptionlabs.ai/prncss-xyz/key" }}
 {{ if (stat (joinPath .chezmoi.homeDir ".password-store/ollama.com/keys/prncss-xyz.gpg")) -}}
 export OLLAMA_API_KEY={{ pass "ollama.com/keys/prncss-xyz" }}
 {{- end }}
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/huggingface.co/juliette.lamarche.xyz@gmail.com/nvim.gpg")) -}}
+export HF_TOKEN={{ pass "huggingface.co/juliette.lamarche.xyz@gmail.com/nvim" }}
+{{- end }}
 {{ end -}}
 {{ if eq .hosted "true" -}}
-export hosted=HOSTED
+export HOSTED=HOSTED
 {{ end -}}

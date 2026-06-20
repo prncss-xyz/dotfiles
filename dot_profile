@@ -1,0 +1,15 @@
+[ -f ~/.bashrc ] && . ~/.bashrc
+export ENV="$HOME/.profile"
+
+if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty 2>/dev/null)" = /dev/tty1 ]; then
+    exec river
+fi
+
+# If running interactively, replace the dash process with fish
+case $- in
+    *i*)
+        if command -v fish >/dev/null 2>&1; then
+            exec fish
+        fi
+        ;;
+esac
