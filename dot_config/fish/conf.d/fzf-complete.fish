@@ -3,13 +3,13 @@ function __fzf_complete
 
     set -l selected (
         complete --do-complete (commandline -b) |
-        fzf --select-1 --exit-0 --query="$token" --height=~40% --layout=reverse --bind=tab:accept
+        fzf --select-1 --exit-0 --query="$token" --height=~40% --layout=reverse --bind=tab:accept,one:accept
     )
 
     set -l completion (string split \t -- "$selected")[1]
 
     if test -n "$completion"
-        commandline -t -- $completion
+        commandline -t -- (string escape -- "$completion")
     end
 
     commandline -f repaint
