@@ -1,4 +1,3 @@
-# Environment variables from config.fish
 export SCARF_ANALYTICS=false
 export GODEBUG=netdns=cgo
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
@@ -64,3 +63,10 @@ export HF_TOKEN={{ pass "huggingface.co/juliette.lamarche.xyz@gmail.com/nvim" }}
 {{ if eq .hosted "true" -}}
 export HOSTED=HOSTED
 {{ end -}}
+
+{{ if eq .chezmoi.os "android" -}}
+export BROWSER-termux-open-url
+export PERSONAL="$HOME/storage/shared/Personal"
+{{ end -}}
+
+gpg-connect-agent updatestartuptty /bye > /dev/null

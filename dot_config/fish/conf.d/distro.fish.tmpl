@@ -1,7 +1,4 @@
 {{ if eq .chezmoi.os "android" -}}
-set -x BROWSER termux-open-url
-set -x PERSONAL "$HOME/storage/shared/Personal"
-
 abbr pa pkg install -y
 abbr pr pkg remove -Ry
 abbr pu pkg update && pkg upgrade
