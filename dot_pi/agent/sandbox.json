@@ -14,10 +14,7 @@
       "/home/prncss/.a5c",
       "/home/prncss/.pi/agent"
     ],
-    "allowWrite": [
-      ".",
-      "/tmp/**"
-    ],
+    "allowWrite": [".", "~/.local/share/pnpm/store", "~/.cache/pnpm/", "/tmp/**"],
     "denyWrite": []
   }
 }
