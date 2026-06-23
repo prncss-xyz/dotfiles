@@ -2,7 +2,6 @@
   "filesystem": {
     "denyRead": [],
     "allowRead": [
-      ".",
       "~/.agents",
       "~/.config",
       "~/.local",
@@ -11,10 +10,15 @@
       "~/.vite-plus/bin",
       "~/.pi/agent",
       "~/projects",
+      "~/.local/share/pnpm/store",
+      "~/.cache/pnpm/",
       "/home/prncss/.a5c",
       "/home/prncss/.pi/agent"
     ],
-    "allowWrite": [".", "~/.local/share/pnpm/store", "~/.cache/pnpm/", "/tmp/**"],
+    "allowWrite": [
+      ".",
+      "/tmp/**"
+    ],
     "denyWrite": []
   }
 }
