@@ -20,15 +20,6 @@
       "command": "bun",
       "args": ["x", "@upstash/context7-mcp"]
     },
-    "tavily": {
-      "command": "bun",
-      "args": ["x", "tavily-mcp@latest"]
-    },
-    "exa": {
-      "command": "bun",
-      "args": ["x", "exa-mcp-server"],
-      "enabled": true
-    },
     "codemod": {
       "command": "bun",
       "args": ["x", "codemod@latest", "mcp"]

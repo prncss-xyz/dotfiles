@@ -1,0 +1,51 @@
+{
+  "npmCommand": ["pnpm"],
+  "packages": [
+    "npm:pi-web-access",
+    "npm:pi-skill-palette",
+    "npm:pi-intercom",
+    "npm:pi-subagents",
+    "npm:pi-mcp-adapter",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-btw",
+    "npm:@juicesharp/rpiv-advisor",
+    "npm:@juicesharp/rpiv-args",
+    "npm:pi-sandbox",
+    "npm:@observal/pi-insights",
+    "npm:pi-hermes-memory",
+    "npm:context-mode",
+    "npm:pi-lens"
+  ],
+  "quietStartup": true,
+  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4-flash",
+  "defaultThinkingLevel": "high",
+  "lastChangelogVersion": "0.78.1",
+  "disabledCommands": ["gather-context-and-clarify"],
+  "subagents": {
+    "agentOverrides": {
+      "context-builder": {
+        "tools": "mcp:context7"
+      },
+      "oracle": {
+        "model": "opencode-go/deepseek-v4-pro"
+      },
+      "planner": {
+        "model": "opencode-go/glm-5.2"
+      },
+      "researcher": {
+        "tools": "mcp:context7",
+        "model": "opencode-go/kimi-k2.7-code"
+      },
+      "reviewer": {
+        "model": "opencode-go/qwen3.7-max"
+      },
+      "scout": {
+        "model": "opencode-go/deepseek-v4-flash"
+      },
+      "worker": {
+        "model": "opencode-go/minimax-m3"
+      }
+    }
+  }
+}
