@@ -1,5 +1,6 @@
 ---
 description: Use subagents to gather context, then ask clarifying questions
+skills: grilling
 ---
 
 Based on our discussion and my intent, launch focused context-gathering subagents before planning or implementing.
