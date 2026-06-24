@@ -60,6 +60,8 @@
     "command": "",
     "enabled": true
   },
+  "enableTerminalSandbox": true,
+  "toolPermission": "proceed-in-sandbox",
   "trustedWorkspaces": [
     "/home/prncss/projects/funtoyz/scopes",
     "/home/prncss/projects/dotfiles",

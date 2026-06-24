@@ -1,0 +1,12 @@
+{
+  "$schema": "https://paseo.sh/schemas/paseo.config.v1.json",
+  "version": 1,
+  "daemon": {
+    "shell": "/bin/bash"
+  },
+  "providers": {
+    "opencode": {
+      "enabled": false
+    }
+  }
+}

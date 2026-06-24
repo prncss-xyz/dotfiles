@@ -1,5 +1,17 @@
 {
   "mcpServers": {
+    "git": {
+      "command": "uvx",
+      "args": ["mcp-server-git"]
+    },
+    "github": {
+      "command": "bun",
+      "args": ["x", "@modelcontextprotocol/server-github"]
+    },
+    "playwright": {
+      "command": "bun",
+      "args": ["x", "@playwright/mcp"]
+    },
     "chrome-devtools": {
       "command": "bun",
       "args": ["x", "chrome-devtools-mcp@latest"]
@@ -20,23 +32,6 @@
     "codemod": {
       "command": "bun",
       "args": ["x", "codemod@latest", "mcp"]
-    },
-    "duckduckgo": {
-      "command": "uvx",
-      "args": ["duckduckgo-mcp-server"]
-    },
-    "serena": {
-      "command": "uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/oraios/serena.git",
-        "serena",
-        "start-mcp-server",
-        "--context",
-        "ide-assistant",
-        "--enable-web-dashboard",
-        "false"
-      ]
     }
   }
 }

@@ -1,38 +1,36 @@
 {
   "mcpServers": {
+    "git": {
+      "command": "uvx",
+      "args": ["mcp-server-git"]
+    },
+    "github": {
+      "command": "bun",
+      "args": ["x", "@modelcontextprotocol/server-github"]
+    },
+    "playwright": {
+      "command": "bun",
+      "args": ["x", "@playwright/mcp"]
+    },
+    "chrome-devtools": {
+      "command": "bun",
+      "args": ["x", "chrome-devtools-mcp@latest"]
+    },
     "context7": {
       "command": "bun",
-      "args": [
-        "x",
-        "@upstash/context7-mcp"
-      ]
+      "args": ["x", "@upstash/context7-mcp"]
     },
     "tavily": {
       "command": "bun",
-      "args": [
-        "x",
-        "tavily-mcp@latest"
-      ]
+      "args": ["x", "tavily-mcp@latest"]
     },
     "exa": {
       "command": "bun",
-      "args": [
-        "x",
-        "exa-mcp-server"
-      ]
+      "args": ["x", "exa-mcp-server"]
     },
-    "serena": {
-      "command": "uvx",
-      "args": [
-        "--from",
-        "git+https://github.com/oraios/serena.git",
-        "serena",
-        "start-mcp-server",
-        "--context",
-        "ide-assistant",
-        "--enable-web-dashboard",
-        "false"
-      ]
+    "codemod": {
+      "command": "bun",
+      "args": ["x", "codemod@latest", "mcp"]
     }
   }
 }
