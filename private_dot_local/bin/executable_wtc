@@ -1,0 +1,39 @@
+#!/bin/sh
+set -eu
+
+remote="origin"
+
+branch="${1:-}"
+if [ -z "$branch" ]; then
+  branch="$(git rev-parse --abbrev-ref "$remote/HEAD" 2>/dev/null | sed 's|^origin/||' || true)"
+fi
+if [ -z "$branch" ]; then
+  for candidate in main master; do
+    if git rev-parse --verify "refs/remotes/$remote/$candidate" >/dev/null 2>&1; then
+      branch="$candidate"
+      break
+    fi
+  done
+fi
+if [ -z "$branch" ]; then
+  echo "error: could not determine default branch" >&2
+  exit 1
+fi
+
+dirname="$(echo "$branch" | sed 's|[\\/]|-|g')"
+
+git fetch --all
+
+if ! git rev-parse --verify "refs/remotes/$remote/$branch" >/dev/null 2>&1; then
+  # Branch doesn't exist on remote — create from current HEAD and push
+  current=$(git rev-parse --abbrev-ref HEAD)
+  git branch "$branch" "$current"
+  git push -u "$remote" "$branch"
+fi
+
+# Now origin/$branch exists. Check out in a new worktree.
+if git rev-parse --verify "refs/heads/$branch" >/dev/null 2>&1; then
+  git worktree add "../$dirname" "$branch"
+else
+  git worktree add "../$dirname" -b "$branch" "$remote/$branch"
+fi

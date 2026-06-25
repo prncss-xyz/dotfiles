@@ -1,5 +1,7 @@
 {
-  "npmCommand": ["pnpm"],
+  "npmCommand": [
+    "pnpm"
+  ],
   "packages": [
     "npm:pi-web-access",
     "npm:pi-skill-palette",
@@ -20,12 +22,16 @@
   "defaultProvider": "opencode-go",
   "defaultModel": "deepseek-v4-flash",
   "defaultThinkingLevel": "high",
-  "lastChangelogVersion": "0.78.1",
-  "disabledCommands": ["gather-context-and-clarify"],
+  "lastChangelogVersion": "0.80.2",
+  "disabledCommands": [
+    "gather-context-and-clarify"
+  ],
   "subagents": {
     "agentOverrides": {
       "context-builder": {
-        "tools": "mcp:context7"
+        "tools": "mcp:context7",
+        "model": "opencode-go/kimi-k2.7-code",
+        "skills": "search"
       },
       "oracle": {
         "model": "opencode-go/deepseek-v4-pro"
@@ -35,7 +41,8 @@
       },
       "researcher": {
         "tools": "mcp:context7",
-        "model": "opencode-go/kimi-k2.7-code"
+        "model": "opencode-go/kimi-k2.7-code",
+        "skills": "search"
       },
       "reviewer": {
         "model": "opencode-go/qwen3.7-max"
