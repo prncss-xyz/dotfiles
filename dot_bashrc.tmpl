@@ -53,9 +53,6 @@ export NVIDIA_API_KEY={{ pass "nvidia.com/juliette.lamarche.xyz@gmai.com/keys/pr
 {{ if (stat (joinPath .chezmoi.homeDir ".password-store/google.com/juliette.lamarche.xyz@gmail.com/keys/nvim.gpg")) -}}
 export GEMINI_API_KEY={{ pass "google.com/juliette.lamarche.xyz@gmail.com/keys/nvim" }}
 {{- end }}
-{{ if (stat (joinPath .chezmoi.homeDir ".password-store/openai.com/juliette.lamarche.xyz@gmail.com/keys/nvim.gpg")) -}}
-export OPENAI_API_KEY={{ pass "openai.com/juliette.lamarche.xyz@gmail.com/keys/nvim" }}
-{{- end }}
 {{ if (stat (joinPath .chezmoi.homeDir ".password-store/inceptionlabs.ai/prncss-xyz/key.gpg")) -}}
 export INCEPTION_API_KEY={{ pass "inceptionlabs.ai/prncss-xyz/key" }}
 {{- end }}

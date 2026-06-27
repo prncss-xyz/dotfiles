@@ -1,7 +1,5 @@
 {
-  "npmCommand": [
-    "pnpm"
-  ],
+  "npmCommand": ["pnpm"],
   "packages": [
     "npm:pi-web-access",
     "npm:pi-skill-palette",
@@ -19,39 +17,46 @@
     "npm:pi-lens"
   ],
   "quietStartup": true,
-  "defaultProvider": "opencode-go",
-  "defaultModel": "deepseek-v4-flash",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.4-mini",
   "defaultThinkingLevel": "high",
   "lastChangelogVersion": "0.80.2",
-  "disabledCommands": [
-    "gather-context-and-clarify"
-  ],
+  "disabledCommands": ["gather-context-and-clarify"],
+  "model_fallback": true,
+  "runtime_fallback": {
+    "enabled": true,
+    "retry_on_errors": [400, 429, 503, 529],
+    "max_fallback_attempts": 3,
+    "cooldown_seconds": 60,
+    "timeout_seconds": 30,
+    "notify_on_fallback": true
+  },
   "subagents": {
     "agentOverrides": {
       "context-builder": {
         "tools": "mcp:context7",
-        "model": "opencode-go/kimi-k2.7-code",
+        "model": "openai-codex/gpt-5.5",
         "skills": "search"
       },
       "oracle": {
-        "model": "opencode-go/deepseek-v4-pro"
+        "model": "openai-codex/gpt-5.5"
       },
       "planner": {
-        "model": "opencode-go/glm-5.2"
+        "model": "openai-codex/gpt-5.5"
       },
       "researcher": {
         "tools": "mcp:context7",
-        "model": "opencode-go/kimi-k2.7-code",
+        "model": "openai-codex/gpt-5.5",
         "skills": "search"
       },
       "reviewer": {
-        "model": "opencode-go/qwen3.7-max"
+        "model": "openai-codex/gpt-5.5"
       },
       "scout": {
-        "model": "opencode-go/deepseek-v4-flash"
+        "model": "openai-codex/gpt-5.4-mini"
       },
       "worker": {
-        "model": "opencode-go/minimax-m3"
+        "model": "openai-codex/gpt-5.4-mini"
       }
     }
   }
