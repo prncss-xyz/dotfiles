@@ -5,14 +5,14 @@
 # message and automatically strips the git boilerplate comments.
 
 if ! git rev-parse --git-dir >/dev/null 2>&1; then
-  echo "Not a git repository" >&2
-  exit 1
+	echo "Not a git repository" >&2
+	exit 1
 fi
 
 git_dir=$(git rev-parse --git-dir)
 if [ ! -f "$git_dir/COMMIT_EDITMSG" ]; then
-  echo "No previous commit message found" >&2
-  exit 1
+	echo "No previous commit message found" >&2
+	exit 1
 fi
 
 git commit -e -F "$git_dir/COMMIT_EDITMSG" "$@"
