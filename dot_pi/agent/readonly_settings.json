@@ -12,9 +12,7 @@
     "npm:@juicesharp/rpiv-args",
     "npm:pi-sandbox",
     "npm:@observal/pi-insights",
-    "npm:pi-hermes-memory",
-    "npm:context-mode",
-    "npm:pi-lens"
+    "npm:pi-hermes-memory"
   ],
   "quietStartup": true,
   "defaultProvider": "openai-codex",

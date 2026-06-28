@@ -1,0 +1,5 @@
+{
+  "modelKey": "openai-codex/gpt-5.5",
+  "effort": "high",
+  "disabledForModels": ["openai-codex/gpt-5.5"]
+}

@@ -4,6 +4,10 @@
 
 You only have write access to the current directory and to `/tmp`.
 
+## File manipulation
+
+For any kind of complex file transform, use temporary JavaScript scripts. Prefer this over piping bash commands.
+
 ## Coding
 
 - never commit changes unless explicitly asked to
