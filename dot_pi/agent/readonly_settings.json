@@ -8,7 +8,6 @@
     "npm:pi-mcp-adapter",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-btw",
-    "npm:@juicesharp/rpiv-advisor",
     "npm:@juicesharp/rpiv-args",
     "npm:pi-sandbox",
     "npm:@observal/pi-insights",
