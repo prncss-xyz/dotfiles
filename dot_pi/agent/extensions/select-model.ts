@@ -23,10 +23,12 @@ const CURATED_MODELS = [
   { provider: "opencode-go", id: "minimax-m3" },
   { provider: "opencode-go", id: "mimo-v2.5" },
   { provider: "opencode-go", id: "deepseek-v4-flash" },
+  { provider: "sakana", id: "fugu" },
+  { provider: "sakana", id: "fugu-ultra" },
 ];
 
 export default function (pi: ExtensionAPI) {
-  // Quick-access shortcuts: ctrl+1 through ctrl+6
+  // Quick-access shortcuts: ctrl+1 onward
   for (const [i, model] of CURATED_MODELS.entries()) {
     pi.registerShortcut(`ctrl+${i + 1}`, {
       description: `Select ${model.id}`,

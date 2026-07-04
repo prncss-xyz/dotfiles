@@ -23,6 +23,9 @@
     "codemod": {
       "command": "bun",
       "args": ["x", "codemod@latest", "mcp"]
+    },
+    "mdn": {
+      "url": "https://mcp.mdn.mozilla.net/"
     }
   }
 }

@@ -5,6 +5,8 @@ abbr cmd chezmoi diff
 abbr cme chezmoi edit
 abbr cmr chezmoi destroy
 abbr cmu chezmoi apply
+abbr wts worktree switch
+abbr wtc worktree switch --create
 abbr d ddgr --rev
 abbr dw BROWSER=w3m ddgr --rev
 abbr l eza --icons --git

@@ -1,7 +1,8 @@
 {
   "allowNonWorkspaceAccess": true,
   "colorScheme": "colorblind-friendly dark",
-  "model": "Gemini 3.1 Pro (High)",
+  "enableTerminalSandbox": true,
+  "model": "Gemini 3.5 Flash (High)",
   "permissions": {
     "allow": [
       "command(git log)",
@@ -52,7 +53,16 @@
       "command(chmod +x /tmp/gwta-test.sh)",
       "command(cd)",
       "command(npm run)",
-      "command(sleep)"
+      "command(sleep)",
+      "unsandboxed(pnpm run)",
+      "mcp(git/git_status)",
+      "mcp(git/git_diff)",
+      "mcp(git/git_diff_unstaged)",
+      "unsandboxed(pnpm check:tsc)",
+      "unsandboxed(pnpm fix)"
+    ],
+    "deny": [
+      "mcp(git/git_diff_unstaged)"
     ]
   },
   "statusLine": {
@@ -60,11 +70,13 @@
     "command": "",
     "enabled": true
   },
-  "enableTerminalSandbox": true,
   "toolPermission": "proceed-in-sandbox",
   "trustedWorkspaces": [
     "/home/prncss/projects/funtoyz/scopes",
     "/home/prncss/projects/dotfiles",
-    "/home/prncss/projects/nvim"
+    "/home/prncss/projects/nvim",
+    "/home/prncss/projects/storybook",
+    "/home/prncss/projects/notes",
+    "/home/prncss/projects/timer-demo"
   ]
 }

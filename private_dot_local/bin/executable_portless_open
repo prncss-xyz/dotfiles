@@ -1,0 +1,29 @@
+#!/bin/sh
+
+strip_ansi() {
+  esc=$(printf '\033')
+  sed "s/${esc}\[[0-9;?]*[ -/]*[@-~]//g"
+}
+
+parse_portless_urls() {
+  strip_ansi | grep -Eo 'https?://[^[:space:])>]+'
+}
+
+portless_open() {
+  for command_name in portless fzf xdg-open; do
+    if ! command -v "$command_name" >/dev/null 2>&1; then
+      printf '%s\n' "Missing required command: $command_name" >&2
+      return 127
+    fi
+  done
+
+  selected_url=$(portless list | parse_portless_urls | fzf --prompt='portless> ')
+
+  if [ -z "$selected_url" ]; then
+    return 130
+  fi
+
+  xdg-open "$selected_url" >/dev/null 2>&1 &
+}
+
+portless_open "$@"

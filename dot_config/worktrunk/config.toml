@@ -1,0 +1,14 @@
+worktree-path = "{{ repo_path }}/../{{ branch | sanitize }}"
+
+[commit.generation]
+command = "pi run --model deepseek-v4-flash --provider opencode-go -"
+template-append = """
+- Use conventional commits (feat:, fix:, docs:, …)
+"""
+
+[commit]
+stage = "all"
+
+[aliases]
+dev = "portless pnpm run dev"
+storybook = "portless pnpm exec storybook dev"
