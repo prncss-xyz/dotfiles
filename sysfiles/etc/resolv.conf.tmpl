@@ -1,0 +1,10 @@
+# see https://tailscale.com/s/resolvconf-overwrite
+
+nameserver 1.1.1.1
+nameserver 1.0.0.1
+nameserver 2606:4700:4700::1111
+nameserver fd7a:115c:a1e0::53
+nameserver 100.100.100.100
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/tailscale.net/prncss-xyz.gpg")) -}}
+search {{ pass "tailscale.net/prncss-xyz" }}
+{{- end }}

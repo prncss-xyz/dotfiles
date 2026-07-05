@@ -23,6 +23,11 @@ const CURATED_MODELS = [
   { provider: "opencode-go", id: "minimax-m3" },
   { provider: "opencode-go", id: "mimo-v2.5" },
   { provider: "opencode-go", id: "deepseek-v4-flash" },
+  { provider: "google", id: "gemini-3.1-pro" },
+  { provider: "google", id: "gemini-3.5-flash" },
+  { provider: "google", id: "gemini-3.1-flash-lite" },
+  { provider: "cerebras", id: "gpt-oss-120b" },
+  { provider: "openrouter", id: "inception/mercury-2" },
   { provider: "sakana", id: "fugu" },
   { provider: "sakana", id: "fugu-ultra" },
 ];
@@ -30,6 +35,7 @@ const CURATED_MODELS = [
 export default function (pi: ExtensionAPI) {
   // Quick-access shortcuts: ctrl+1 onward
   for (const [i, model] of CURATED_MODELS.entries()) {
+    if (i === 10) break;
     pi.registerShortcut(`ctrl+${i + 1}`, {
       description: `Select ${model.id}`,
       handler: selectModelHandler(pi, model.provider, model.id),
