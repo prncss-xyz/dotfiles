@@ -1,0 +1,20 @@
+#!/bin/sh
+# Install all pi packages declared in ~/.pi/agent/settings.json.
+# settings.json is chezmoi-readonly, so flip the bit for the install, then restore.
+
+settings="$HOME/.pi/agent/settings.json"
+
+command -v pi >/dev/null || {
+  echo "pi not found in PATH" >&2
+  exit 1
+}
+[ -f "$settings" ] || {
+  echo "settings not found: $settings" >&2
+  exit 1
+}
+
+chmod u+w "$settings"
+jq -r '.packages[]' "$settings" | while read -r pkg; do
+  pi install "$pkg"
+done
+chmod u-w "$settings"

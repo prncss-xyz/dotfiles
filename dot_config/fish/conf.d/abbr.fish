@@ -5,8 +5,8 @@ abbr cmd chezmoi diff
 abbr cme chezmoi edit
 abbr cmr chezmoi destroy
 abbr cmu chezmoi apply
-abbr wts worktree switch
-abbr wtc worktree switch --create
+abbr wts wt switch
+abbr wtc wt switch --create
 abbr d ddgr --rev
 abbr dw BROWSER=w3m ddgr --rev
 abbr l eza --icons --git
@@ -31,7 +31,6 @@ abbr gstp git stash pop
 abbr gsts git stash show --text
 abbr grhh git reset --hard HEAD
 abbr gch git checkout HEAD --
-abbr gwt git worktree
 abbr ytx yt-dlp -x
 abbr yta 'yt-dlp -x --output "%(autonumber)02d %(title)s.%(ext)s"'
 abbr cdp cd $HOME/projects/

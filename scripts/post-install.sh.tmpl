@@ -5,14 +5,25 @@ dracut_setup
 
 ya pkg install
 # pnpm ls -g --depth=0
-pnpm i -g @fsouza/prettierd @github/copilot @vtsls/language-server bash-language-server graphql-language-service-cli knip opencode-ai vscode-langservers-extracted --allow-build=@fsouza/prettierd
+pnpm i -g @anthropic-ai/sandbox-runtime @earendil-works/pi-coding-agent @typescript/native-preview bash-language-server graphql-language-service-cli portless serve skills vscode-langservers-extracted oxfmt oxlint
+
 # uv tool list
 uv tool install yamllint
+
+# sync pi packages declared in readonly_settings.json
+# settings.json is chezmoi-readonly, so flip the bit for the install, then restore
+if command -v pi >/dev/null && [ -f ~/.pi/agent/settings.json ]; then
+    chmod u+w ~/.pi/agent/settings.json
+    jq -r '.packages[]' ~/.pi/agent/settings.json | while read -r pkg; do
+        pi install "$pkg"
+    done
+    chmod u-w ~/.pi/agent/settings.json
+fi
 gh extension install gennaro-tedesco/gh-f
 curl -fsSL https://claude.ai/install.sh | bash
 # gpg --armor --export-secret-keys {{ .email }} | gpg --symmetric --cipher-algo AES256 -o private_key.asc.gpg
 gpg --decrypt private_key.asc.gpg | gpg --import
-echo -e "5\ny\n" | gpg --command-fd 0 --edit-key {{ .email }} trust
+printf "5\ny\n" | gpg --command-fd 0 --edit-key {{ .email }} trust
 
 # clone nvim
 

@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "trigger": {
+    "maxTokens": 350000
+  },
+  "summaryRetention": {
+    "mode": "percent",
+    "value": 20
+  },
+  "models": [
+    {
+      "model": "opencode-go/deepseek-v4-pro",
+      "thinkingLevel": "high"
+    },
+    {
+      "model": "openai-codex/gpt-5.4-mini",
+      "thinkingLevel": "low"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
-This file provides guidance to agents.
+When automation, create POSIX compliant shell scripts.
+Only write shell functions for integration with fish shell (e.g. changing directory).
 
 ## What This Is
 
