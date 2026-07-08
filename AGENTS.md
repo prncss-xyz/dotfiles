@@ -19,7 +19,7 @@ Secrets are retrieved at apply-time via `pass` (passwordstore). OS-conditional b
 - `dot_config/` — XDG config: fish shell, git, neovim (symlinked), ghostty, river/sway, yazi, starship, etc.
 - `dot_config/fish/conf.d/env.fish.tmpl` — environment variables and PATH setup
 - `dot_config/fish/config.fish` — interactive shell: abbreviations, theme, tool init (fzf, starship, zoxide)
-- `private_dot_local/bin/` — user scripts (chezmoi `executable_` prefix)
+- `private_dot_local/bin/` — user scripts (chezmoi `executable_` prefix) must be standard POSIX-COMPLIANT scripts
 - `scripts/post-install.fish.tmpl` — post-install setup: global packages (pnpm, uv), GPG key import, service links
 - `scripts/post-install-root.fish` — root-level setup: sysfiles sync, runit services, font config
 - `sysfiles/` — system-level config files synced to `/` via `rsync` (only on non-hosted machines)

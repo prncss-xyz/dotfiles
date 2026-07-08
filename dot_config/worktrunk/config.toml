@@ -8,7 +8,3 @@ template-append = """
 
 [commit]
 stage = "all"
-
-[aliases]
-dev = "portless pnpm run dev"
-storybook = "portless pnpm exec storybook dev"
