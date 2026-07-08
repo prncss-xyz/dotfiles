@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 REPOS=(
-  "$HOME/projects/notes/"
-  "$HOME/projects/nvim/"
-  "$HOME/projects/dotfiles/main"
+  "$HOME/projects/notes/main/"
+  "$HOME/projects/nvim/main/"
+  "$HOME/projects/dotfiles/"
 )
 
 for repo in "${REPOS[@]}"; do
