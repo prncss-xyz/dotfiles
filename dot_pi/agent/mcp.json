@@ -26,6 +26,10 @@
     },
     "mdn": {
       "url": "https://mcp.mdn.mozilla.net/"
+    },
+    "ttsc-graph": {
+      "command": "bun",
+      "args": ["-x", "@ttsc/graph"]
     }
   }
 }

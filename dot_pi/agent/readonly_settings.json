@@ -20,8 +20,8 @@
     "npm:pi-hermes-memory",
     "npm:pi-shell-completions",
     "npm:@vanillagreen/pi-codex-minimal-tools",
-    "@narumitw/pi-codex-usage",
-    "pi-worktrunk"
+    "npm:pi-worktrunk",
+    "npm:@tmustier/pi-usage-extension"
   ],
   "quietStartup": true,
   "defaultProvider": "opencode-go",

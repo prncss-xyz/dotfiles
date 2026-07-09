@@ -11,9 +11,9 @@ import {
 } from "@earendil-works/pi-tui";
 
 const CURATED_MODELS = [
-  { provider: "openai-codex", id: "gpt-5.5" },
-  { provider: "openai-codex", id: "gpt-5.4-mini" },
-  { provider: "openai-codex", id: "gpt-5.4-nano" },
+  { provider: "openai-codex", id: "gpt-5.6-sol" },
+  { provider: "openai-codex", id: "gpt-5.6-terra" },
+  { provider: "openai-codex", id: "gpt-5.6-luna" },
   { provider: "opencode-go", id: "glm-5.2" },
   { provider: "opencode-go", id: "qwen3.7-max" },
   { provider: "opencode-go", id: "kimi-k2.7-code" },
@@ -36,7 +36,7 @@ export default function (pi: ExtensionAPI) {
   // Quick-access shortcuts: ctrl+1 onward
   for (const [i, model] of CURATED_MODELS.entries()) {
     if (i === 10) break;
-    pi.registerShortcut(`ctrl+${i + 1}`, {
+    pi.registerShortcut(`ctrl+${i + 1}` as never, {
       description: `Select ${model.id}`,
       handler: selectModelHandler(pi, model.provider, model.id),
     });
