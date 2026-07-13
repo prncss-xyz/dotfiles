@@ -1,3 +1,5 @@
+#!/usr/bin/sh
+
 ya pkg upgrade
 pnpm -g update --latest
 uv tool upgrade --all

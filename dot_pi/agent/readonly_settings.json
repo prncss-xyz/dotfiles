@@ -11,7 +11,6 @@
     "npm:pi-intercom",
     "npm:pi-subagents",
     "npm:pi-mcp-adapter",
-    "npm:pi-custom-compaction",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-btw",
     "npm:@juicesharp/rpiv-args",
@@ -21,13 +20,14 @@
     "npm:pi-shell-completions",
     "npm:@vanillagreen/pi-codex-minimal-tools",
     "npm:pi-worktrunk",
-    "npm:@tmustier/pi-usage-extension"
+    "npm:@tmustier/pi-usage-extension",
+    "npm:@guwidoe/pi-prompt-suggester",
+    "npm:@ryan_nookpi/pi-extension-auto-name"
   ],
   "quietStartup": true,
   "defaultProvider": "opencode-go",
   "defaultModel": "minimax-m3",
   "defaultThinkingLevel": "high",
-  "lastChangelogVersion": "0.80.3",
   "disabledCommands": ["gather-context-and-clarify"],
   "model_fallback": true,
   "runtime_fallback": {
@@ -42,7 +42,7 @@
     "agentOverrides": {
       "context-builder": {
         "tools": "mcp:context7",
-        "model": "openai-codex/gpt-5.5",
+        "model": "openai-codex/gpt-5.6-sol",
         "skills": "search"
       },
       "oracle": {
@@ -53,11 +53,11 @@
       },
       "researcher": {
         "tools": "mcp:context7",
-        "model": "openai-codex/gpt-5.5",
+        "model": "openai-codex/gpt-5.6-sol",
         "skills": "search"
       },
       "reviewer": {
-        "model": "openai-codex/gpt-5.5"
+        "model": "openai-codex/gpt-5.6-sol",
       },
       "scout": {
         "model": "opencode-go/deepseek-v4-flash"

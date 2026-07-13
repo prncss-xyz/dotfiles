@@ -1,5 +1,5 @@
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
-import { DynamicBorder } from "@earendil-works/pi-coding-agent";
+import { copyToClipboard, DynamicBorder } from "@earendil-works/pi-coding-agent";
 import {
   Container,
   fuzzyFilter,
@@ -9,7 +9,6 @@ import {
   Text,
   type Focusable,
 } from "@earendil-works/pi-tui";
-
 const CURATED_MODELS = [
   { provider: "openai-codex", id: "gpt-5.6-sol" },
   { provider: "openai-codex", id: "gpt-5.6-terra" },
@@ -41,6 +40,19 @@ export default function (pi: ExtensionAPI) {
       handler: selectModelHandler(pi, model.provider, model.id),
     });
   }
+
+  pi.registerShortcut("ctrl+y", {
+    description: "Copy prompt to clipboard",
+    handler: async (ctx) => {
+      try {
+        await copyToClipboard(ctx.ui.getEditorText());
+        ctx.ui.notify("Prompt copied to clipboard", "info");
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        ctx.ui.notify(`Failed to copy prompt: ${message}`, "error");
+      }
+    },
+  });
 
   // ctrl+l: curated model picker dialog (overrides app.model.select)
   pi.registerShortcut("ctrl+l", {

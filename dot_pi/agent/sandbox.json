@@ -13,7 +13,7 @@
       "/home/prncss/.a5c",
       "/home/prncss/.pi/agent"
     ],
-    "allowWrite": [".", "/tmp/**", "~/.local/share/pnpm", "~/.local/state/pnpm", "~/.cache/pnpm/"]
+    "allowWrite": [".", "/tmp", "~/.local/share/pnpm", "~/.local/state/pnpm", "~/.cache/pnpm/"]
   },
   "network": {
     "allowAllUnixSockets": true,

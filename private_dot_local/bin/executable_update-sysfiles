@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/sh
 
 sudo rsync -Lr ~/sysfiles/* /
 # doas chmod 0400 /etc/doas.conf

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 8,
+  "inference": {
+    "seederModel": "opencode-go/deepseek-v4-pro",
+    "suggesterModel": "opencode-go/deepseek-v4-flash",
+    "seederThinking": "high",
+    "suggesterThinking": "low"
+  }
+}
