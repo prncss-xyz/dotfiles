@@ -1,5 +1,6 @@
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 import { copyToClipboard, DynamicBorder } from "@earendil-works/pi-coding-agent";
+import type { ThinkingLevel } from "@earendil-works/pi-agent-core";
 import {
   Container,
   fuzzyFilter,
@@ -9,10 +10,12 @@ import {
   Text,
   type Focusable,
 } from "@earendil-works/pi-tui";
-const CURATED_MODELS = [
-  { provider: "openai-codex", id: "gpt-5.6-sol" },
-  { provider: "openai-codex", id: "gpt-5.6-terra" },
-  { provider: "openai-codex", id: "gpt-5.6-luna" },
+
+const defaultThinking = "high";
+
+const CURATED_MODELS: { provider: string; id: string; thinking?: ThinkingLevel }[] = [
+  { provider: "openai-codex", id: "gpt-5.6-sol", thinking: "low" },
+  { provider: "openai-codex", id: "gpt-5.6-luna", thinking: "max" },
   { provider: "opencode-go", id: "glm-5.2" },
   { provider: "opencode-go", id: "qwen3.7-max" },
   { provider: "opencode-go", id: "kimi-k2.7-code" },
@@ -29,15 +32,17 @@ const CURATED_MODELS = [
   { provider: "openrouter", id: "inception/mercury-2" },
   { provider: "sakana", id: "fugu" },
   { provider: "sakana", id: "fugu-ultra" },
+  { provider: "openai-codex", id: "gpt-5.6-sol" },
 ];
 
 export default function (pi: ExtensionAPI) {
   // Quick-access shortcuts: ctrl+1 onward
   for (const [i, model] of CURATED_MODELS.entries()) {
     if (i === 10) break;
+    const thinking = model.thinking ?? defaultThinking;
     pi.registerShortcut(`ctrl+${i + 1}` as never, {
-      description: `Select ${model.id}`,
-      handler: selectModelHandler(pi, model.provider, model.id),
+      description: `Select ${model.id} [thinking: ${thinking}]`,
+      handler: selectModelHandler(pi, model.provider, model.id, thinking),
     });
   }
 
@@ -65,6 +70,7 @@ function selectModelHandler(
   pi: ExtensionAPI,
   provider: string,
   modelId: string,
+  thinking: ThinkingLevel,
 ): (ctx: ExtensionContext) => Promise<void> {
   return async (ctx) => {
     const model = ctx.modelRegistry.find(provider, modelId);
@@ -77,7 +83,8 @@ function selectModelHandler(
       ctx.ui.notify(`No API key for ${provider}/${modelId}`, "error");
       return;
     }
-    ctx.ui.notify(`Model: ${provider}/${modelId}`, "info");
+    pi.setThinkingLevel(thinking);
+    ctx.ui.notify(`Model: ${provider}/${modelId}  [thinking: ${thinking}]`, "info");
   };
 }
 
@@ -89,7 +96,12 @@ function curatedModelPicker(pi: ExtensionAPI): (ctx: ExtensionContext) => Promis
     );
 
     if (model) {
-      await selectModelHandler(pi, model.provider, model.id)(ctx);
+      await selectModelHandler(
+        pi,
+        model.provider,
+        model.id,
+        model.thinking ?? defaultThinking,
+      )(ctx);
     }
   };
 }
@@ -97,6 +109,7 @@ function curatedModelPicker(pi: ExtensionAPI): (ctx: ExtensionContext) => Promis
 interface ModelRef {
   provider: string;
   id: string;
+  thinking?: ThinkingLevel;
 }
 
 class ModelPicker extends Container implements Focusable {
@@ -156,7 +169,12 @@ class ModelPicker extends Container implements Focusable {
 
   private filterModels(query: string) {
     this.filteredModels = query
-      ? fuzzyFilter(CURATED_MODELS, query, (m) => `${m.id} ${m.provider} ${m.provider}/${m.id}`)
+      ? fuzzyFilter(
+          CURATED_MODELS,
+          query,
+          (m) =>
+            `${m.id} ${m.provider} ${m.provider}/${m.id} thinking:${m.thinking ?? defaultThinking}`,
+        )
       : [...CURATED_MODELS];
     this.selectedIndex = 0;
     this.updateList();
@@ -181,7 +199,11 @@ class ModelPicker extends Container implements Focusable {
       const prefix = isSelected ? this.theme.fg("accent", "→ ") : "  ";
       const idText = isSelected ? this.theme.fg("accent", item.id) : item.id;
       const providerBadge = this.theme.fg("muted", `[${item.provider}]`);
-      this.listContainer.addChild(new Text(`${prefix}${idText} ${providerBadge}`, 0, 0));
+      const thinkingBadge =
+        " " + this.theme.fg("highlight", `[thinking:${item.thinking ?? defaultThinking}]`);
+      this.listContainer.addChild(
+        new Text(`${prefix}${idText} ${providerBadge}${thinkingBadge}`, 0, 0),
+      );
     }
 
     if (startIndex > 0 || endIndex < this.filteredModels.length) {

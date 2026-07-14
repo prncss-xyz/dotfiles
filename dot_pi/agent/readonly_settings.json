@@ -22,12 +22,13 @@
     "npm:pi-worktrunk",
     "npm:@tmustier/pi-usage-extension",
     "npm:@guwidoe/pi-prompt-suggester",
-    "npm:@ryan_nookpi/pi-extension-auto-name"
+    "npm:@carter-mcalister/pi-auto-name",
+    "npm:@latentminds/pi-quotas"
   ],
   "quietStartup": true,
-  "defaultProvider": "opencode-go",
-  "defaultModel": "minimax-m3",
-  "defaultThinkingLevel": "high",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-luna",
+  "defaultThinkingLevel": "max",
   "disabledCommands": ["gather-context-and-clarify"],
   "model_fallback": true,
   "runtime_fallback": {
@@ -43,27 +44,34 @@
       "context-builder": {
         "tools": "mcp:context7",
         "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "low",
         "skills": "search"
       },
       "oracle": {
-        "model": "opencode-go/deepseek-v4-pro"
+        "model": "opencode-go/deepseek-v4-pro",
+        "thinking": "high"
       },
       "planner": {
-        "model": "opencode-go/glm-5.2"
+        "model": "opencode-go/glm-5.2",
+        "thinking": "high"
       },
       "researcher": {
         "tools": "mcp:context7",
         "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "low",
         "skills": "search"
       },
       "reviewer": {
         "model": "openai-codex/gpt-5.6-sol",
+        "thinking": "low"
       },
       "scout": {
-        "model": "opencode-go/deepseek-v4-flash"
+        "model": "opencode-go/deepseek-v4-flash",
+        "thinking": "low"
       },
       "worker": {
-        "model": "opencode-go/minimax-m3"
+        "model": "opencode-go/minimax-m3",
+        "thinking": "medium"
       }
     }
   }
