@@ -5,12 +5,15 @@
     "clock",
     "sway/mode",
     "river/mode",
+    "mango/keymode",
     "sway/workspaces",
+    "mango/workspaces",
     "mpris"
   ],
   "modules-center": [
     "sway/window",
     "river/window",
+    "mango/window",
   ],
   "modules-right": [
     "cpu",
@@ -22,6 +25,12 @@
     "current-only": false,
     "tooltip": false
   },
+  "mango/workspaces": {
+    "current-only": false,
+    "tooltip": false,
+    "on-click": "activate",
+    "on-click-right": "toggle"
+  },
   "river/tags": {},
   "sway/window": {
     "swap-icon-label": false,
@@ -29,6 +38,14 @@
     "tooltip": false
   },
   "river/window": {
+    "swap-icon-label": false,
+    "max-length": 90,
+    "tooltip": false
+  },
+  "mango/keymode": {
+    "format": "{}"
+  },
+  "mango/window": {
     "swap-icon-label": false,
     "max-length": 90,
     "tooltip": false
