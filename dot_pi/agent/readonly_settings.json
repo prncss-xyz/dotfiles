@@ -10,6 +10,7 @@
     "npm:pi-skill-palette",
     "npm:pi-intercom",
     "npm:pi-subagents",
+    "npm:pi-prompt-template-model",
     "npm:pi-mcp-adapter",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-btw",

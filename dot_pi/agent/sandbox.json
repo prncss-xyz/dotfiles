@@ -12,7 +12,9 @@
       "~/projects",
       "/home/prncss/.a5c",
       "/home/prncss/.pi/agent",
-      "/tmp"
+      "/tmp",
+      "/usr/share/nvim/runtime/doc/api.txt",
+      "/usr/share/man"
     ],
     "allowWrite": [".", "/tmp", "~/.local/share/pnpm", "~/.local/state/pnpm", "~/.cache/pnpm/"]
   },
@@ -36,7 +38,8 @@
       "generativelanguage.googleapis.com",
       "api.exa.ai",
       "api.tavily.com",
-      "youtu.be"
+      "youtu.be",
+      "fonts.gstatic.com"
     ],
     "deniedDomains": []
   }
