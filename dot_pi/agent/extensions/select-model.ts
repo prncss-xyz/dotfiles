@@ -15,7 +15,8 @@ const defaultThinking = "high";
 
 const CURATED_MODELS: { provider: string; id: string; thinking?: ThinkingLevel }[] = [
   { provider: "openai-codex", id: "gpt-5.6-sol", thinking: "low" },
-  { provider: "openai-codex", id: "gpt-5.6-luna", thinking: "max" },
+  { provider: "openai-codex", id: "gpt-5.6-luna", thinking: "medium" },
+  { provider: "opencode-go", id: "kimi-k3" },
   { provider: "opencode-go", id: "glm-5.2" },
   { provider: "opencode-go", id: "qwen3.7-max" },
   { provider: "opencode-go", id: "kimi-k2.7-code" },
@@ -28,7 +29,7 @@ const CURATED_MODELS: { provider: string; id: string; thinking?: ThinkingLevel }
   { provider: "google", id: "gemini-3.1-pro" },
   { provider: "google", id: "gemini-3.5-flash" },
   { provider: "google", id: "gemini-3.1-flash-lite" },
-  { provider: "cerebras", id: "gpt-oss-120b" },
+  { provider: "cerebras", id: "gpt-oss-120b", thinking: "medium" },
   { provider: "openrouter", id: "inception/mercury-2" },
   { provider: "sakana", id: "fugu" },
   { provider: "sakana", id: "fugu-ultra" },
@@ -200,7 +201,7 @@ class ModelPicker extends Container implements Focusable {
       const idText = isSelected ? this.theme.fg("accent", item.id) : item.id;
       const providerBadge = this.theme.fg("muted", `[${item.provider}]`);
       const thinkingBadge =
-        " " + this.theme.fg("highlight", `[thinking:${item.thinking ?? defaultThinking}]`);
+        " " + this.theme.fg("warning", `[thinking:${item.thinking ?? defaultThinking}]`);
       this.listContainer.addChild(
         new Text(`${prefix}${idText} ${providerBadge}${thinkingBadge}`, 0, 0),
       );

@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+eval "$(pass show llm-keys)" && paseo "$@"
