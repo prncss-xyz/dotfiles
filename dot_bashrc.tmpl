@@ -16,6 +16,7 @@ export PI_OFFLINE=1
 export PORTLESS_PORT=1355
 export NODE_EXTRA_CA_CERTS=$HOME/.portless/ca.pem
 export PATH=/home/prncss/.opencode/bin:$PATH
+export PORTLESS_TAILSCALE=1
 
 {{ if ne .chezmoi.os "darwin" -}}
 export GRIM_DEFAULT_DIR=$HOME/Media/Pictures/Captures

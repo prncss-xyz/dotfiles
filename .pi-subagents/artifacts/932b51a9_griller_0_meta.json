@@ -1,0 +1,37 @@
+{
+  "runId": "932b51a9",
+  "agent": "griller",
+  "task": "does this prompt event works?",
+  "exitCode": 0,
+  "usage": {
+    "input": 6299,
+    "output": 502,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "cost": 0.009311,
+    "turns": 2
+  },
+  "model": "openai-codex/gpt-5.6-luna:medium",
+  "attemptedModels": [
+    "openai-codex/gpt-5.6-luna:medium"
+  ],
+  "modelAttempts": [
+    {
+      "model": "openai-codex/gpt-5.6-luna:medium",
+      "success": true,
+      "exitCode": 0,
+      "usage": {
+        "input": 6299,
+        "output": 502,
+        "cacheRead": 0,
+        "cacheWrite": 0,
+        "cost": 0.009311,
+        "turns": 2
+      }
+    }
+  ],
+  "durationMs": 16130,
+  "toolCount": 1,
+  "transcriptPath": "/home/prncss/projects/dotfiles/.pi-subagents/artifacts/932b51a9_griller_0_transcript.jsonl",
+  "timestamp": 1784856593417
+}

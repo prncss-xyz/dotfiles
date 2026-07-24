@@ -1,8 +1,8 @@
 ---
-name: grill
+name: griller
 tools:
     - ask_user_question
-    - itercom
+    - intercom
     - subagent
 systemPromptMode: replace
 description: Use subagents to gather context, then ask clarifying questions

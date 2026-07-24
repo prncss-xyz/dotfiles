@@ -43,10 +43,10 @@
   "subagents": {
     "agentOverrides": {
       "context-builder": {
-        "tools": "mcp:context7",
+        "tools": ["mcp:context7"],
         "model": "openai-codex/gpt-5.6-sol",
         "thinking": "low",
-        "skills": "search"
+        "skills": ["search"]
       },
       "oracle": {
         "model": "opencode-go/deepseek-v4-pro",
@@ -57,10 +57,10 @@
         "thinking": "high"
       },
       "researcher": {
-        "tools": "mcp:context7",
+        "tools": ["mcp:context7"],
         "model": "openai-codex/gpt-5.6-sol",
         "thinking": "low",
-        "skills": "search"
+        "skills": ["search"]
       },
       "reviewer": {
         "model": "openai-codex/gpt-5.6-sol",
