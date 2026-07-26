@@ -1,0 +1,4 @@
+#!/bin/sh
+
+eval "$(/usr/bin/pass show llm-keys)" &&
+	exec "$HOME/.local/share/pnpm/bin/paseo" daemon start --for

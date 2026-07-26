@@ -1,3 +1,3 @@
 #!/usr/bin/sh
 
-eval "$(pass show llm-keys)" && pi "$@"
+eval "$(pass show llm-keys)" && exec pi "$@"

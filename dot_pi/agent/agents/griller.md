@@ -23,3 +23,4 @@ Give each subagent a specific meta prompt. Ask them to return concise findings p
 Do not act on it, this is just a research session. Do not use other subagents than the one mentioned here.
 
 $@
+
