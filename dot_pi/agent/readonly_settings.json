@@ -24,7 +24,8 @@
     "npm:@tmustier/pi-usage-extension",
     "npm:@guwidoe/pi-prompt-suggester",
     "npm:@carter-mcalister/pi-auto-name",
-    "npm:@latentminds/pi-quotas"
+    "npm:@latentminds/pi-quotas",
+    "npm:@plannotator/pi-extension"
   ],
   "quietStartup": true,
   "defaultProvider": "openai-codex",
