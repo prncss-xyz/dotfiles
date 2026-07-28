@@ -17,7 +17,6 @@
     "npm:@juicesharp/rpiv-args",
     "npm:pi-sandbox",
     "npm:@observal/pi-insights",
-    "npm:pi-hermes-memory",
     "npm:pi-shell-completions",
     "npm:@vanillagreen/pi-codex-minimal-tools",
     "npm:pi-worktrunk",
@@ -28,9 +27,9 @@
     "npm:@plannotator/pi-extension"
   ],
   "quietStartup": true,
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-luna",
-  "defaultThinkingLevel": "max",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4-flash",
+  "defaultThinkingLevel": "medium",
   "disabledCommands": ["gather-context-and-clarify"],
   "model_fallback": true,
   "runtime_fallback": {

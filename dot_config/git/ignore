@@ -9,4 +9,5 @@ ltex.*
 .vectorcode/
 .nvim.lua
 .a5c/
+.pi-subagents/
 node_modules/
