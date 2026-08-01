@@ -18,6 +18,9 @@ export NODE_EXTRA_CA_CERTS=$HOME/.portless/ca.pem
 export PATH=/home/prncss/.opencode/bin:$PATH
 export PORTLESS_TAILSCALE=1
 
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
+
 {{ if ne .chezmoi.os "darwin" -}}
 export GRIM_DEFAULT_DIR=$HOME/Media/Pictures/Captures
 export PERSONAL=$HOME/Personal

@@ -1,10 +1,9 @@
 #!/bin/sh
-dir_name=$(basename "$PWD")
 branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+dir_name=$(basename "$PWD")
 if [ -n "$branch" ] && [ "$branch" != "HEAD" ] && [ "$dir_name" = "$branch" ]; then
-  repo_name=$(basename "$(dirname "$PWD")")
-else
-  repo_name=$dir_name
+  dir_name=$(basename "$(dirname "$PWD")")
 fi
+repo_name=$dir_name
 gh repo create "$repo_name" --public --source=.
 git push

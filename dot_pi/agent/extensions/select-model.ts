@@ -15,8 +15,9 @@ const defaultThinking = "high";
 
 const CURATED_MODELS: { provider: string; id: string; thinking?: ThinkingLevel }[] = [
   { provider: "openai-codex", id: "gpt-5.6-sol", thinking: "low" },
-  { provider: "opencode-go", id: "deepseek-v4-pro", thinking: "medium" },
+  { provider: "opencode-go", id: "deepseek-v4-flash", thinking: "high" },
   { provider: "opencode-go", id: "deepseek-v4-flash", thinking: "medium" },
+  { provider: "opencode-go", id: "deepseek-v4-flash", thinking: "low" },
   { provider: "openrouter", id: "inception/mercury-2", thinking: "low" },
   { provider: "cerebras", id: "gpt-oss-120b", thinking: "low" },
   { provider: "opencode-go", id: "minimax-m3", thinking: "medium" },

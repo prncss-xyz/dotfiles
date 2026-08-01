@@ -1,0 +1,5 @@
+---
+subagent: inquierer
+---
+
+$@
