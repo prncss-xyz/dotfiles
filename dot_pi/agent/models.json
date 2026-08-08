@@ -1,5 +1,19 @@
 {
   "providers": {
+    "opencode-go": {
+      "modelOverrides": {
+        "deepseek-v4-flash": {
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": null,
+            "max": "max"
+          }
+        }
+      }
+    },
     "inceptionlabs": {
       "baseUrl": "https://api.inceptionlabs.ai/v1",
       "api": "openai-completions",

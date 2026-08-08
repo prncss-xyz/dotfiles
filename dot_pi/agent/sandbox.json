@@ -5,6 +5,7 @@
       "~/.agents",
       "~/.config",
       "~/.local",
+      "~/.vite-plus",
       "~/.cargo/bin",
       "~/.luarocks/bin",
       "~/.vite-plus/bin",
@@ -16,7 +17,13 @@
       "/usr/share/nvim/runtime/doc/api.txt",
       "/usr/share/man"
     ],
-    "allowWrite": [".", "/tmp", "~/.local/share/pnpm", "~/.local/state/pnpm", "~/.cache/pnpm/"]
+    "allowWrite": [
+      ".",
+      "/tmp",
+      "~/.local/share/pnpm",
+      "~/.local/state/pnpm",
+      "~/.cache/pnpm/"
+    ]
   },
   "network": {
     "allowAllUnixSockets": true,

@@ -15,7 +15,6 @@
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-btw",
     "npm:@juicesharp/rpiv-args",
-    "npm:pi-sandbox",
     "npm:@observal/pi-insights",
     "npm:pi-shell-completions",
     "npm:@vanillagreen/pi-codex-minimal-tools",
@@ -50,7 +49,7 @@
       },
       "oracle": {
         "model": "opencode-go/deepseek-v4-pro",
-        "thinking": "high"
+        "thinking": "max"
       },
       "planner": {
         "model": "opencode-go/glm-5.2",
@@ -68,11 +67,11 @@
       },
       "scout": {
         "model": "opencode-go/deepseek-v4-flash",
-        "thinking": "low"
+        "thinking": "high"
       },
       "worker": {
         "model": "opencode-go/minimax-m3",
-        "thinking": "medium"
+        "thinking": "high"
       }
     }
   }
