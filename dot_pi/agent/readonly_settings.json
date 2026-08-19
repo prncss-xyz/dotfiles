@@ -19,8 +19,7 @@
     "npm:pi-shell-completions",
     "npm:@vanillagreen/pi-codex-minimal-tools",
     "npm:@guwidoe/pi-prompt-suggester",
-    "npm:@carter-mcalister/pi-auto-name",
-    "npm:@plannotator/pi-extension"
+    "npm:@carter-mcalister/pi-auto-name"
   ],
   "quietStartup": true,
   "defaultProvider": "openai-codex",

@@ -10,4 +10,5 @@ ltex.*
 .nvim.lua
 .a5c/
 .pi-subagents/
+.artifacts/
 node_modules/
