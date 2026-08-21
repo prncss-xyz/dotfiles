@@ -1,5 +1,5 @@
 ---
-name: griller
+name: plannifier
 tools:
   - ask_user_question
   - intercom

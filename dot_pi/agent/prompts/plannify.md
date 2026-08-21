@@ -1,8 +1,8 @@
 ---
-subagent: planify
+subagent: plannifier
 ---
 
-When it is done convert the session into an executable plan.
+When the session is done, immediately convert it into an executable plan.
 
 Find a suitable branch name for the task which has been planned. No more than 5 words, no special characters, snake-case. e.g.: `create-dark-mode-toggle`.
 
