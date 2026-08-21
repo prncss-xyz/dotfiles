@@ -3,6 +3,8 @@ default-cache-ttl 3600
 max-cache-ttl 7200
 {{- if eq .chezmoi.os "darwin" }}
 pinentry-program /opt/homebrew/bin/pinentry-mac
+{{- else if ne (env "WSL_DISTRO_NAME") "" }}
+pinentry-program /usr/bin/pinentry-gtk-2
 {{- else if eq .hosted "false" }}
 pinentry-program /usr/bin/pinentry-gnome3
 {{- else }}
