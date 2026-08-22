@@ -14,4 +14,6 @@ iris = '#c4a7e7'
 [cmd_duration]
 min_time = 1000
 
-## https://github.com/starship/starship/issues/6417 seams not to be fixed
+## keep git_status (files/conflicts) but hide the branch name
+[git_branch]
+disabled = true
