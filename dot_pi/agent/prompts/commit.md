@@ -1,5 +1,5 @@
 ---
-subagent: commiter
+subagent: committer
 ---
 
 $@

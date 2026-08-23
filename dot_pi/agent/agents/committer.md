@@ -1,10 +1,6 @@
 ---
 name: committer
-tools:
-  - intercom
-  - subagent
-  - mcp:git
-  - mcp:github
+tools: intercom, subagent, mcp:git, mcp:github
 systemPromptMode: replace
 async: false
 description: Use subagents to commit work and update PR
