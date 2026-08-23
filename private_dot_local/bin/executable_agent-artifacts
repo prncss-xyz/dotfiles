@@ -1,0 +1,27 @@
+#!/bin/sh
+
+root="$(git rev-parse --show-toplevel 2>/dev/null)"
+branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+
+if [ "$branch" = "HEAD" ]; then
+	echo "error: repository has a detached HEAD" >&2
+	exit 1
+fi
+
+repo="$(basename "$root")"
+
+if [ "$repo" = "$branch" ]; then
+	repo="$(basename "$(dirname "$root")")"
+fi
+
+branch="$(printf '%s' "$branch" | tr '/' '-')"
+target="${HOME}/projects/notes/main/dev/artifacts/${repo}"
+
+if [ "${1:-}" = "remove" ]; then
+	rm -rf "$target"
+	rm -f .artifacts
+	exit
+fi
+
+mkdir -p "$target/${branch}"
+ln -s "$(realpath --relative-to=. "$target")" .artifacts

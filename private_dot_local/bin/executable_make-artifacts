@@ -1,7 +1,0 @@
-#!/bin/sh
-
-repo="$(git rev-parse --show-toplevel 2>/dev/null | xargs basename)"
-branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null | tr '/' '-')"
-target="${HOME}/artifacts/${repo}/${branch}"
-mkdir -p "$target"
-ln -s "$(realpath --relative-to=. "$target")" ./artifacts
