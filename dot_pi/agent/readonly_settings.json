@@ -1,5 +1,7 @@
 {
-  "npmCommand": ["pnpm"],
+  "npmCommand": [
+    "pnpm"
+  ],
   "tools": {
     "grep": true,
     "find": true,
@@ -19,17 +21,25 @@
     "npm:pi-shell-completions",
     "npm:@vanillagreen/pi-codex-minimal-tools",
     "npm:@guwidoe/pi-prompt-suggester",
-    "npm:@carter-mcalister/pi-auto-name"
+    "npm:@carter-mcalister/pi-auto-name",
+    "npm:@calesennett/pi-codex-usage"
   ],
   "quietStartup": true,
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "low",
-  "disabledCommands": ["gather-context-and-clarify"],
+  "disabledCommands": [
+    "gather-context-and-clarify"
+  ],
   "model_fallback": true,
   "runtime_fallback": {
     "enabled": true,
-    "retry_on_errors": [400, 429, 503, 529],
+    "retry_on_errors": [
+      400,
+      429,
+      503,
+      529
+    ],
     "max_fallback_attempts": 3,
     "cooldown_seconds": 60,
     "timeout_seconds": 30,
@@ -38,10 +48,14 @@
   "subagents": {
     "agentOverrides": {
       "context-builder": {
-        "tools": ["mcp:context7"],
+        "tools": [
+          "mcp:context7"
+        ],
         "model": "openai-codex/gpt-5.6-sol",
         "thinking": "low",
-        "skills": ["search"]
+        "skills": [
+          "search"
+        ]
       },
       "oracle": {
         "model": "opencode-go/deepseek-v4-pro",
@@ -52,10 +66,14 @@
         "thinking": "high"
       },
       "researcher": {
-        "tools": ["mcp:context7"],
+        "tools": [
+          "mcp:context7"
+        ],
         "model": "openai-codex/gpt-5.6-sol",
         "thinking": "low",
-        "skills": ["search"]
+        "skills": [
+          "search"
+        ]
       },
       "reviewer": {
         "model": "openai-codex/gpt-5.6-sol",

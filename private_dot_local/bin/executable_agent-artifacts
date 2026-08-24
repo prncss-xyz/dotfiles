@@ -18,6 +18,17 @@ branch="$(printf '%s' "$branch" | tr '/' '-')"
 target="${HOME}/projects/notes/main/dev/artifacts/${repo}"
 
 if [ "${1:-}" = "remove" ]; then
+	printf 'Remove artifacts for this worktree? [y/N] '
+	read -r confirmation
+
+	case "$confirmation" in
+		y | Y | yes | YES | Yes) ;;
+		*)
+			echo "Removal cancelled."
+			exit
+			;;
+	esac
+
 	rm -rf "$target"
 	rm -f .artifacts
 	exit

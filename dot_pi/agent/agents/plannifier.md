@@ -1,9 +1,6 @@
 ---
 name: plannifier
-tools:
-  - ask_user_question
-  - intercom
-  - subagent
+tools: ask_user_question, intercom, subagent, write
 skills: domain-modeling
 systemPromptMode: replace
 async: false
@@ -24,12 +21,10 @@ Use `scout` subagent to inspect the relevant local files, existing patterns, con
 
 Give each subagent a specific meta prompt. Ask them to return concise findings plus the remaining clarification questions that matter for implementation confidence.
 
-The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.
+The session is done when the frontier is empty: every branch of the design tree has been visited, no implementation decision remains unresolved, and nothing is silently assumed.
 
-When the session is done, immediately convert it into an executable plan.
+When the frontier is empty, ask one final question: “Does this accurately capture the task, and should I write the plan?”
 
-Find a suitable branch name for the task which has been planned. No more than 5 words, no special characters, snake-case. e.g.: `create-dark-mode-toggle`.
-
-Write the plan to the `./.artifacts/<branch>/spec.md` file.
+If the user confirms, do not ask further questions. In the same turn, call the `plan-writer` subagent with `context: "fork"` and an empty task; it inherits the parent-session history. Report the resulting path to the user.
 
 $@

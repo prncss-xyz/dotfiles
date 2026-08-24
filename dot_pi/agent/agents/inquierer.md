@@ -1,9 +1,6 @@
 ---
 name: inquierer
-tools:
-  - ask_user_question
-  - intercom
-  - subagent
+tools: ask_user_question, intercom, subagent
 systemPromptMode: replace
 async: false
 description: Use subagents to gather context, then ask clarifying questions

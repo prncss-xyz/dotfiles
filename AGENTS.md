@@ -16,7 +16,7 @@ Secrets are retrieved at apply-time via `pass` (passwordstore). OS-conditional b
 
 ## Repo Layout
 
-- `dot_config/` — XDG config: fish shell, git, neovim (symlinked), ghostty, river/sway, yazi, starship, etc.
+- `dot_config/` — XDG config: fish shell, git, neovim (symlinked), ghostty, mango-wc, yazi, starship, etc.
 - `dot_config/fish/conf.d/env.fish.tmpl` — environment variables and PATH setup
 - `dot_config/fish/config.fish` — interactive shell: abbreviations, theme, tool init (fzf, starship, zoxide)
 - `private_dot_local/bin/` — user scripts (chezmoi `executable_` prefix) must be standard POSIX-COMPLIANT scripts
@@ -32,3 +32,7 @@ Secrets are retrieved at apply-time via `pass` (passwordstore). OS-conditional b
 - Editor: **neovim** (config lives in a separate repo, symlinked via `dot_config/symlink_nvim.tmpl`)
 - Global JS packages managed via **pnpm**; Python tools via **uv**; npm prefix set to `~/.local`
 - GPG signing enforced on all git commits and tags
+
+## Scripts
+
+When writing bash scripts, always make them POSIX-compliant.
