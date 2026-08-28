@@ -1,44 +1,6 @@
 #!/bin/sh
 
 projects=${PROJECTS_DIR:-"$HOME/projects"}
-artifacts=${ARTIFACTS_DIR:-"$projects/notes/main/dev/artifacts"}
-
-relative_path() {
-	awk -v from="$1" -v to="$2" 'BEGIN {
-		from_count = split(from, from_parts, "/")
-		to_count = split(to, to_parts, "/")
-		common = 1
-		while (common <= from_count && common <= to_count && from_parts[common] == to_parts[common])
-			common++
-		result = ""
-		for (index = common; index <= from_count; index++)
-			if (from_parts[index] != "") result = result (result == "" ? "" : "/") ".."
-		for (index = common; index <= to_count; index++)
-			if (to_parts[index] != "") result = result (result == "" ? "" : "/") to_parts[index]
-		print result == "" ? "." : result
-	}'
-}
-
-link_artifacts() {
-	repo_root=$1
-	repo=$2
-	branch=$3
-	target=$artifacts/$repo
-	branch_dir=$target/$(printf '%s' "$branch" | tr '/' '-')
-	link_path=$repo_root/.artifacts
-
-	if ! mkdir -p "$branch_dir"; then
-		printf 'warning: failed to create artifacts directory: %s\n' "$branch_dir" >&2
-		return
-	fi
-
-	[ -e "$link_path" ] || [ -L "$link_path" ] && return
-	link_target=$(relative_path "$repo_root" "$target")
-	if ! ln -s "$link_target" "$link_path"; then
-		printf 'warning: failed to create artifacts link: %s\n' "$link_path" >&2
-	fi
-}
-
 get_default_file() {
 	repo_dir=$1
 	preferred_rel=${2:-}
@@ -96,5 +58,5 @@ branch=$(git -C "$repo_dir" branch --show-current 2>/dev/null)
 [ -n "$branch" ] || branch=main
 repo=$(basename "$repo_dir")
 [ "$repo" = "$branch" ] && repo=$(basename "$(dirname "$repo_dir")")
-link_artifacts "$repo_dir" "$repo" "$branch"
+git-link-artifacts "$repo_dir" "$repo" "$branch"
 get_default_file "$repo_dir"
