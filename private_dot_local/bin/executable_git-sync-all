@@ -4,6 +4,7 @@ REPOS=(
   "$HOME/projects/notes/main/"
   "$HOME/projects/nvim/main/"
   "$HOME/projects/dotfiles/"
+  "$HOME/Personal/pass"
 )
 
 for repo in "${REPOS[@]}"; do

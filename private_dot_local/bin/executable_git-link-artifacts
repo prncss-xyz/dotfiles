@@ -11,12 +11,35 @@ while [ $# -gt 0 ]; do
 	shift
 done
 
-repo_root=${1:-}
-repo=${2:-}
-branch=${3:-}
+case $# in
+	0)
+		repo_root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+			printf 'error: current directory is not in a Git repository\n' >&2
+			exit 1
+		}
+		branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null) || {
+			printf 'error: cannot detect branch from detached HEAD\n' >&2
+			exit 1
+		}
+		repo=${repo_root##*/}
+		if [ "$repo" = "$branch" ]; then
+			repo_parent=${repo_root%/*}
+			repo=${repo_parent##*/}
+		fi
+		;;
+	3)
+		repo_root=$1
+		repo=$2
+		branch=$3
+		;;
+	*)
+		printf 'usage: git-link-artifacts [--remove [--force]] [REPO_ROOT REPO BRANCH]\n' >&2
+		exit 2
+		;;
+esac
 
-if [ -z "$repo_root" ] || [ -z "$repo" ] || [ -z "$branch" ] || [ $# -ne 3 ]; then
-	printf 'usage: git-link-artifacts [--remove [--force]] REPO_ROOT REPO BRANCH\n' >&2
+if [ -z "$repo_root" ] || [ -z "$repo" ] || [ -z "$branch" ]; then
+	printf 'error: repository root, repository name, and branch must not be empty\n' >&2
 	exit 2
 fi
 
