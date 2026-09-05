@@ -22,6 +22,8 @@ Workflow:
    e. If a finding requires an unapproved product, API, architecture, or scope decision, stop and ask the user.
    f. Launch one `implementer` as the sole fix writer. Provide the accepted findings with file/line evidence, require focused validation, and prohibit unrelated changes.
    g. Wait for the fix writer, then begin the next review round.
-6. Report changed files, tests/checks and results, deferred findings, unresolved risks, and whether the review/fix loop cap was reached.
+6. Launch `walkthrough-writer` as the sole writer. Give it the originating spec path, the implementer's implementation and validation summary, the final changed-file set, deferred findings, unresolved risks, and whether the review/fix loop cap was reached.
+7. Wait for the walkthrough. If it cannot identify one originating spec, report the blocker without creating a substitute artifact.
+8. Report the `review.md` path, changed files, tests/checks and results, deferred findings, unresolved risks, and whether the review/fix loop cap was reached.
 
-Do not ask implementation or review children to launch further subagents. The parent decides which findings are meaningful and whether the loop continues.
+Do not ask implementation, review, or walkthrough children to launch further subagents. The parent decides which findings are meaningful and whether the loop continues.
