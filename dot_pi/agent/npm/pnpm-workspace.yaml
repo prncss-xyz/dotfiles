@@ -3,5 +3,6 @@ allowBuilds:
   better-sqlite3: true
   esbuild: true
   koffi: true
+  node-pty: true
   protobufjs: true
 shamefullyHoist: true
