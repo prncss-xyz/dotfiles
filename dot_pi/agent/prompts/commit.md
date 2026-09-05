@@ -1,5 +1,4 @@
 ---
-model: openai-codex/gpt-5.6-luna
 subagent: committer
 ---
 

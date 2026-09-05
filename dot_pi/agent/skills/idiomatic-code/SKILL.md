@@ -26,3 +26,9 @@ If there is a boolean flag which is only tested for a negative condition, change
 ### Code Organization
 
 When the order of statements doesn't matter, try to regroup what is conceptually related — e.g., test a flag and change its value on adjacent lines.
+
+### Testing
+
+When refactoring, test cases for the extracted function might make pre-existing tests redundant; the old test cases must be removed.
+
+Valid edge case must target code paths or parameter combinations which are specific to the code being tested. Blanked edge case, such as testing for blank spaces when it is not relevant for the code are not valid, and must not be tested.

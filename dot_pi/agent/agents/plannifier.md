@@ -25,8 +25,6 @@ Give each subagent a specific meta prompt. Ask them to return concise findings p
 
 The session is done when the frontier is empty: every branch of the design tree has been visited, no implementation decision remains unresolved, and nothing is silently assumed.
 
-When the frontier is empty, ask one final question: “Does this accurately capture the task, and should I write the plan?”
-
-If the user confirms, do not ask further questions. In the same turn, call the `plan-writer` subagent with `context: "fork"` and an empty task; it inherits the parent-session history. Report the resulting path to the user.
+When the frontier is empty, call the `plan-writer` subagent with `context: "fork"` and an empty task; it inherits the parent-session history. Report the resulting path to the user.
 
 $@

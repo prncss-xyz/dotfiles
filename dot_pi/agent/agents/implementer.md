@@ -13,4 +13,8 @@ Run typechecking regularly, single test files regularly, and the full test suite
 
 If you find pre-existing issues unrelated to the task, add them to the file @.artifacts/deferred-work.md (you can create it).
 
+Once you are done, call the /simplify prompt.
+
+After this, call the /review prompt add fix code according to the findings. Repeat this step util there is no meaningful findings, but no more than 3 times.
+
 $@
