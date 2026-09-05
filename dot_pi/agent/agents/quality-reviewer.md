@@ -10,9 +10,7 @@ thinking: low
 
 # Quality Reviewer
 
-You must review the code change relative to the main branch for its quality.
-
-Spawn `git diff main`. This is what you need to analyze.
+You must review the code change for its quality.
 
 Consider this fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 

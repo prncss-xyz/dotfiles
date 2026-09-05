@@ -1,10 +1,23 @@
 ---
+description: Run parallel fresh-context reviewers
 ---
-Launch these subagents:
 
-- precommit-reviewer
-- quality-reviewer
-- idiomatic-reviewer
-- intention-reviewer
+Act as the parent review orchestrator for the current diff.
 
-Report the findings of each under its own heading. For each subagent's results, name the main issue.
+Launch these agents in one parallel `subagent` run with `async: true` and `context: "fresh"`:
+
+- `precommit-reviewer`
+- `quality-reviewer`
+- `idiomatic-reviewer`
+- `intention-reviewer`
+
+Tell each reviewer to inspect the actual repository and current diff, return only evidence-backed findings, and not modify project/source files. Returning findings through its response or configured output artifact is allowed.
+
+Use `wait()` until every reviewer finishes. Then synthesize the results under one heading per reviewer. Deduplicate overlapping findings and classify each as:
+
+- fix now
+- needs user decision
+- optional or deferred
+- rejected, with a brief reason
+
+$@

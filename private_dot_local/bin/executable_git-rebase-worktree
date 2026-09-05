@@ -1,0 +1,47 @@
+#!/bin/sh
+
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+	printf 'error: not in a git repository\n' >&2
+	exit 1
+}
+
+current_branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null) || {
+	printf 'error: current worktree is detached\n' >&2
+	exit 1
+}
+
+command -v fzf >/dev/null 2>&1 || {
+	printf 'error: fzf is required\n' >&2
+	exit 1
+}
+
+selection=$(
+	git worktree list --porcelain | awk -v current="$repo_root" '
+		$1 == "worktree" {
+			path = substr($0, length($1) + 2)
+			branch = ""
+			detached = 0
+		}
+		$1 == "branch" {
+			branch = substr($0, length($1) + 2)
+			sub("^refs/heads/", "", branch)
+		}
+		$1 == "detached" { detached = 1 }
+		NF == 0 {
+			if (path != current && branch != "" && !detached)
+				printf "%s\t%s\n", branch, path
+		}
+	' | fzf --delimiter='\t' --with-nth=1,2 --prompt='Worktree to rebase: '
+) || exit 0
+
+[ -n "$selection" ] || exit 0
+branch=$(printf '%s\n' "$selection" | cut -f1)
+worktree_path=$(printf '%s\n' "$selection" | cut -f2-)
+
+printf 'Rebasing %s onto %s...\n' "$branch" "$current_branch"
+if ! git -C "$worktree_path" rebase "$current_branch"; then
+	printf 'error: rebase failed; worktree was not removed\n' >&2
+	exit 1
+fi
+
+git-worktree --remove --force "$branch"

@@ -11,9 +11,7 @@ thinking: low
 
 # Idiomatic Reviewer
 
-You must review the code change relative to the main branch for its idiomaticity.
-
-Spawn `git diff main`. This is what you need to analyze.
+You must review the code change for its idiomaticity.
 
 You must focus on whether the code is idiomatic as defined by the preloaded skill. Other agents review the code for other qualities; this is not your concern.
 
