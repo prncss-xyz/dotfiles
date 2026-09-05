@@ -1,4 +1,10 @@
 ---
 ---
+Launch these subagents:
 
-Launch the subagents quality-reviewer and intention-reviewer. Report the finding of each under their own headings. For each subagent results, name the main issue.
+- precommit-reviewer
+- quality-reviewer
+- idiomatic-reviewer
+- intention-reviewer
+
+Report the findings of each under its own heading. For each subagent's results, name the main issue.

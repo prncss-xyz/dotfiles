@@ -1,7 +1,7 @@
 ---
 name: plan-writer
 tools: ask_user_question, intercom, subagent, write
-skills: domain-modeling
+skills: domain-modeling, to-spec
 systemPromptMode: replace
 async: false
 defaultContext: fork
