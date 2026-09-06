@@ -1,23 +1,5 @@
 #!/bin/sh
 
-get_default_file() {
-	repo_dir=$1
-	preferred_rel=${2:-}
-
-	if [ -n "$preferred_rel" ] && [ -f "$repo_dir/$preferred_rel" ]; then
-		printf '%s\n' "$repo_dir/$preferred_rel"
-	elif [ -f "$repo_dir/README.md" ]; then
-		printf '%s\n' "$repo_dir/README.md"
-	else
-		first=$(git -C "$repo_dir" ls-files 2>/dev/null | awk 'NR == 1 { print; exit }')
-		if [ -n "$first" ]; then
-			printf '%s\n' "$repo_dir/$first"
-		else
-			printf '%s\n' "$repo_dir/README.md"
-		fi
-	fi
-}
-
 remove=false
 force=false
 while [ $# -gt 0 ]; do
@@ -74,14 +56,6 @@ if [ "$remove" = true ]; then
 	exit 0
 fi
 
-preferred_rel=
-if [ $# -ge 2 ]; then
-	case $2 in
-		"$repo_root"/*) preferred_rel=${2#"$repo_root"/} ;;
-		*) preferred_rel=$2 ;;
-	esac
-fi
-
 git fetch origin "$branch" >/dev/null 2>&1 || :
 if git rev-parse --verify "origin/$branch" >/dev/null 2>&1; then
 	set -- git worktree add "$worktree_path" "$branch"
@@ -95,4 +69,4 @@ if ! result=$("$@" 2>&1); then
 fi
 
 git-link-artifacts "$worktree_path" "$repo" "$branch"
-get_default_file "$worktree_path" "$preferred_rel"
+printf '%s\n' "$worktree_path"

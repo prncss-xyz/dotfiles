@@ -3,6 +3,6 @@ function gwt --description 'Create a Git worktree and enter it'
     or return $status
 
     if test -n "$target"
-        builtin cd -- (dirname "$target")
+        builtin cd -- "$target"
     end
 end
