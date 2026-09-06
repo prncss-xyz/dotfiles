@@ -144,6 +144,16 @@
       "skillFolderHash": "8ec0462658381bd1606d3f9db14ffc67df6a2a43",
       "installedAt": "2026-07-15T00:51:12.110Z",
       "updatedAt": "2026-08-22T22:14:27.212Z"
+    },
+    "writing-for-agents": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mattpocock/skills.git",
+      "ref": "main",
+      "skillPath": "skills/productivity/writing-for-agents/SKILL.md",
+      "skillFolderHash": "ad2925850efb8973a72d2e666f7a975f9a2d4a9b",
+      "installedAt": "2026-09-05T22:36:41.948Z",
+      "updatedAt": "2026-09-05T22:36:41.948Z"
     }
   },
   "lastSelectedAgents": [
