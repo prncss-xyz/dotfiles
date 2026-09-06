@@ -14,7 +14,7 @@ Use the inherited parent-session history to identify the approved shared underst
 
 Choose a suitable branch name of no more than 5 lowercase words, joined with hyphens (kebab-case), for example `create-dark-mode-toggle`.
 
-Write the plan to `./.artifacts/<branch>/spec.md`. The `write` tool creates the parent directories automatically.
+Write the plan to `./.artifacts/<branch>/plan.md`. The `write` tool creates the parent directories automatically.
 
 Do not write to any other path and do not modify existing project files.
 

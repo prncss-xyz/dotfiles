@@ -38,7 +38,7 @@ Once the bug is narrow enough to test, write the smallest failing test that demo
 
 A failed reproduction attempt is new evidence, not completion. Return to another round of questions and research, revise the hypotheses, and adjust or replace the test. Repeat until the reproduction isolates the bug or the investigation establishes why a failing test is currently impractical.
 
-Create or replace `./.artifacts/<branch>/bug.md` with the complete proposed description and reproduction before asking for approval. Record:
+Create or replace `./.artifacts/<branch>/task.md` with the complete proposed description and reproduction before asking for approval. Record:
 
 - a concise bug statement;
 - observed and expected behavior;
