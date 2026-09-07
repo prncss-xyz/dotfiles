@@ -17,6 +17,8 @@ Prefer functional programming over imperative programming or OOP.
 
 Prefer coding assertions over defensive programming.
 
+Use explicit error handling patterns (avoid try/catch workflows, throw for code assertions).
+
 ### State Management
 
 If many variables are not truly independent, that is, only some combinations of values are possible, replace this with an algebraic data type.
