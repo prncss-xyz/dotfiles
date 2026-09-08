@@ -14,6 +14,7 @@ import {
 const defaultThinking = "high";
 
 const CURATED_MODELS: { provider: string; id: string; thinking?: ThinkingLevel }[] = [
+  { provider: "openai-codex", id: "gpt-6-astra", thinking: "low" },
   { provider: "openai-codex", id: "gpt-5.6-sol", thinking: "low" },
   { provider: "openai-codex", id: "gpt-5.6-terra", thinking: "medium" },
   { provider: "openai-codex", id: "gpt-5.6-luna", thinking: "low" },
