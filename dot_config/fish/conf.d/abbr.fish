@@ -9,6 +9,7 @@ abbr d ddgr --rev
 abbr dw BROWSER=w3m ddgr --rev
 abbr l eza --icons --git
 abbr n nvim
+abbr ndebug nvim --listen /tmp/nvim-debug.sock
 abbr o xdg-open
 abbr t eza --tree --icons --git
 # https://github.com/jhillyerd/plugin-git/blob/83a0a865d5031c436d47c9e3ab3a269b5d601615/functions/__git.init.fish#L6

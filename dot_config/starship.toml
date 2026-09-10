@@ -1,6 +1,12 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 palette = "rose-pine"
+format = "$time$all"
+
+[time]
+disabled = false
+time_format = "%H:%M"
+format = "[$time]($style) "
 
 [palettes.rose-pine]
 overlay = '#26233a'
