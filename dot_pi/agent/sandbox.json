@@ -25,7 +25,7 @@
     ]
   },
   "network": {
-    "allowAllUnixSockets": true,
+    "allowAllUnixSockets": false,
     "allowedDomains": [
       "registry.npmjs.org",
       "*.npmjs.org",
