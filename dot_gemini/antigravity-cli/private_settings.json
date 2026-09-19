@@ -2,7 +2,6 @@
   "allowNonWorkspaceAccess": true,
   "colorScheme": "colorblind-friendly dark",
   "enableTerminalSandbox": true,
-  "model": "Gemini 3.5 Flash (High)",
   "permissions": {
     "allow": [
       "command(git log)",
@@ -50,12 +49,12 @@
       "command(cd)",
       "command(npm run)",
       "command(sleep)",
-      "unsandboxed(pnpm run)",
+      "command(pnpm run)",
       "mcp(git/git_status)",
       "mcp(git/git_diff)",
       "mcp(git/git_diff_unstaged)",
-      "unsandboxed(pnpm check:tsc)",
-      "unsandboxed(pnpm fix)"
+      "command(pnpm check:tsc)",
+      "command(pnpm fix)"
     ],
     "deny": [
       "mcp(git/git_diff_unstaged)"
