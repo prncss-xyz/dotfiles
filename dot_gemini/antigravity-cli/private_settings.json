@@ -54,7 +54,8 @@
       "mcp(git/git_diff)",
       "mcp(git/git_diff_unstaged)",
       "command(pnpm check:tsc)",
-      "command(pnpm fix)"
+      "command(pnpm fix)",
+      "command(git grep)"
     ],
     "deny": [
       "mcp(git/git_diff_unstaged)"
@@ -72,6 +73,7 @@
     "/home/prncss/projects/nvim",
     "/home/prncss/projects/storybook",
     "/home/prncss/projects/notes",
-    "/home/prncss/projects/timer-demo"
+    "/home/prncss/projects/timer-demo",
+    "/home/prncss/projects/nvim/main"
   ]
 }
