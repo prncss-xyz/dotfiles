@@ -1,0 +1,42 @@
+# @plugin(@varlock/pass-plugin@1.0.2)
+# @initPass()
+# ---
+
+# @required @sensitive
+OPENCODE_API_KEY=pass("opencode.ai/key/prncss-xyz")
+
+# @required @sensitive
+EXA_API_KEY=pass("exa.ai/juliette.lamarche.xyz@gmail.com")
+
+# @required @sensitive
+TAVILY_API_KEY=pass("tavily.com/juliette.lamarche.xyz@gmail.com/keys/nvim")
+
+# @required @sensitive
+GROQ_API_KEY=pass("groq.com/juliette.lamarche.xyz@gmail.com/keys/nvim")
+
+# @required @sensitive
+CEREBRAS_API_KEY=pass("cerebras.ai/key/prncss-xyz")
+
+# @required @sensitive
+CODESTRAL_API_KEY=pass("mistral.ai/juliette.lamarche.xyz@gmail.com/keys/codestral")
+
+# @required @sensitive
+MISTRAL_API_KEY=pass("mistral.ai/juliette.lamarche.xyz@gmail.com/keys/nvim")
+
+# @required @sensitive
+OPENROUTER_API_KEY=pass("openrouter.ai/keys/prncss-xyz")
+
+# @required @sensitive
+NVIDIA_API_KEY=pass("nvidia.com/juliette.lamarche.xyz@gmai.com/keys/prncss-xyz")
+
+# @required @sensitive
+GEMINI_API_KEY=pass("google.com/juliette.lamarche.xyz@gmail.com/keys/nvim")
+
+# @required @sensitive
+INCEPTION_API_KEY=pass("inceptionlabs.ai/prncss-xyz/key")
+
+# @required @sensitive
+OLLAMA_API_KEY=pass("ollama.com/keys/prncss-xyz")
+
+# @required @sensitive
+HF_TOKEN=pass("huggingface.co/juliette.lamarche.xyz@gmail.com/nvim")

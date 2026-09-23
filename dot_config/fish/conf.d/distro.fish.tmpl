@@ -15,7 +15,7 @@ abbr pu brew update; brew upgrade; brew cleanup
 {{ if eq .chezmoi.osRelease.name "Void" -}}
 abbr pa sudo xbps-install -y
 abbr pr sudo xbps-remove -Ry
-abbr pu sudo xbps-install -Syu
+abbr pu /usr/sbin/sudo xbps-install -Syu
 {{ end -}}
 {{ if eq .chezmoi.osRelease.name "Alpine" -}}
 abbr pa sudo apk add

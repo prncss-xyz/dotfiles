@@ -1,7 +1,5 @@
 ## Coding Style
 
-If current branch is main or master, you are doing planning work, don't edit code, expect for these repos: `nvim`, `dotfiles`, `notes`.
-
 Prefer coding assertions over defensive programming.
 
 ## Sandbox

@@ -30,7 +30,7 @@ abbr gstp git stash pop
 abbr gsts git stash show --text
 abbr grhh git reset --hard HEAD
 abbr gch git checkout HEAD --
-abbr ytx yt-dlp -x
+abbr ytx yt-dlp -x --no-playlist
 abbr yta 'yt-dlp -x --output "%(autonumber)02d %(title)s.%(ext)s"'
 abbr cdp cd $HOME/projects/
 abbr gsa git-sync-all

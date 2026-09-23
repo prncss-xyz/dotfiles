@@ -1,2 +1,3 @@
 %wheel ALL=(ALL:ALL) NOPASSWD: /usr/sbin/reboot
 %wheel ALL=(ALL:ALL) NOPASSWD: /usr/sbin/poweroff
+%wheel ALL=(ALL:ALL) NOPASSWD: /usr/sbin/sudo xbps-install -Syu 

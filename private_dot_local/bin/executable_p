@@ -1,3 +1,4 @@
 #!/usr/bin/sh
 
-eval "$(pass show llm-keys)" && exec pi "$@"
+exec varlock run --path "$HOME/.config/varlock/.env.agent.schema" --inject vars -- pi "$@"
+# formerly eval "$(pass show llm-keys)" && exec pi "$@"
