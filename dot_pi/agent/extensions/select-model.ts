@@ -17,7 +17,6 @@ const CURATED_MODELS: { provider: string; id: string; thinking?: ThinkingLevel }
   { provider: "openai-codex", id: "gpt-6-astra", thinking: "low" },
   { provider: "openai-codex", id: "gpt-6-sol", thinking: "low" },
   { provider: "openai-codex", id: "gpt-6-luna", thinking: "low" },
-  { provider: "opencode-go", id: "muse-spark-1.3-contributor", thinking: "low" },
   { provider: "opencode-go", id: "glm-5.3-flash", thinking: "low" },
   { provider: "opencode-go", id: "mimo-v2.6-flash", thinking: "low" },
   { provider: "opencode-go", id: "glm-5.3", thinking: "medium" },
