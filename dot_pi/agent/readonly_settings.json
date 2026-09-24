@@ -23,7 +23,6 @@
     "npm:@juicesharp/rpiv-args",
     "npm:@observal/pi-insights",
     "npm:pi-shell-completions",
-    "npm:@vanillagreen/pi-codex-minimal-tools",
     "npm:@guwidoe/pi-prompt-suggester",
     "npm:@carter-mcalister/pi-auto-name",
     "npm:@calesennett/pi-codex-usage"
