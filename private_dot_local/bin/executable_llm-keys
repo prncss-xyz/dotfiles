@@ -1,0 +1,58 @@
+#!/bin/sh
+
+set -eu
+umask 077
+
+schema=${XDG_CONFIG_HOME:-"$HOME/.config"}/varlock/env.agent.schema
+output=${1:-${schema%.schema}}
+
+if [ "$#" -gt 1 ]; then
+    printf 'Usage: llm-keys [output-file]\n' >&2
+    exit 2
+fi
+
+if [ ! -r "$schema" ]; then
+    printf 'llm-keys: cannot read schema: %s\n' "$schema" >&2
+    exit 1
+fi
+
+mkdir -p "$(dirname "$output")"
+tmp=$(mktemp "${output}.tmp.XXXXXX")
+trap 'rm -f "$tmp"' 0 HUP INT TERM
+
+count=0
+while IFS= read -r line || [ -n "$line" ]; do
+    case $line in
+        *=\pass\(\"*\"\))
+            key=${line%%=*}
+            entry=${line#*'pass("'}
+            entry=${entry%'")'}
+            ;;
+        *) continue ;;
+    esac
+
+    case $key in
+        ''|[0-9]*|*[!A-Za-z0-9_]*)
+            printf 'llm-keys: invalid variable name: %s\n' "$key" >&2
+            exit 1
+            ;;
+    esac
+
+    secret=$(pass show "$entry") || {
+        printf 'llm-keys: failed to read pass entry: %s\n' "$entry" >&2
+        exit 1
+    }
+    secret=$(printf '%s\n' "$secret" | sed -n '1p')
+    escaped=$(printf '%s' "$secret" | sed "s/'/'\\\\''/g")
+    printf "export %s='%s'\n" "$key" "$escaped" >> "$tmp"
+    count=$((count + 1))
+done < "$schema"
+
+if [ "$count" -eq 0 ]; then
+    printf 'llm-keys: no pass entries found in %s\n' "$schema" >&2
+    exit 1
+fi
+
+mv -f "$tmp" "$output"
+trap - 0 HUP INT TERM
+printf 'Wrote %s keys to %s\n' "$count" "$output"
