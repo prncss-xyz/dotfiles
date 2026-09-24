@@ -3,7 +3,7 @@ export ENV="$HOME/.profile"
 
 if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty 2>/dev/null)" = /dev/tty1 ]; then
   exec mango
-    # exec river
+  # exec sway
 fi
 
 # If running interactively, replace the dash process with fish
