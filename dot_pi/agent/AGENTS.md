@@ -6,7 +6,7 @@ Never write comments unless explicitly asked to.
 
 ## Sandbox
 
-You only have write access to the current directory and to `/tmp`.
+You may write to the current project directory, `/tmp`, and `~/projects/notes/main/dev/artifacts`. Do not write elsewhere.                 
 
 ## File Manipulation
 
