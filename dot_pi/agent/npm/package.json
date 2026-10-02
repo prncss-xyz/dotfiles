@@ -1,0 +1,19 @@
+{
+  "name": "pi-extensions",
+  "private": true,
+  "dependencies": {
+    "@carter-mcalister/pi-auto-name": "^0.2.0",
+    "@guwidoe/pi-prompt-suggester": "^0.3.10",
+    "@juicesharp/rpiv-args": "^1.20.0",
+    "@juicesharp/rpiv-ask-user-question": "^1.20.0",
+    "@juicesharp/rpiv-btw": "^1.20.0",
+    "@observal/pi-insights": "^1.2.3",
+    "pi-intercom": "^0.6.0",
+    "pi-prompt-template-model": "^0.12.0",
+    "pi-sandbox": "^0.4.4",
+    "pi-skill-palette": "^1.1.0",
+    "pi-subagents": "^0.35.1",
+    "pi-web-access": "^0.13.0"
+  }
+}
+

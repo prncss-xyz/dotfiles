@@ -16,12 +16,10 @@
     "npm:pi-intercom",
     "npm:pi-subagents",
     "npm:pi-prompt-template-model",
-    "npm:pi-mcp-adapter",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-btw",
     "npm:@juicesharp/rpiv-args",
     "npm:@observal/pi-insights",
-    "npm:pi-shell-completions",
     "npm:@guwidoe/pi-prompt-suggester",
     "npm:@carter-mcalister/pi-auto-name",
     "npm:@calesennett/pi-codex-usage"
