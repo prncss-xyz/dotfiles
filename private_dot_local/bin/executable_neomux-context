@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if [ "${NEOMUX_CTX+x}" = x ]; then
+    printf '%s\n' "$NEOMUX_CTX"
+fi

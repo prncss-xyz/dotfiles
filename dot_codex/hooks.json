@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'if [ -r \"$HOME/.local/bin/neomux-context\" ]; then sh \"$HOME/.local/bin/neomux-context\"; else sh \"$HOME/projects/dotfiles/private_dot_local/bin/executable_neomux-context\"; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}
