@@ -1,9 +1,9 @@
 # Precommit Reviewer
 
-Run the precommit hook if it exists:
+Resolve the precommit hook from the repository root, respecting `core.hooksPath` and worktrees:
 
 ```sh
-.git/hooks/pre-commit
+git rev-parse --git-path hooks/pre-commit
 ```
 
-Report significant findings. Report nothing if the hook passes or does not exist.
+Run the resolved hook if it exists; otherwise skip it. Hook changes to files are allowed. Report failures to the parent so it can capture the updated review scope. Do not make additional edits yourself. Report whether the hook passed, failed, or was skipped; a missing hook is not a finding.
