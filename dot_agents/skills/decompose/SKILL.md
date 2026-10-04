@@ -4,24 +4,22 @@ description: Decompose a high level plan into actionable steps
 disable-model-invocation: true
 ---
 
-Decompose the task supplied by the user in `$@`. You will write the result to an artifact file named `todo.md`. If the file already exits, say so and don't proceed further.
+Decompose the task supplied with this invocation into a plan written to the artifact file `todo.md`. Before planning, check whether the file already exists; if it does, report it and stop. The deliverable is the plan; implementation happens in a separate invocation.
 
-## 1
+## Define vertical slices
 
-Decompose the task in vertical slices.
+Each slice delivers a small, independently verifiable outcome, spanning whatever layers are needed to achieve it.
 
-Sort them such that:
+Give each slice a Markdown heading and a brief statement of its outcome.
 
-- When a slice have dependencies, the dependencies come first in the list.
-- As much as the dependency requirement is respected, the simplest slices go first.
+## Define atomic steps
 
-Each vertical slice is a markdown section.
+Break each slice into atomic steps, formatted as `- [ ] {step}`. Each step includes one concrete action, an observable completion condition, and how to verify that condition as part of the step.
 
-## 2
+For both slices and steps, place dependencies first. Among items whose dependencies are satisfied, put the simplest first.
 
-Decompose each vertical slices into atomic steps. Order each step in such a way that
+## Check and save
 
-- When a step have dependencies, the dependencies come first in the list.
-- As much as the dependency requirement is respected, the simplest steps go first.
+Before writing `todo.md`, check that every requested outcome is covered, dependencies appear before their dependents, and every step includes verification of its completion condition.
 
-The atomic steps for a given vertical slice appears as mark down TODO like `- [ ] {step}`
+Write the plan and report its path.
