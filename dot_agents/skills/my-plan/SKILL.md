@@ -1,6 +1,6 @@
 ---
 name: my-plan
-description: Define a high-level plan for a user task through an exhaustive grilling interview, then save it as an artifact.
+description: Define a high-level plan for a user task through a focused interview, then save it as an artifact.
 disable-model-invocation: true
 ---
 
@@ -8,22 +8,24 @@ Plan the task supplied by the user in `$@`.
 
 ## 1
 
-Use the `grilling` skill to reach a shared understanding of the task.
+Interview the user until you share an understanding of the desired outcome, scope, and acceptance criteria. Map decisions and their prerequisites as a design tree. In each round, ask all questions whose prerequisites are settled, number them, and give a recommended answer for each. Wait for the user's answers, then update the tree and ask the next round. Do not ask a question that depends on an answer still open in the current round.
+
+Verify facts from the repository and available tools instead of asking the user for them. If a fact needs separate investigation, delegate it to a subagent and continue with questions that do not depend on it. Ask the user to make decisions, not to research facts. End the interview when no material decisions remain open and the user confirms the shared understanding.
 
 ## 2
 
-Create or replace `~/projects/notes/main/dev/artifacts/dotfiles/plan.md`. Include the desired outcome, scope, major phases, dependencies, checkpoints, acceptance criteria, and key risks. Keep it high level; omit implementation steps.
+Create or replace the artifact `plan.md`. Include the desired outcome, scope, major phases, dependencies, checkpoints, acceptance criteria, and key risks. Keep it high level; omit implementation steps.
 
 ## 3
 
-Launch a subagent with it's own context, pass it the task and the plan, ask it to verify the plan amongs these axis:
+Launch a subagent with its own context. Give it the user's task, the draft plan, and relevant repository evidence. Ask it to review the plan along these axes:
 
 - Factual accuracy: are the claims about the codebase and the libraries valid?
-- Scope accuracy: is the plan achiving all the task and only the task?
+- Scope accuracy: does the plan cover the full task without adding unrelated work?
 - Internal consistency: are some parts of the plan contradicting each other?
 - Simplicity: can some aspects of the plan be made simpler?
 
-Require actionable findings with the affected plan section, supporting evidence, and a suggested correction. Unverifiable claims should be identified as such.
+Require actionable findings with the affected plan section, supporting evidence, and a suggested correction. Have the reviewer distinguish verified errors from uncertainty and preferences, and identify claims it cannot verify.
 
 ## 4
 
