@@ -1,6 +1,7 @@
 ---
 name: my-review-code
 description: Review code with an optional Git reference and spec file or ticket link. Default to uncommitted work, falling back to main when the working tree is clean.
+disable-model-invocation: true
 ---
 
 # Code Review
