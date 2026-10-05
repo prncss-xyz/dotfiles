@@ -14,7 +14,17 @@ Verify facts from the repository and available tools instead of asking the user 
 
 ## 2
 
-Create or replace the artifact `plan.md`. Include the desired outcome, scope, major phases, dependencies, checkpoints, acceptance criteria, and key risks. Keep it high level; omit implementation steps.
+Create or replace the artifact `plan.md`. Include the desired outcome, scope, a numbered breakdown, dependencies, checkpoints, acceptance criteria, and key risks. Keep it high level; omit implementation steps.
+
+### Tracer bullets, not layers
+
+Organize the breakdown into vertical slices: each slice delivers one thin, working path through all the layers needed for an observable outcome. Start with the smallest end-to-end path, then extend it with additional behavior. Do not split the work into horizontal phases such as all storage, then all backend, then all UI; that postpones verification until several phases land.
+
+For each slice, state the outcome, scope across the necessary layers, acceptance criteria, and how it can be verified once its prerequisites have landed. A slice must own all work needed to meet its criteria; no criterion may depend on a later slice. For example, prefer “create and retrieve one saved item” followed by “list and filter saved items” over separate database, API, and UI phases.
+
+Look for prefactoring that makes the change easier before planning feature slices. When justified by repository evidence, put that work before the slices it enables, give it its own behavior-preservation checks, and explain why it is needed. Do not invent a broad cleanup or infrastructure phase.
+
+Record only real blocking dependencies and explain what each prerequisite supplies. If a slice cannot be verified without unfinished work elsewhere, merge the coupled work or redraw the boundary. Keep slices small enough to assess independently without fragmenting a single outcome into layer-specific tasks.
 
 ## 3
 
@@ -24,6 +34,7 @@ Launch a subagent with its own context. Give it the user's task, the draft plan,
 - Scope accuracy: does the plan cover the full task without adding unrelated work?
 - Internal consistency: are some parts of the plan contradicting each other?
 - Simplicity: can some aspects of the plan be made simpler?
+- Vertical slicing: does each slice deliver a verifiable outcome across the necessary layers, own its acceptance criteria, and avoid depending on later work? Are prefactoring and blocking dependencies justified?
 
 Require actionable findings with the affected plan section, supporting evidence, and a suggested correction. Have the reviewer distinguish verified errors from uncertainty and preferences, and identify claims it cannot verify.
 
