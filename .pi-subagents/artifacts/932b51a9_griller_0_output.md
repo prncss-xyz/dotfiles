@@ -1,1 +1,0 @@
-Yes—the prompt event works. It was received and processed correctly. No repository changes were made.
