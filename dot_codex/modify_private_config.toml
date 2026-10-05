@@ -1,0 +1,41 @@
+#!/bin/sh
+set -eu
+
+uv run --no-project --with tomlkit python -c '
+import sys
+import tomlkit
+
+config = tomlkit.parse(sys.stdin.read())
+servers = tomlkit.parse("""
+[mcp_servers.git]
+command = "uvx"
+args = ["mcp-server-git"]
+
+[mcp_servers.github]
+command = "bun"
+args = ["x", "@modelcontextprotocol/server-github"]
+
+[mcp_servers.playwright]
+command = "bun"
+args = ["x", "@playwright/mcp"]
+startup_timeout_sec = 120
+
+[mcp_servers.chrome-devtools]
+command = "bun"
+args = ["x", "chrome-devtools-mcp@latest"]
+
+[mcp_servers.context7]
+command = "bun"
+args = ["x", "@upstash/context7-mcp"]
+startup_timeout_sec = 120
+
+[mcp_servers.codemod]
+command = "bun"
+args = ["x", "codemod@latest", "mcp"]
+
+[mcp_servers.mdn]
+url = "https://mcp.mdn.mozilla.net/"
+""")
+config["mcp_servers"] = servers["mcp_servers"]
+sys.stdout.write(tomlkit.dumps(config))
+'

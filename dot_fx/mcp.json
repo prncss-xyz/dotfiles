@@ -1,38 +1,43 @@
 {
-  "mcpServers": {
+  "mcp": {
     "git": {
       "command": "uvx",
       "args": [
         "mcp-server-git"
-      ]
+      ],
+      "type": "local"
     },
     "github": {
       "command": "bun",
       "args": [
         "x",
         "@modelcontextprotocol/server-github"
-      ]
+      ],
+      "type": "local"
     },
     "playwright": {
       "command": "bun",
       "args": [
         "x",
         "@playwright/mcp"
-      ]
+      ],
+      "type": "local"
     },
     "chrome-devtools": {
       "command": "bun",
       "args": [
         "x",
         "chrome-devtools-mcp@latest"
-      ]
+      ],
+      "type": "local"
     },
     "context7": {
       "command": "bun",
       "args": [
         "x",
         "@upstash/context7-mcp"
-      ]
+      ],
+      "type": "local"
     },
     "codemod": {
       "command": "bun",
@@ -40,10 +45,12 @@
         "x",
         "codemod@latest",
         "mcp"
-      ]
+      ],
+      "type": "local"
     },
     "mdn": {
-      "serverUrl": "https://mcp.mdn.mozilla.net/"
+      "url": "https://mcp.mdn.mozilla.net/",
+      "type": "http"
     }
   }
 }

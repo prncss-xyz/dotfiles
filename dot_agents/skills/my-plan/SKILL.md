@@ -8,7 +8,7 @@ Plan the task supplied by the user in `$@`.
 
 ## 1
 
-Interview the user until you share an understanding of the desired outcome, scope, and acceptance criteria. Map decisions and their prerequisites as a design tree. In each round, ask all questions whose prerequisites are settled, number them, and give a recommended answer for each. Wait for the user's answers, then update the tree and ask the next round. Do not ask a question that depends on an answer still open in the current round.
+Interview the user until you share an understanding of the desired outcome, scope, and acceptance criteria. Map decisions and their prerequisites as a design tree. In each round, use the harness provided tool to ask all questions whose prerequisites are settled, number them, and give a recommended answer for each. Wait for the user's answers, then update the tree and ask the next round. Do not ask a question that depends on an answer still open in the current round.
 
 Verify facts from the repository and available tools instead of asking the user for them. If a fact needs separate investigation, delegate it to a subagent and continue with questions that do not depend on it. Ask the user to make decisions, not to research facts. End the interview when no material decisions remain open and the user confirms the shared understanding.
 

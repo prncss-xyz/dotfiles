@@ -1,0 +1,57 @@
+#!/bin/sh
+set -eu
+
+jq --slurp '.[0] // {} | .mcpServers = {
+  "git": {
+    "command": "uvx",
+    "args": [
+      "mcp-server-git"
+    ],
+    "type": "stdio"
+  },
+  "github": {
+    "command": "bun",
+    "args": [
+      "x",
+      "@modelcontextprotocol/server-github"
+    ],
+    "type": "stdio"
+  },
+  "playwright": {
+    "command": "bun",
+    "args": [
+      "x",
+      "@playwright/mcp"
+    ],
+    "type": "stdio"
+  },
+  "chrome-devtools": {
+    "command": "bun",
+    "args": [
+      "x",
+      "chrome-devtools-mcp@latest"
+    ],
+    "type": "stdio"
+  },
+  "context7": {
+    "command": "bun",
+    "args": [
+      "x",
+      "@upstash/context7-mcp"
+    ],
+    "type": "stdio"
+  },
+  "codemod": {
+    "command": "bun",
+    "args": [
+      "x",
+      "codemod@latest",
+      "mcp"
+    ],
+    "type": "stdio"
+  },
+  "mdn": {
+    "url": "https://mcp.mdn.mozilla.net/",
+    "type": "http"
+  }
+}'
