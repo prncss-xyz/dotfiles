@@ -35,6 +35,12 @@ args = ["x", "codemod@latest", "mcp"]
 
 [mcp_servers.mdn]
 url = "https://mcp.mdn.mozilla.net/"
+
+[features]
+api_key_model_discovery = true
+auth_elicitation = true
+code_mode_host = true
+mcp_oauth_refresh_coordination = true
 """)
 config["mcp_servers"] = servers["mcp_servers"]
 sys.stdout.write(tomlkit.dumps(config))
