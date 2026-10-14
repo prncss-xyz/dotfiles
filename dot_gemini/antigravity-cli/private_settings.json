@@ -1,6 +1,5 @@
 {
   "allowNonWorkspaceAccess": true,
-  "colorScheme": "colorblind-friendly dark",
   "enableTerminalSandbox": true,
   "permissions": {
     "allow": [
