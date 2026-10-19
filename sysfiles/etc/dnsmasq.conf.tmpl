@@ -1,0 +1,11 @@
+# Keep public DNS independent of Tailscale and /etc/resolv.conf.
+listen-address=127.0.0.1
+bind-interfaces
+no-resolv
+server=1.1.1.1
+server=1.0.0.1
+
+{{ if (stat (joinPath .chezmoi.homeDir ".password-store/tailscale.net/prncss-xyz.gpg")) -}}
+# Forward only this tailnet's names to Tailscale.
+server=/{{ pass "tailscale.net/prncss-xyz" | trim }}/100.100.100.100
+{{- end }}
