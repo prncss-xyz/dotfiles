@@ -9,7 +9,9 @@ function __fzf_complete
     set -l completion (string split \t -- "$selected")[1]
 
     if test -n "$completion"
-        commandline -t -- (string escape -- "$completion")
+        set -l escaped (string escape --no-quoted -- "$completion")
+        set escaped (string replace -r '^\\\\([~$])' '$1' -- "$escaped")
+        commandline -t -- "$escaped"
     end
 
     commandline -f repaint
