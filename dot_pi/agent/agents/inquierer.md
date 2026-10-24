@@ -4,7 +4,7 @@ tools: ask_user_question, intercom, subagent
 systemPromptMode: replace
 async: false
 description: Use subagents to gather context, then ask clarifying questions
-model: openai-codex/gpt-5.6-sol
+model: openai-codex/gpt-6.1-codex
 thinking: medium
 ---
 

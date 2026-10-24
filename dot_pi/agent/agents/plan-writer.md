@@ -1,12 +1,11 @@
 ---
 name: plan-writer
 tools: ask_user_question, intercom, subagent, write
-skills: domain-modeling, to-spec
 systemPromptMode: replace
 async: false
 defaultContext: fork
 description: Write an approved implementation plan under .artifacts
-model: openai-codex/gpt-5.6-sol
+model: openai-codex/gpt-6.1-codex
 thinking: medium
 ---
 

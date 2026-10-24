@@ -4,7 +4,7 @@ tools: mcp:git, mcp:github
 systemPromptMode: replace
 async: false
 description: Use subagents to commit work and update PR
-model: openai-codex/gpt-5.6-luna
+model: openai-codex/gpt-6-luna
 thinking: low
 ---
 

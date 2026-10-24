@@ -4,7 +4,7 @@ tools: bash, read, grep, find, ls
 systemPromptMode: replace
 async: true
 description: Review code for opportunities to reduce complexity
-model: openai-codex/gpt-5.6-sol
+model: openai-codex/gpt-6.1-codex
 thinking: low
 ---
 

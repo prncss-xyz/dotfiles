@@ -4,7 +4,7 @@ tools: bash, read, grep, find, ls, write
 systemPromptMode: replace
 async: true
 description: Write a terse reviewer walkthrough beside the implementation spec
-model: openai-codex/gpt-5.6-sol
+model: openai-codex/gpt-6.1-codex
 thinking: medium
 ---
 

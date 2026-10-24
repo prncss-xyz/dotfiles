@@ -5,7 +5,7 @@ skills: idiomatic-code
 systemPromptMode: replace
 async: true
 description: Use subagents to review code quality
-model: openai-codex/gpt-5.6-sol
+model: openai-codex/gpt-6.1-codex
 thinking: low
 ---
 

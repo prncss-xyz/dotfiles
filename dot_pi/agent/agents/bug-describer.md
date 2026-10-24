@@ -4,7 +4,7 @@ skills: domain-modeling
 systemPromptMode: replace
 async: false
 description: Narrow a bug into a description and failing reproduction
-model: openai-codex/gpt-5.6-sol
+model: openai-codex/gpt-6.1-codex
 thinking: medium
 ---
 

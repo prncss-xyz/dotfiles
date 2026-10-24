@@ -26,7 +26,7 @@
   ],
   "quietStartup": true,
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6-sol",
+  "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "low",
   "disabledCommands": [
     "gather-context-and-clarify"
@@ -51,40 +51,40 @@
         "tools": [
           "mcp:context7"
         ],
-        "model": "openai-codex/gpt-6-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "low",
         "skills": [
           "search"
         ]
       },
       "oracle": {
-        "model": "opencode-go/deepseek-v4.1-pro",
+        "model": "openai-codex/gpt-6-luna",
         "thinking": "max"
       },
       "planner": {
-        "model": "openai-codex/gpt-6-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "high"
       },
       "researcher": {
         "tools": [
           "mcp:context7"
         ],
-        "model": "openai-codex/gpt-6-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "low",
         "skills": [
           "search"
         ]
       },
       "reviewer": {
-        "model": "openai-codex/gpt-6-sol",
+        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "low"
       },
       "scout": {
-        "model": "opencode-go/deepseek-v4.1-flash",
+        "model": "openai-codex/gpt-6-luna",
         "thinking": "high"
       },
       "worker": {
-        "model": "opencode-go/glm-5.3-flash",
+        "model": "openai-codex/gpt-6-luna",
         "thinking": "high"
       }
     }

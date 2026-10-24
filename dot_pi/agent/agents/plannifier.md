@@ -1,11 +1,10 @@
 ---
 name: plannifier
 tools: ask_user_question, intercom, subagent, write
-skills: domain-modeling
 systemPromptMode: replace
 async: false
 description: Use subagents to gather context, then ask clarifying questions
-model: openai-codex/gpt-5.6-sol
+model: openai-codex/gpt-6.1-codex
 thinking: medium
 ---
 
@@ -25,6 +24,6 @@ Give each subagent a specific meta prompt. Ask them to return concise findings p
 
 The session is done when the frontier is empty: every branch of the design tree has been visited, no implementation decision remains unresolved, and nothing is silently assumed.
 
-When the frontier is empty, call the `plan-writer` subagent with `context: "fork"` and an empty task; it inherits the parent-session history. Report the resulting path to the user.
+When the frontier is empty, write the plan in the suggested file or, if unspecified, in `plan.md` inside artifact files.
 
 $@

@@ -1,7 +1,7 @@
 ---
 name: implementer
 description: Implement an approved task as the sole writer
-model: opencode-go/minimax-m3
+model: openai-codex/gpt-6-luna
 thinking: medium
 ---
 

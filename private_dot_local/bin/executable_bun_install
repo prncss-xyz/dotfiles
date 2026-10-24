@@ -1,0 +1,40 @@
+#!/bin/sh
+# Install the latest Bun release for Void Linux (glibc or musl).
+set -eu
+
+for dependency in curl unzip xbps-uhelper; do
+  command -v "$dependency" >/dev/null 2>&1 || {
+    printf 'Required command not found: %s\n' "$dependency" >&2
+    exit 1
+  }
+done
+
+void_arch=$(xbps-uhelper arch)
+case "$void_arch" in
+  x86_64|x86_64-musl) target=linux-x64 ;;
+  aarch64|aarch64-musl) target=linux-aarch64 ;;
+  *)
+    printf 'Unsupported Bun architecture: %s\n' "$void_arch" >&2
+    exit 1
+    ;;
+esac
+case "$void_arch" in
+  *-musl) target=$target-musl ;;
+esac
+
+install_dir=${BUN_INSTALL:-"$HOME/.bun"}
+work_dir=$(mktemp -d)
+trap 'rm -rf "$work_dir"' 0
+trap 'exit 1' HUP INT TERM
+
+printf 'Downloading bun-%s\n' "$target"
+curl -fL "https://github.com/oven-sh/bun/releases/latest/download/bun-$target.zip" \
+  -o "$work_dir/bun.zip"
+unzip -q "$work_dir/bun.zip" -d "$work_dir"
+
+# Check compatibility before replacing an existing installation.
+"$work_dir/bun-$target/bun" --version
+mkdir -p "$install_dir/bin"
+mv "$work_dir/bun-$target/bun" "$install_dir/bin/bun"
+printf 'Installed Bun to %s/bin/bun\n' "$install_dir"
+printf 'For fish PATH setup: fish_add_path --prepend "%s/bin"\n' "$install_dir"

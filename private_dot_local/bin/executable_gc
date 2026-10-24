@@ -1,43 +1,70 @@
 #!/bin/sh
 
-prefixes="feat
-fix
-docs
-style
-refactor
-perf
-test
-chore
-ci
-build"
+retry=false
+remaining=$#
+while [ "$remaining" -gt 0 ]; do
+  remaining=$((remaining - 1))
+  case $1 in
+    -r|--retry) retry=true; shift ;;
+    --) shift; break ;;
+    *) arg=$1; shift; set -- "$@" "$arg" ;;
+  esac
+done
 
-selected=$(printf "%s\n" "$prefixes" | fzf --height=40% --prompt="Select commit type: ")
+git_dir=$(git rev-parse --absolute-git-dir) || exit 1
+message_file=${XDG_STATE_HOME:-"$HOME/.local/state"}/gc/repositories${git_dir}/message
 
-if [ -z "$selected" ]; then
-  echo "Commit cancelled"
-  exit 1
-fi
-
-if [ -t 0 ]; then
-  printf "Scope (optional): "
-  read -r scope
-  printf "Message: "
-  read -r msg
+if [ "$retry" = true ]; then
+  if [ ! -s "$message_file" ]; then
+    printf '%s\n' 'No stored commit message for this Git directory' >&2
+    exit 1
+  fi
 else
-  printf "Scope (optional): "
-  read -r scope < /dev/tty
-  printf "Message: "
-  read -r msg < /dev/tty
+
+  prefixes="feat
+  fix
+  docs
+  style
+  refactor
+  perf
+  test
+  chore
+  ci
+  build"
+
+  selected=$(printf "%s\n" "$prefixes" | fzf --height=40% --prompt="Select commit type: ")
+
+  if [ -z "$selected" ]; then
+    echo "Commit cancelled"
+    exit 1
+  fi
+
+  if [ -t 0 ]; then
+    printf "Scope (optional): "
+    read -r scope
+    printf "Message: "
+    read -r msg
+  else
+    printf "Scope (optional): "
+    read -r scope < /dev/tty
+    printf "Message: "
+    read -r msg < /dev/tty
+  fi
+
+  if [ -z "$msg" ]; then
+    echo "Commit cancelled"
+    exit 1
+  fi
+
+  prefix="${selected%%:*}"
+  if [ -n "$scope" ]; then
+    prefix="${prefix}(${scope})"
+  fi
+
+  umask 077
+  mkdir -p "${message_file%/*}" || exit 1
+  printf '%s\n' "$prefix: $msg" > "$message_file" || exit 1
 fi
 
-if [ -z "$msg" ]; then
-  echo "Commit cancelled"
-  exit 1
-fi
-
-prefix="${selected%%:*}"
-if [ -n "$scope" ]; then
-  prefix="${prefix}(${scope})"
-fi
-
-exec git commit -m "$prefix: $msg" "$@"
+git commit -F "$message_file" "$@" || exit $?
+rm -f "$message_file"
