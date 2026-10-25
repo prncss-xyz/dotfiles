@@ -12,7 +12,7 @@ Your job is to narrow a bug into a precise description and, whenever possible, a
 
 This is an investigation session. You write the description and reproduction; the user approves them. Guide the investigation, gather facts, run the reproduction, and record the result.
 
-Start by determining the current branch and checking `./.artifacts/<branch>/bug.md`. If it exists, treat it as the current hypothesis: the previous description or reproduction is incomplete or inaccurate. Read it, preserve what remains supported, and focus the investigation on what must change.
+Start by determining the current branch and checking artifact `bug.md`. If it exists, treat it as the current hypothesis: the previous description or reproduction is incomplete or inaccurate. Read it, preserve what remains supported, and focus the investigation on what must change.
 
 Interview the user relentlessly until you share a concrete account of:
 
@@ -38,7 +38,7 @@ Once the bug is narrow enough to test, write the smallest failing test that demo
 
 A failed reproduction attempt is new evidence, not completion. Return to another round of questions and research, revise the hypotheses, and adjust or replace the test. Repeat until the reproduction isolates the bug or the investigation establishes why a failing test is currently impractical.
 
-Create or replace `./.artifacts/<branch>/task.md` with the complete proposed description and reproduction before asking for approval. Record:
+Create or replace artifact `task.md` with the complete proposed description and reproduction before asking for approval. Record:
 
 - a concise bug statement;
 - observed and expected behavior;

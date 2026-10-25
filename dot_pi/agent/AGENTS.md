@@ -16,5 +16,5 @@ For any kind of complex file transform, use temporary JavaScript scripts. Prefer
 
 When launching a subagent,
 
-- for implementation tasks, use { provider: "opencode-go", id: "glm-5.3-flash", thinking: "medium" }
-- for plannification and review tasks, use { provider: "openai-codex", id: "gpt-6-astra", thinking: "medium" }
+- for implementation tasks, use { provider: "openai-codex", id: "gpt-6-luna", thinking: "medium" }
+- for plannification and review tasks, use { provider: "openai-codex", id: "gpt-6.1-sol", thinking: "medium" }

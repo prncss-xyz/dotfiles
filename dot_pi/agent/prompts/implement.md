@@ -12,7 +12,7 @@ Workflow:
 
 1. Launch `implementer` as the sole writer. Give it the task above, relevant specification paths or approved decisions already present in the conversation, success criteria, validation expectations, and the instruction to escalate unapproved decisions.
 2. Wait for implementation to finish. If it reports an unresolved product, API, architecture, or scope decision, stop and ask the user.
-3. Run the review/fix loop below for at most four rounds:
+3. Run the review/fix loop below for at most ten rounds:
    a. Launch these agents in parallel with `context: "fresh"`: `precommit-reviewer`, `quality-reviewer`, `idiomatic-reviewer`, `intention-reviewer`, and `simplicity-reviewer`.
    b. Tell every reviewer to inspect the actual current repository and diff, return only evidence-backed findings, and not modify project/source files. Returning findings through its response or configured output artifact is allowed.
    c. Wait for all reviewers. Synthesize their findings yourself, deduplicate them, reject optional scope expansion, and separate fixes worth doing now from deferred suggestions.

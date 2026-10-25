@@ -54,7 +54,7 @@ Handle command errors and empty review scopes in the parent before launching rev
 Identify the spec reference before launching reviewers, without reading or retrieving its contents:
 
 1. If the user supplied a spec, use its path or URL.
-2. If no spec was supplied, look for a local artifact such as `.artifacts/<branch-name>/spec.md`, `plan.md`, or a similarly named spec or plan. Use filenames, locations, and task context to identify the relevant candidate. If multiple candidates are plausible and their relevance is unclear, ask the user which to use.
+2. If no spec was supplied, look for an artifact such as `spec.md`, `plan.md`, or a similarly named spec or plan. Use filenames, locations, and task context to identify the relevant candidate. If multiple candidates are plausible and their relevance is unclear, ask the user which to use.
 3. Record the selected reference. Resolve local paths to absolute paths so the subagent can locate the file; preserve URLs as supplied.
 
 If no spec reference is supplied or found, skip the intention reviewer and continue the other reviews. The intention reviewer handles reading the file or retrieving the linked source and reports any access problem.

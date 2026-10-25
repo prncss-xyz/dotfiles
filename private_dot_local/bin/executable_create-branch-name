@@ -7,7 +7,7 @@ if [ $# -eq 0 ]; then
 fi
 
 SUMMARY=$(
-  p --no-tools --no-extensions --no-skills --no-context-files --model opencode-go/deepseek-v4-flash:off -p <<EOF
+  p --no-tools --no-extensions --no-skills --no-context-files --model openai-codex/gpt-6-luna:off -p <<EOF
 Your task is to describe the goal of the following prompt.
 You must use at most 4 words. Only lowercase except for proper names. No punctuation.
 Do not describe completion critaira.

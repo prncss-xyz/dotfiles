@@ -4,7 +4,7 @@ tools: ask_user_question, intercom, subagent, write
 systemPromptMode: replace
 async: false
 defaultContext: fork
-description: Write an approved implementation plan under .artifacts
+description: Write an approved implementation plan
 model: openai-codex/gpt-6.1-codex
 thinking: medium
 ---

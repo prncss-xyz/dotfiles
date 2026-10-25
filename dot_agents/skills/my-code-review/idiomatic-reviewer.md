@@ -76,4 +76,4 @@ Report findings by file/hunk:
 
 Skip checks already enforced by tooling, for both documented standards and baseline smells. Distinguish hard violations of documented standards from judgment calls about baseline smells. Keep the report under 400 words.
 
-Record any pre-existing issues unrelated to the task in `.artifacts/deferred-work.md`, creating the file if needed.
+Record any pre-existing issues unrelated to the task in artifact `deferred-work.md`, creating the file if needed.

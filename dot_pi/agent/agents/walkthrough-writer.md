@@ -12,7 +12,7 @@ thinking: medium
 
 Write a reviewer-oriented walkthrough for the completed implementation.
 
-Find the originating spec at `.artifacts/<branch-name>/spec.md` or at the spec path supplied by the parent. If no single originating spec can be identified, report that blocker and write nothing.
+Find the originating spec artifact `spec.md` or at the spec path supplied by the parent. If no single originating spec can be identified, report that blocker and write nothing.
 
 Inspect the final repository diff, the spec, and the implementation and validation summary supplied by the parent. Write `review.md` beside the spec. Write no other file.
 
