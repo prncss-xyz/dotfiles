@@ -2,26 +2,21 @@
 description: Implement, review, and fix a task
 ---
 
-Act as the parent orchestrator for this implementation. The user's task is:
+Orchestrate the implementation of:
 
 $@
 
-Keep all project-file writes single-threaded. Use `async: true` for every subagent launch and use `wait()` when a result is required. Do not finish while a promised implementation, review, or fix run is still active.
+Rules:
+- Only one writer subagent runs at a time. Launch subagents with `async: true` and `wait()` for each one.
+- If an unapproved product, API, architecture, or scope decision comes up, stop and ask the user.
+- Validation gate: before review or walkthrough, the writer must show the commands run and passing results for every required test. Missing, skipped, failing, or deferred tests go back to the writer. If validation is blocked, ask the user; never waive it.
 
 Workflow:
 
-1. Launch `implementer` as the sole writer. Give it the task above, relevant specification paths or approved decisions already present in the conversation, success criteria, validation expectations, and the instruction to escalate unapproved decisions.
-2. Wait for implementation to finish. If it reports an unresolved product, API, architecture, or scope decision, stop and ask the user.
-3. Run the review/fix loop below for at most ten rounds:
-   a. Launch these agents in parallel with `context: "fresh"`: `precommit-reviewer`, `quality-reviewer`, `idiomatic-reviewer`, `intention-reviewer`, and `simplicity-reviewer`.
-   b. Tell every reviewer to inspect the actual current repository and diff, return only evidence-backed findings, and not modify project/source files. Returning findings through its response or configured output artifact is allowed.
-   c. Wait for all reviewers. Synthesize their findings yourself, deduplicate them, reject optional scope expansion, and separate fixes worth doing now from deferred suggestions.
-   d. If there are no meaningful fixes worth doing now, stop the loop.
-   e. If a finding requires an unapproved product, API, architecture, or scope decision, stop and ask the user.
-   f. Launch one `implementer` as the sole fix writer. Provide the accepted findings with file/line evidence, require focused validation, and prohibit unrelated changes.
-   g. Wait for the fix writer, then begin the next review round.
-4. Launch `walkthrough-writer` as the sole writer. Give it the originating spec path, the implementer's implementation and validation summary, the final changed-file set, deferred findings, unresolved risks, and whether the review/fix loop cap was reached.
-5. Wait for the walkthrough. If it cannot identify one originating spec, report the blocker without creating a substitute artifact.
-6. Report the `review.md` path, changed files, tests/checks and results, deferred findings, unresolved risks, and whether the review/fix loop cap was reached.
-
-Do not ask implementation, review, or walkthrough children to launch further subagents. The parent decides which findings are meaningful and whether the loop continues.
+1. Launch `implementer` with the task, relevant spec paths or approved decisions, success criteria, and required tests. Apply the validation gate.
+2. Review/fix loop, at most 6 rounds:
+   a. Run `precommit-reviewer`, `quality-reviewer`, `idiomatic-reviewer`, `intention-reviewer`, and `simplicity-reviewer` in parallel with `context: "fresh"`.
+   b. Deduplicate their findings, reject scope expansion, and split them into fix-now and deferred. If nothing needs fixing now, exit the loop.
+   c. Launch `implementer` with the accepted findings (with file/line evidence), and ask for focused validation and no unrelated changes. Apply the validation gate.
+3. Launch `walkthrough-writer` with the originating spec path, the implementation and validation summary, the changed files, deferred findings, risks, and whether the loop cap was hit. It writes `review.md`; if it can't identify a single originating spec, report that as a blocker.
+4. Report the `review.md` path, changed files, test results, deferred findings, risks, how many workflow cycles went through, and whether the loop cap was hit.

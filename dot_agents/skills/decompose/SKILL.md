@@ -12,9 +12,13 @@ Each slice delivers a small, independently verifiable outcome, spanning whatever
 
 Give each slice a Markdown heading and a brief statement of its outcome.
 
+A small task may be a single slice. Don't split an outcome only to produce more slices.
+
 ## Define atomic steps
 
-Break each slice into atomic steps, formatted as `- [ ] {step}`. Each step includes one concrete action, an observable completion condition, and how to verify that condition as part of the step.
+Break each slice into atomic steps, formatted as `- [ ] {step}`. Each step includes one concrete action, an observable completion condition, and how to verify that condition as part of the step. A slice may consist of a single step when its outcome is achieved by one action.
+
+## Order
 
 For both slices and steps, place dependencies first. Among items whose dependencies are satisfied, put the simplest first.
 
