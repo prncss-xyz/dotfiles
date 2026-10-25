@@ -1,0 +1,4 @@
+name = "planner"
+description = "Plans work and resolves design decisions without implementing"
+model = "gpt-6.1-sol"
+model_reasoning_effort = "high"

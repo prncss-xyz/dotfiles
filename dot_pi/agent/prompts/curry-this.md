@@ -1,8 +1,0 @@
----
----
-
-Curry this function.
-
-$@
-
-

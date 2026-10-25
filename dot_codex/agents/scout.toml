@@ -1,0 +1,4 @@
+name = "scout"
+description = "Explores the codebase and reports files, patterns, and constraints"
+model = "gpt-6-luna"
+model_reasoning_effort = "low"
