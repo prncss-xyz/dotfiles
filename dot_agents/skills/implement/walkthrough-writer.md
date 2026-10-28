@@ -2,9 +2,9 @@
 
 Write a reviewer-oriented walkthrough for the completed slice.
 
-Find the originating plan at the path supplied by the workflow, else `plan.md`. If no single originating plan can be identified, report that blocker and write nothing.
+Use the originating plan supplied by the workflow when present. When the workflow supplies a standalone task without a plan, use that task as the implementation intent; a plan is not required.
 
-Inspect the final repository diff, the plan, the task file (the slice), the contract file if supplied, and the implementation and validation summary from the workflow. Write the walkthrough file named by the workflow beside the plan. Write no other file.
+Inspect the final repository diff, the plan if supplied, the task file (the slice), the contract file if supplied, and the implementation and validation summary from the workflow. Write the walkthrough at the path named by the workflow. Write no other file.
 
 When a contract is supplied, link it in the summary and don't re-describe it: the walkthrough covers how the slice implements it.
 

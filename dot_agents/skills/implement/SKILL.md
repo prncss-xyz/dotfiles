@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Implement one slice of a plan, then review and fix it in a bounded loop, and write a reviewer walkthrough
+description: Implement a task or one slice of a plan, then review and fix it in a bounded loop, and write a reviewer walkthrough
 disable-model-invocation: true
 ---
 
@@ -8,8 +8,8 @@ Orchestrate the implementation of the slice supplied with this invocation. Never
 
 Inputs, read from the artifact directory:
 
-- **Slice**: the `{dd}-{name}.task.md` file supplied with the invocation. Without one, the slice is the whole plan.
-- **Plan**: the plan the task file links to, else the supplied plan path, else `plan.md` beside the task file. If no single originating plan can be identified, stop and report it as a blocker.
+- **Slice**: the `task.md` or `{dd}-{name}.task.md` file supplied with the invocation. Without one, the slice is the whole plan.
+- **Plan**: the plan the task file links to, else the supplied plan path, else `plan.md` beside the task file. If no plan exists and a task file is supplied, implement directly from that task's acceptance criteria, scope edges, and constraints without creating a plan. If an explicitly linked or supplied plan is missing, multiple plans are ambiguous, or neither a task nor a plan is available, stop and report it as a blocker. Pass the plan path to subsequent steps only when a plan exists.
 - **Contract**: `{dd}-{name}.api-contract.md` beside the task file, or `api-contract.md` when the slice is the whole plan, when present. Its entry points, types, errors, exports, and tests are approved decisions: they must not be changed, and its tests must not be modified, weakened, skipped, or deleted. A needed change to them is an unapproved API decision.
 
 Rules:
@@ -26,6 +26,6 @@ Workflow:
    a. Read and follow [the review skill](../review/SKILL.md) with no fixed point, so it reviews uncommitted work, and with the plan path and the task file as its intent: the slice's acceptance criteria, scope edges, and constraints, not the hints in its notes, so an approach that meets the criteria differently is not a finding. Instruct reviewers and the review orchestrator to give stylistic findings the same weight as other findings: apply the same classification and resolution criteria, and never downgrade or defer a finding solely because it concerns style. When a contract exists, pass it as settled: a finding that would change it is classified "needs user decision" or rejected as scope expansion, never "fix now".
    b. Bring "needs user decision" findings to the user. If no "fix now" findings remain, exit the loop.
    c. Launch the implementer again with the accepted findings and their `path:line` evidence, asking for focused validation and no unrelated changes. Apply the validation gate.
-4. Read and follow [walkthrough-writer.md](./walkthrough-writer.md) directly, using the plan path, the slice, the contract path if any, the implementation and validation summary, the changed files, deferred findings, risks, the number of review rounds, and whether the loop cap was hit. The output is `{dd}-{name}.walkthrough.md` beside the task file, or `walkthrough.md` when the slice is the whole plan.
+4. Read and follow [walkthrough-writer.md](./walkthrough-writer.md) directly, using the plan path if any, the slice, the contract path if any, the implementation and validation summary, the changed files, deferred findings, risks, the number of review rounds, and whether the loop cap was hit. The output is `{dd}-{name}.walkthrough.md` beside a numbered task file, or `walkthrough.md` beside `task.md` or the plan when the slice is the whole plan.
 5. On success, after validation passes, no "fix now" findings remain, and the walkthrough is written, commit the slice's changes using a Conventional Commits message.
 6. Report only the walkthrough path.
