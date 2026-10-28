@@ -1,6 +1,23 @@
 #!/usr/bin/sh
 
-ya pkg upgrade
-pnpm -g update --latest
-uv tool upgrade --all
+xbps-install -Syu &
+xbps_pid=$!
+ya pkg upgrade &
+ya_pid=$!
+pnpm -g update --latest &
+pnpm_pid=$!
+uv tool upgrade --all &
+uv_pid=$!
+claude update &
+claude_pid=$!
+
+status=0
+for pid in "$xbps_pid" "$ya_pid" "$pnpm_pid" "$uv_pid" "$claude_pid"; do
+    wait "$pid" || status=1
+done
+
+pi update --models; pi update --extensions
+
 # within nvim :SystemUpdate
+
+exit "$status"

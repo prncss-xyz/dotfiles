@@ -21,18 +21,7 @@ if [ "$retry" = true ]; then
   fi
 else
 
-  prefixes="feat
-  fix
-  docs
-  style
-  refactor
-  perf
-  test
-  chore
-  ci
-  build"
-
-  selected=$(printf "%s\n" "$prefixes" | fzf --height=40% --prompt="Select commit type: ")
+  selected=$(printf '%s\n' feat fix docs style refactor perf test chore ci build | fzf --height=40% --prompt="Select commit type: ")
 
   if [ -z "$selected" ]; then
     echo "Commit cancelled"

@@ -17,8 +17,9 @@ Workflow:
 1. Run `git status --porcelain --untracked-files=all`. If the working tree is not clean, ask the user how to proceed: the review scope is uncommitted work, so pre-existing changes would be reviewed as part of the task.
 2. Launch a fresh-context subagent told to read and follow [implementer.md](./implementer.md), with the task, relevant spec paths or approved decisions, success criteria, and required tests. Apply the validation gate.
 3. Review/fix loop, at most 6 rounds:
-   a. Read and follow [the review skill](../review/SKILL.md) with no fixed point, so it reviews uncommitted work, and with the task or spec path as its intent.
+   a. Read and follow [the review skill](../review/SKILL.md) with no fixed point, so it reviews uncommitted work, and with the task or spec path as its intent. Instruct reviewers and the review orchestrator to give stylistic findings the same weight as other findings: apply the same classification and resolution criteria, and never downgrade or defer a finding solely because it concerns style.
    b. Bring "needs user decision" findings to the user. If no "fix now" findings remain, exit the loop.
    c. Launch the implementer again with the accepted findings and their `path:line` evidence, asking for focused validation and no unrelated changes. Apply the validation gate.
-4. Launch a fresh-context subagent told to read and follow [walkthrough-writer.md](./walkthrough-writer.md), with the originating spec path, the implementation and validation summary, the changed files, deferred findings, risks, and whether the loop cap was hit. If it cannot identify a single originating spec, report that as a blocker.
-5. Report the walkthrough path, changed files, test results, deferred findings, risks, the number of review rounds, and whether the loop cap was hit.
+4. Read and follow [walkthrough-writer.md](./walkthrough-writer.md) directly, using the originating spec path, the implementation and validation summary, the changed files, deferred findings, risks, the number of review rounds, and whether the loop cap was hit. If no single originating spec can be identified, report that as a blocker.
+5. On success, after validation passes, no "fix now" findings remain, and the walkthrough is written, commit the task's changes using a Conventional Commits message.
+6. Report only the walkthrough path.
