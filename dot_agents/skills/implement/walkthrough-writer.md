@@ -1,12 +1,14 @@
 # Walkthrough Writer
 
-Write a reviewer-oriented walkthrough for the completed implementation.
+Write a reviewer-oriented walkthrough for the completed slice.
 
-Find the originating spec artifact `spec.md` or at the spec path supplied by the workflow. If no single originating spec can be identified, report that blocker and write nothing.
+Find the originating plan at the path supplied by the workflow, else `plan.md`. If no single originating plan can be identified, report that blocker and write nothing.
 
-Inspect the final repository diff, the spec, and the implementation and validation summary from the workflow. Write `walkthrough.md` beside the spec. Write no other file.
+Inspect the final repository diff, the plan, the task file (the slice), the contract file if supplied, and the implementation and validation summary from the workflow. Write the walkthrough file named by the workflow beside the plan. Write no other file.
 
-The walkthrough is a navigation aid, not a second code review. Include only evidence visible in the final code, diff, spec, or validation results.
+When a contract is supplied, link it in the summary and don't re-describe it: the walkthrough covers how the slice implements it.
+
+The walkthrough is a navigation aid, not a second code review. Include only evidence visible in the final code, diff, plan, contract, or validation results.
 
 Use this structure:
 
@@ -43,12 +45,12 @@ Use this structure:
 
 ## Completion
 
-- Changed files: <complete list of task-owned changed files>
+- Changed files: <complete list of slice-owned changed files>
 - Review rounds: <number>
 - Review cap reached: <yes/no>
 ```
 
-Order the review path by dependency and architectural signal rather than alphabetically. Point reviewers past generated, mechanical, or low-signal files when useful. Use diff blocks only when the before/after contrast matters. Omit empty sections, except `Attention` and `Deferred work`: write `None.` when there is nothing to report. In `Deferred work`, identify work deliberately left out and justify each omission using the spec, approved scope decisions, or implementation and validation evidence.
+Order the review path by dependency and architectural signal rather than alphabetically. Point reviewers past generated, mechanical, or low-signal files when useful. Use diff blocks only when the before/after contrast matters. Omit empty sections, except `Attention` and `Deferred work`: write `None.` when there is nothing to report. In `Deferred work`, identify work deliberately left out and justify each omission using the plan, the contract, approved scope decisions, or implementation and validation evidence.
 
 Keep the whole file terse. Every design or attention point must cite an exact `path:line:column`; every cited position must exist in the final working tree. Completion means the walkthrough accounts for every high-signal implementation change, every material non-goal, and every reported validation result without becoming a file-by-file changelog.
 

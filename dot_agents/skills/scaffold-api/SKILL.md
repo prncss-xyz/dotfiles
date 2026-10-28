@@ -1,25 +1,26 @@
 ---
 name: scaffold-api
 description: Scaffold a caller-facing API with typed stubs, failing behavior tests, review, and a contract handoff before implementation.
+disable-model-invocation: true
 ---
 
-Scaffold the supplied task without implementing behavior. Delegate project edits to one `worker` at a time; own the boundary, review, and handoff.
+Scaffold the slice described by the `{dd}-{name}.task.md` file supplied with the invocation, or the whole plan without one, without implementing behavior. Delegate project edits to one `worker` at a time; own the boundary, review, and handoff.
 
 ## Boundary
 
 Define the smallest interface consumers need across a named module/package/service boundary: entry points, types, errors, and exports. Public visibility alone does not justify inclusion. Exclude internals and speculative extensions; never widen the API for testability. Preserve existing contracts unless the task requires changes.
 
-Infer routine choices from the spec and repository; ask only about decisions that materially change caller guarantees.
+Take the boundary from the plan's interface decisions, limited to what the slice needs. Infer routine choices from the plan and repository; ask only about decisions that materially change caller guarantees.
 
 ## Workflow
 
-1. Read repository instructions, spec, test conventions, and `git status --porcelain --untracked-files=all`. Preserve pre-existing changes; ask about inseparable overlap. Use the repository's artifact directory, else the spec's directory, else ask.
+1. Read repository instructions, the task file, the plan (the one the task file links to, else the supplied path, else `plan.md`), test conventions, and `git status --porcelain --untracked-files=all`. Preserve pre-existing changes; ask about inseparable overlap. Use the plan's directory as the artifact directory, else the repository's artifact directory, else ask.
 2. Launch a fresh `worker` with [scaffolder.md](./scaffolder.md), task, boundary, required behaviors/checks, existing changes, and artifact directory.
 3. Enforce the validation gate below; return deficiencies to the worker.
 4. Run [review-api](../review-api/SKILL.md) with the task-owned diff, added files, boundary, intent, and evidence. Have the worker fix `fix now` findings, revalidate, and repeat review; escalate `needs user decision`. Stop incomplete after 6 rounds with required findings unresolved.
-5. Write `api-contract.md` per [contract-writer.md](./contract-writer.md).
+5. Write `{dd}-{name}.api-contract.md` beside the task file, or `api-contract.md` when the slice is the whole plan, per [contract-writer.md](./contract-writer.md).
 6. Only after scaffolding, validation, review, and the report succeed with no unresolved required findings or decisions, commit the task's changes using `git commit --no-verify` with a Conventional Commits message. Expected-red behavior tests satisfying the validation gate count as success. Do not commit failed, blocked, or incomplete work, or include pre-existing changes. If the commit fails, report the failure without claiming success.
-7. On success, report only the report path.
+7. On success, report only the contract path.
 
 ## Validation gate
 

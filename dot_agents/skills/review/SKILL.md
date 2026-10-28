@@ -11,7 +11,7 @@ Orchestrate a review of one pinned change scope. Never modify project files your
 Both optional:
 
 - **Fixed point**: a Git reference (commit SHA, branch, tag, `main`, `HEAD~5`), used exactly as written.
-- **Intent**: a spec path, ticket URL, or task description stating what the change is meant to do. If none is supplied, look for a relevant `spec.md` or `plan.md` in the artifacts directory; if several are plausible, ask the user.
+- **Intent**: a spec path, ticket URL, or task description stating what the change is meant to do. If none is supplied, look for a relevant `plan.md` in the artifacts directory; if several are plausible, ask the user.
 
 ## Pin the scope
 
@@ -22,7 +22,7 @@ Do this before launching any reviewer, and stop with a report on any error or em
 
 ## Run reviewers
 
-Each reviewer is a file next to this one. Launch one fresh-context subagent per file, telling it to read and follow that file:
+Each reviewer is a file next to this one. Launch one fresh `reviewer` subagent per file, telling it to read and follow that file:
 
 1. [precommit-reviewer.md](./precommit-reviewer.md) — run it alone first, since the hook may modify files; then re-pin the scope.
 2. In a single parallel run:

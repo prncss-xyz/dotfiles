@@ -13,6 +13,7 @@ Decisions are the user's; facts are yours. When a question needs a fact from the
 Make sure these branches exist where relevant — they are the decisions most often left for the implementer to discover:
 
 - **Ownership**: which component owns each responsibility and the key state.
+- **Interface**: whether the change introduces or alters a caller-facing boundary (module, package, or service), who consumes it, and which guarantees callers rely on: entry points, results, errors, and compatibility.
 - **Invariants**: what must hold throughout and after the change.
 - **Composition**: where behavior lives, and whether locally sensible steps conflict when combined.
 - **Evidence**: how tests will reach and demonstrate the intended behavior, not merely exercise nearby code.

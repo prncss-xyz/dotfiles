@@ -1,25 +1,31 @@
 ---
 name: implement
-description: Implement a task, then review and fix it in a bounded loop, and write a reviewer walkthrough
+description: Implement one slice of a plan, then review and fix it in a bounded loop, and write a reviewer walkthrough
 disable-model-invocation: true
 ---
 
-Orchestrate the implementation of the task supplied with this invocation. Never edit project files yourself.
+Orchestrate the implementation of the slice supplied with this invocation. Never edit project files yourself.
+
+Inputs, read from the artifact directory:
+
+- **Slice**: the `{dd}-{name}.task.md` file supplied with the invocation. Without one, the slice is the whole plan.
+- **Plan**: the plan the task file links to, else the supplied plan path, else `plan.md` beside the task file. If no single originating plan can be identified, stop and report it as a blocker.
+- **Contract**: `{dd}-{name}.api-contract.md` beside the task file, or `api-contract.md` when the slice is the whole plan, when present. Its entry points, types, errors, exports, and tests are approved decisions: they must not be changed, and its tests must not be modified, weakened, skipped, or deleted. A needed change to them is an unapproved API decision.
 
 Rules:
 
 - Only one writer subagent runs at a time; wait for each to finish.
 - If an unapproved product, API, architecture, or scope decision comes up, stop and ask the user.
-- Validation gate: before review or walkthrough, the writer must show the commands run and passing results for every required test. Missing, skipped, failing, or deferred tests go back to the writer. If validation is blocked, ask the user; never waive it.
+- Validation gate: before review or walkthrough, the writer must show the commands run and passing results for every required test: the verification of each of the slice's acceptance criteria and, when a contract exists, all of its tests. Missing, skipped, failing, or deferred tests go back to the writer. If validation is blocked, ask the user; never waive it.
 
 Workflow:
 
-1. Run `git status --porcelain --untracked-files=all`. If the working tree is not clean, ask the user how to proceed: the review scope is uncommitted work, so pre-existing changes would be reviewed as part of the task.
-2. Launch a fresh-context subagent told to read and follow [implementer.md](./implementer.md), with the task, relevant spec paths or approved decisions, success criteria, and required tests. Apply the validation gate.
+1. Run `git status --porcelain --untracked-files=all`. If the working tree is not clean, ask the user how to proceed: the review scope is uncommitted work, so pre-existing changes would be reviewed as part of the slice.
+2. Launch a fresh `worker` told to read and follow [implementer.md](./implementer.md), with the plan path, the task file, the contract path if any, and required tests. Apply the validation gate.
 3. Review/fix loop, at most 6 rounds:
-   a. Read and follow [the review skill](../review/SKILL.md) with no fixed point, so it reviews uncommitted work, and with the task or spec path as its intent. Instruct reviewers and the review orchestrator to give stylistic findings the same weight as other findings: apply the same classification and resolution criteria, and never downgrade or defer a finding solely because it concerns style.
+   a. Read and follow [the review skill](../review/SKILL.md) with no fixed point, so it reviews uncommitted work, and with the plan path and the task file as its intent: the slice's acceptance criteria, scope edges, and constraints, not the hints in its notes, so an approach that meets the criteria differently is not a finding. Instruct reviewers and the review orchestrator to give stylistic findings the same weight as other findings: apply the same classification and resolution criteria, and never downgrade or defer a finding solely because it concerns style. When a contract exists, pass it as settled: a finding that would change it is classified "needs user decision" or rejected as scope expansion, never "fix now".
    b. Bring "needs user decision" findings to the user. If no "fix now" findings remain, exit the loop.
    c. Launch the implementer again with the accepted findings and their `path:line` evidence, asking for focused validation and no unrelated changes. Apply the validation gate.
-4. Read and follow [walkthrough-writer.md](./walkthrough-writer.md) directly, using the originating spec path, the implementation and validation summary, the changed files, deferred findings, risks, the number of review rounds, and whether the loop cap was hit. If no single originating spec can be identified, report that as a blocker.
-5. On success, after validation passes, no "fix now" findings remain, and the walkthrough is written, commit the task's changes using a Conventional Commits message.
+4. Read and follow [walkthrough-writer.md](./walkthrough-writer.md) directly, using the plan path, the slice, the contract path if any, the implementation and validation summary, the changed files, deferred findings, risks, the number of review rounds, and whether the loop cap was hit. The output is `{dd}-{name}.walkthrough.md` beside the task file, or `walkthrough.md` when the slice is the whole plan.
+5. On success, after validation passes, no "fix now" findings remain, and the walkthrough is written, commit the slice's changes using a Conventional Commits message.
 6. Report only the walkthrough path.
