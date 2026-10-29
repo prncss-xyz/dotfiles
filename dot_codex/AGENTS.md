@@ -2,11 +2,13 @@
 
 Prefer coding assertions over defensive programming.
 
-Never write comments unless explicitly asked to.
+Except for JSDoc comments, never write comments unless explicitly asked to.
+
+@ts-expect-error is acceptable for testing the typing of a function reject some combinations of arguments.
 
 ## File Manipulation
 
-For any kind of complex file transform, use temporary JavaScript scripts. Prefer this over piping bash commands.
+For any kind of complex file transform, prefer using code mode over piping bash commands.
 
 ## Subagents
 

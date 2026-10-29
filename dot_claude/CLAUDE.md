@@ -2,7 +2,9 @@
 
 Prefer coding assertions over defensive programming.
 
-Never write comments unless explicitly asked to.
+Except for JSDoc comments, never write comments unless explicitly asked to.
+
+@ts-expect-error is acceptable for testing the typing of a function reject some combinations of arguments.
 
 ## File Manipulation
 
