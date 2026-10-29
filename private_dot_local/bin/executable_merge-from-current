@@ -1,0 +1,79 @@
+#!/bin/sh
+set -eu
+
+[ "$#" -ge 1 ] && [ "$#" -le 2 ] || {
+  printf '%s\n' 'Usage: merge-from-current <target-branch> [commit-message]' >&2
+  exit 1
+}
+current=$1
+git check-ref-format --branch "$current" >/dev/null
+source=$(git rev-parse --show-toplevel)
+branch=$(git -C "$source" symbolic-ref --short HEAD)
+
+echo "merging $current into $branch"
+
+message=${2-"Merge $branch"}
+[ "$branch" != "$current" ] || {
+  printf '%s\n' 'Target branch must differ from the current branch' >&2
+  exit 1
+}
+root=$(git -C "$source" worktree list --porcelain | awk -v ref="refs/heads/$current" '
+  /^worktree / { path = substr($0, 10) }
+  /^branch / && substr($0, 8) == ref { print path }
+')
+[ -n "$root" ] || {
+  printf 'No worktree found for %s\n' "$current" >&2
+  exit 1
+}
+[ "$(git -C "$root" symbolic-ref --short HEAD)" = "$current" ]
+for path in "$root" "$source"; do
+  status=$(git -C "$path" status --porcelain)
+  [ -z "$status" ] || {
+    printf 'Worktree must be clean: %s\n' "$path" >&2
+    exit 1
+  }
+done
+original=$(git -C "$root" rev-parse HEAD)
+if git -C "$root" rebase "$branch"; then
+  :
+else
+  [ -n "$(git -C "$root" diff --name-only --diff-filter=U)" ] || exit 1
+  printf '%s\n' 'Rebase conflicts detected. Calling headless Codex to resolve them; this may take a while.' >&2
+  git_dir=$(git -C "$root" rev-parse --absolute-git-dir)
+  common_dir=$(git -C "$root" rev-parse --path-format=absolute --git-common-dir)
+  codex exec --sandbox workspace-write --cd "$root" --add-dir "$git_dir" --add-dir "$common_dir" \
+    'Resolve all conflicts in the ongoing rebase, preserving the intended changes from both branches. Stage resolved files and run GIT_EDITOR=true git rebase --continue, resolving further conflicts until the rebase finishes. Do not abort or skip commits, merge, squash, push, or delete branches or worktrees. If you cannot resolve a conflict, stop and report failure.' || exit 1
+  [ ! -d "$git_dir/rebase-merge" ] && [ ! -d "$git_dir/rebase-apply" ] || exit 1
+  [ -z "$(git -C "$root" status --porcelain)" ] || exit 1
+fi
+[ "$(git -C "$root" symbolic-ref --short HEAD)" = "$current" ]
+git -C "$root" merge-base --is-ancestor "$branch" HEAD
+rebased=$(git -C "$root" rev-parse HEAD)
+git -C "$root" reset --soft "$original"
+if git -C "$root" diff --cached --quiet; then
+  printf '%s\n' 'No changes to merge.'
+  exit 0
+fi
+if git -C "$root" commit -m "$message"; then
+  :
+else
+  git -C "$root" reset --soft "$rebased"
+  exit 1
+fi
+if remote=$(git -C "$root" config --get "branch.$branch.remote"); then
+  remote_ref=$(git -C "$root" config --get "branch.$branch.merge")
+elif git -C "$root" remote get-url origin >/dev/null 2>&1; then
+  remote=origin
+  remote_ref=refs/heads/$branch
+else
+  remote=
+fi
+if [ -n "$remote" ] && [ "$remote" != . ]; then
+  remote_branch=$(git -C "$root" ls-remote --heads "$remote" "$remote_ref")
+  if [ -n "$remote_branch" ]; then
+    git -C "$root" push "$remote" ":$remote_ref"
+  fi
+fi
+git -C "$root" worktree remove "$source"
+git -C "$root" branch -D -- "$branch"
+printf 'Merged %s into target branch %s and removed its branch and worktree %s\n' "$branch" "$current" "$source"

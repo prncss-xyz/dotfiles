@@ -43,7 +43,6 @@ if [ "$remove" = true ]; then
 		esac
 	fi
 
-	git-link-artifacts --remove --force "$worktree_path" "$repo" "$branch" || exit 1
 	if [ "$force" = true ]; then
 		set -- git worktree remove --force "$worktree_path"
 	else
@@ -68,5 +67,4 @@ if ! result=$("$@" 2>&1); then
 	exit 1
 fi
 
-git-link-artifacts "$worktree_path" "$repo" "$branch"
 printf '%s\n' "$worktree_path"
