@@ -26,9 +26,8 @@ Each reviewer is a file next to this one. Launch one fresh `reviewer` subagent p
 
 1. [precommit-reviewer.md](./precommit-reviewer.md) — run it alone first, since the hook may modify files; then re-pin the scope.
 2. In a single parallel run:
-   - [quality-reviewer.md](./quality-reviewer.md)
-   - [idiomatic-reviewer.md](./idiomatic-reviewer.md)
-   - [simplicity-reviewer.md](./simplicity-reviewer.md)
+   - [design-reviewer.md](./design-reviewer.md)
+   - [conventions-reviewer.md](./conventions-reviewer.md)
    - [intention-reviewer.md](./intention-reviewer.md), only when an intent is available
 
 Give every reviewer the pinned scope commands, the untracked file list or commit list, and the intent if any. Tell each to inspect the actual repository, review only the pinned scope, return only evidence-backed findings citing `path:line`, and not modify project files.
