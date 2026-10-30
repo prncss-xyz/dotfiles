@@ -23,3 +23,9 @@ abbr pr sudo apk del
 abbr pu sudo apk update; doas apk upgrade -U -a
 {{ end -}}
 {{ end -}}
+
+{{ if and (eq .chezmoi.os "linux") (contains "microsoft" (lower .chezmoi.kernel.osrelease)) -}}
+abbr n ~/.local/bin/nvim-no-io-uring
+{{ else -}}
+abbr n nvim
+{{ end -}}
