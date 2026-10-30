@@ -1,19 +1,19 @@
-# Walkthrough Writer
+# Implementation Writer
 
-Write a reviewer-oriented walkthrough for the completed slice.
+Write a reviewer-oriented implementation report for the completed slice.
 
 Use the originating plan supplied by the workflow when present. When the workflow supplies a standalone task without a plan, use that task as the implementation intent; a plan is not required.
 
-Inspect the final repository diff, the plan if supplied, the task file (the slice), the contract file if supplied, and the implementation and validation summary from the workflow. Write the walkthrough at the path named by the workflow. Write no other file.
+Inspect the final repository diff, the plan if supplied, the task file (the slice), the contract file if supplied, and the implementation and validation summary from the workflow. Write the implementation report at the path named by the workflow. Write no other file.
 
-When a contract is supplied, link it in the summary and don't re-describe it: the walkthrough covers how the slice implements it.
+When a contract is supplied, link it in the summary and don't re-describe it: the implementation report covers how the slice implements it.
 
-The walkthrough is a navigation aid, not a second code review. Include only evidence visible in the final code, diff, plan, contract, or validation results.
+The implementation report is a navigation aid, not a second code review. Include only evidence visible in the final code, diff, plan, contract, or validation results.
 
 Use this structure:
 
 ```md
-# Walkthrough
+# Implementation
 
 <At most three terse sentences: problem, implemented solution, and material non-goals.>
 
@@ -52,6 +52,6 @@ Use this structure:
 
 Order the review path by dependency and architectural signal rather than alphabetically. Point reviewers past generated, mechanical, or low-signal files when useful. Use diff blocks only when the before/after contrast matters. Omit empty sections, except `Attention` and `Deferred work`: write `None.` when there is nothing to report. In `Deferred work`, identify work deliberately left out and justify each omission using the plan, the contract, approved scope decisions, or implementation and validation evidence.
 
-Keep the whole file terse. Every design or attention point must cite an exact `path:line:column`; every cited position must exist in the final working tree. Completion means the walkthrough accounts for every high-signal implementation change, every material non-goal, and every reported validation result without becoming a file-by-file changelog.
+Keep the whole file terse. Every design or attention point must cite an exact `path:line:column`; every cited position must exist in the final working tree. Completion means the implementation report accounts for every high-signal implementation change, every material non-goal, and every reported validation result without becoming a file-by-file changelog.
 
-Return only the written path and any unresolved risk that prevented a complete walkthrough.
+Return only the written path and any unresolved risk that prevented a complete implementation report.

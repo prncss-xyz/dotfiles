@@ -22,6 +22,4 @@ Review whether the change follows these conventions, in decreasing priority; a h
 
 Do not suggest changes merely to reduce line count, combine unrelated concerns, remove helpful abstractions, or make code harder to debug or extend.
 
-Only documented rules establish hard violations: cite their file and rule. Everything else is a judgement call; label it as such and name any applicable smell. Skip anything tooling enforces.
-
-Give each finding a specific suggested change. Under 400 words.
+Only explicit user or repository rules establish hard violations: cite the instruction or file and rule. The bundled stack guidance and baseline practices are default preferences, even when phrased imperatively. Treat those and other undocumented choices as judgement calls; label them as such and name any applicable smell.

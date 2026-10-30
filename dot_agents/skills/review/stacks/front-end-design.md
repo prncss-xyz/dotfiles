@@ -10,10 +10,8 @@ Never more than one primary button in the same view.
 
 `dvh` (css) accounts for the mobile browser chrome that shows and hides on scroll. Using `vh` for full-screen mobile layouts often causes overflow because of this.
 
-Avoid layout shift by reserving space before content loads and using size-matched font fallbacks.
+Avoid layout shift by reserving space before content loads, including setting aspect ratios on images and embeds, and using size-matched font fallbacks.
 
 An inner element inside a rounded container needs a smaller radius, calculated as outer radius minus padding. Matching both creates a visible gap.
-
-Aspect ratio. The proportional relationship between width and height. Setting it on images and embeds lets the browser reserve the right space before the content loads, preventing layout shift.
 
 Safe area. The part of a screen not obscured by notches or home indicators. Fixed bottom elements need to account for this or they sit underneath the home indicator.

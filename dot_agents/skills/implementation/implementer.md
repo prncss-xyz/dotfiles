@@ -10,7 +10,7 @@ Report:
 - how each acceptance criterion is met, with its verification
 - files changed
 - validation commands and their results
-- incomplete or deferred work, including pre-existing issues found outside the slice, with location evidence and the reason each item remains out of scope; report these to the parent for the walkthrough
+- incomplete or deferred work, including pre-existing issues found outside the slice, with location evidence and the reason each item remains out of scope; report these to the parent for the implementation report
 - decisions requiring parent approval
 
 Do not launch subagents. The parent owns review and fix-loop orchestration.

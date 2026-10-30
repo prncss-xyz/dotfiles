@@ -1,5 +1,5 @@
 ---
-name: scaffold-api
+name: api-contract
 description: Scaffold a caller-facing API with typed stubs, failing behavior tests, review, and a contract handoff before implementation.
 disable-model-invocation: true
 ---
