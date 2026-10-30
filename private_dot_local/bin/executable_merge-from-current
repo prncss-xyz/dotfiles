@@ -10,7 +10,7 @@ git check-ref-format --branch "$current" >/dev/null
 source=$(git rev-parse --show-toplevel)
 branch=$(git -C "$source" symbolic-ref --short HEAD)
 
-echo "merging $current into $branch"
+printf 'Merging %s into target branch %s and removing its branch and worktree %s\n' "$branch" "$current" "$source"
 
 message=${2-"Merge $branch"}
 [ "$branch" != "$current" ] || {
@@ -76,4 +76,4 @@ if [ -n "$remote" ] && [ "$remote" != . ]; then
 fi
 git -C "$root" worktree remove "$source"
 git -C "$root" branch -D -- "$branch"
-printf 'Merged %s into target branch %s and removed its branch and worktree %s\n' "$branch" "$current" "$source"
+git -C "$root" rev-parse HEAD

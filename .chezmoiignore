@@ -20,3 +20,4 @@ sysfiles/
 {{- end }}
 node_modules/
 artifacts/
+src/

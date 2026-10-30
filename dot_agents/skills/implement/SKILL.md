@@ -15,6 +15,7 @@ Inputs, read from the artifact directory:
 Rules:
 
 - Only one writer subagent runs at a time; wait for each to finish.
+- Retain incomplete or deferred work reported by every implementer run and deferred or unresolved review findings across all rounds, including their location evidence and reasons for deferral. Pass the accumulated items to the walkthrough writer, removing an item only when later implementation or validation evidence shows it was resolved.
 - If an unapproved product, API, architecture, or scope decision comes up, stop and ask the user.
 - Validation gate: before review or walkthrough, the writer must show the commands run and passing results for every required test: the verification of each of the slice's acceptance criteria and, when a contract exists, all of its tests. Missing, skipped, failing, or deferred tests go back to the writer. If validation is blocked, ask the user; never waive it.
 

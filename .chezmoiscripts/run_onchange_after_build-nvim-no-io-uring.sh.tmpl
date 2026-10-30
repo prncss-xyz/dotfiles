@@ -1,0 +1,7 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+# nvim-no-io-uring.c sha256: {{ include "src/nvim-no-io-uring.c" | sha256sum }}
+set -eu
+mkdir -p "$HOME/.local/bin"
+cc -O2 -Wall -Wextra -o "$HOME/.local/bin/nvim-no-io-uring" "{{ .chezmoi.sourceDir }}/src/nvim-no-io-uring.c"
+{{ end -}}
