@@ -4,11 +4,13 @@ Write a reviewer-oriented implementation report for the completed task.
 
 Use the originating plan supplied by the workflow when present. When the workflow supplies a standalone task without a plan, use that task as the implementation intent; a plan is not required.
 
-Inspect the final repository diff, the plan if supplied, the task file, the contract file if supplied, and the implementation and validation summary from the workflow. Write the implementation report at the path named by the workflow. Write no other file.
+Inspect the final repository diff, the plan if supplied, the task file, the contract file if supplied, and the implementation and validation summary from the workflow. Write the implementation report at the path named by the workflow. Write no other file except the empty `small-change.txt` beside that report when the qualification below is established.
 
 When a contract is supplied, link it in the summary and don't re-describe it: the implementation report covers how the task implements it.
 
 Use the implementation and validation summary, changed files, accumulated deferred and unresolved findings, risks, full review-round count, any post-style result, and loop exit reason supplied by the workflow. Include only evidence visible in the final code, diff, plan, contract, or validation results.
+
+Also use the workflow's final task-change scope, measured additions and deletions with their measurement evidence, and provisional success eligibility with validation and completion evidence. Missing evidence cannot establish qualification. Success requires an exit of `No new actionable findings`, `No new edits`, or `Post-style passed`, all required validation passing, no remaining "fix now" findings or open user decisions, no incomplete task requirements, and a successfully written report. Commit success is not required.
 
 Return only the written path and any unresolved risk that prevented a complete implementation report.
 
@@ -30,11 +32,19 @@ Use this template for writing the implementation report:
 
 **Door:** <one-way or two-way>
 
-<optional: description>
+<evidence and rollback cost>
 
 **Blast Radius:** <one-word description>
 
-<optional: potential ramifications of merge>
+<evidence of scope, shared-contract effects, and consumer coordination>
+
+**Size:** <additions> + <deletions> = <total> lines; limit 1,000; <pass, fail, or unknown, with measurement evidence>
+
+**Review cycles:** <full review-round count>; limit 3; <pass, fail, or unknown, with evidence; exclude style passes and validation retries>
+
+**Implementation success:** <yes, no, or unknown, with validation, completion, exit, and report-write evidence>
+
+**Small change:** <yes or no> — <combined result and justification; identify failed or unproven criteria>
 
 ## Deferred work
 
@@ -186,6 +196,18 @@ In Evidence, preserve every reported validation command and result. If before ev
 Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
 
 The blast radius is the potential impact or scope of the changes introduced by this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
+
+Assess small-change qualification in every report, including unsuccessful and nonqualifying implementations. All of these conditions must be established:
+
+- Implementation succeeded under the workflow's success conditions above, including successfully writing this report.
+- The door is two-way under the existing rollback guidance above.
+- Effects remain within one bounded behavior or component, with no shared-contract changes or required consumer coordination. Justify this judgment with evidence; a low line count alone cannot establish bounded impact.
+- The final task diff totals at most 1,000 additions plus deletions, including new files. Count the final net diff rather than intermediate edits or review fixes. Multiple files do not independently disqualify a change.
+- At most three full review rounds occurred under the workflow's existing count. The separate style pass and validation retries add no rounds. The round count is the sole review-related criterion; previously raised findings do not independently disqualify a change.
+
+Expose each criterion, its evidence, and the combined result in Merge Danger. Treat missing evidence as unproven and classify the change as not qualifying. Do not add reviewer severity labels or critical-finding history.
+
+Write and verify `implementation.md` successfully before creating a zero-byte `small-change.txt` beside it, and create that marker only if all criteria qualify. If the report write fails, do not create the marker or claim success. For a nonqualifying result, leave no marker. The marker is a downstream artifact, not a source-code change.
 
 ### Deferred work
 
