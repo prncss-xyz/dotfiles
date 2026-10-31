@@ -4,7 +4,7 @@ description: Decompose a high level plan into one task file per slice
 disable-model-invocation: true
 ---
 
-Decompose the task supplied with this invocation into slices, writing one artifact file per slice named `{dd}-{name}.task.md`: `dd` is the slice's two-digit position in the order (`01`, `02`, …) and `name` is a single lowercase word identifying the slice. The task is usually a path to a design plan (such as the `plan.md` produced by the plannifier); read it first, and write the task files beside it. Before planning, check whether any `*.task.md` file already exists there; if one does, report it and stop. The deliverable is the task files; implementation happens in separate invocations, one per task file.
+Decompose the task supplied with this invocation into slices, writing one artifact file per slice with path `{dd}-{name}/task.md`: `dd` is the slice's two-digit position in the order (`01`, `02`, …) and `name` is a single lowercase word identifying the slice. The task is usually a path to a design plan (such as the `plan.md` produced by the plannifier); read it first, and write the task files beside it. Before planning, check whether any `{dd}-{name}/task.md` file already exists there; if one does, report it and stop. The deliverable is the task files; implementation happens in separate invocations, one per task file.
 
 ## Respect the design
 
