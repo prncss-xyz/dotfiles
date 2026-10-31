@@ -1,4 +1,4 @@
 name = "worker"
 description = "Implements an approved task as the sole writer"
-model = "gpt-6-luna"
+model = "gpt-6.1-terra"
 model_reasoning_effort = "medium"

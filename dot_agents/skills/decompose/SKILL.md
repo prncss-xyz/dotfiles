@@ -10,17 +10,23 @@ Decompose the task supplied with this invocation into slices, writing one artifa
 
 Treat the decisions in a supplied plan as settled, including its delivery constraints: don't reopen, reinterpret, or extend them. If a slice would require a design decision the plan leaves open, don't make it: list it under a final `## Open questions` heading in the affected task file instead.
 
+Inspect the relevant entry points and project conventions enough to confirm that the proposed slice boundaries match the existing system. Use the project's domain vocabulary.
+
 ## Define vertical slices
 
 Each slice delivers a small, independently verifiable outcome, spanning whatever layers are needed to achieve it. Use only the temporary scaffolding the plan allows.
 
 Use tracer bullets, not layers: start with the smallest end-to-end path (the plan's first outcome, if it names one), then extend it with additional behavior. Don't split the work into horizontal phases such as all storage, then all backend, then all UI; that postpones verification until several phases land. For example, prefer "create and retrieve one saved item" followed by "list and filter saved items" over separate database, API, and UI slices.
 
-No completion condition may depend on a later slice. If a slice can't be verified without unfinished work elsewhere, merge the coupled work or redraw the boundary.
+Except for the shared-integration-branch case below, no completion condition may depend on a later slice. If a slice can't be verified without unfinished work elsewhere, merge the coupled work or redraw the boundary.
+
+**Wide refactors are the exception to vertical slicing.** A **wide refactor** is one mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so a single edit breaks thousands of call sites at once and no vertical slice can land green. Don't force it into a tracer bullet; sequence it as **expand–contract**. First expand: add the new form beside the old so nothing breaks. Then migrate the call sites over in batches sized by blast radius (per package, per directory), each batch its own task file blocked by the expand, keeping CI green batch to batch because the old form still exists. Finally contract: delete the old form once no caller remains, in a task file blocked by every migrate batch. When even the batches can't stay green alone, keep the sequence but let them share an integration branch that all block a final integrate-and-verify task file; green is promised only there.
 
 If the plan calls for prefactoring, give it its own slice before the slices it enables, verified by behavior-preservation checks. Don't invent a broad cleanup or infrastructure slice.
 
-Each slice is scaffolded, implemented, reviewed, and committed on its own; size it accordingly. Start each task file with a heading stating the slice's outcome, a link to the plan, and a brief statement of the outcome, marking optional follow-ups as optional and slices that introduce or alter a caller-facing boundary as `(scaffold)`. A small task may be a single slice; don't split an outcome only to produce more slices.
+Each slice is scaffolded, implemented, reviewed, and committed on its own; size it to fit within a fresh implementation session, including the context needed for that work. Start each task file with a heading stating the slice's outcome, a link to the plan, and a brief statement of the outcome, marking optional follow-ups as optional and slices that introduce or alter a caller-facing boundary as `(scaffold)`. A small task may be a single slice; don't split an outcome only to produce more slices.
+
+Each task must be understandable from its contents, linked plan, and named prerequisites, without relying on the decomposition conversation.
 
 ## Define acceptance criteria
 

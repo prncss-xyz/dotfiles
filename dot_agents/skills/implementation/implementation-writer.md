@@ -8,7 +8,7 @@ Inspect the final repository diff, the plan if supplied, the task file, the cont
 
 When a contract is supplied, link it in the summary and don't re-describe it: the implementation report covers how the task implements it.
 
-Use the implementation and validation summary, changed files, accumulated deferred and unresolved findings, risks, review-round count, and loop exit reason supplied by the workflow. Include only evidence visible in the final code, diff, plan, contract, or validation results.
+Use the implementation and validation summary, changed files, accumulated deferred and unresolved findings, risks, full review-round count, any post-style result, and loop exit reason supplied by the workflow. Include only evidence visible in the final code, diff, plan, contract, or validation results.
 
 Return only the written path and any unresolved risk that prevented a complete implementation report.
 
@@ -43,7 +43,8 @@ Use this template for writing the implementation report:
 ## Completion
 
 - Changed files: <complete list of task-owned changed files>
-- Review rounds: <number>
+- Full review rounds: <number>
+- Post-style: <pass, fail, or incomplete, with evidence; omit if not run>
 - Exit reason: <loop exit reason supplied by the workflow>
 ```
 

@@ -1,6 +1,6 @@
 ---
 name: review
-description: Review changes against a fixed point, or uncommitted work, with parallel reviewer subagents in forked contexts
+description: Review changes against a fixed point, or uncommitted work, with parallel fresh reviewer subagents
 disable-model-invocation: true
 ---
 
@@ -24,7 +24,7 @@ Retain the selected scope type and SHAs throughout the review. After the hook, r
 
 ## Run reviewers
 
-Launch each reviewer as a separate `reviewer` subagent with a fork of the orchestrator's context. Give each subagent its own instruction file below to read and follow:
+Launch each reviewer as a fresh `reviewer` subagent. Give each subagent its own instruction file below to read and follow:
 
 1. [precommit-reviewer.md](./precommit-reviewer.md) — run it alone first. Only the hook may modify project files; the reviewer must not edit them directly. Then refresh the scope as described above.
 2. Launch one subagent per file in a single parallel run:
