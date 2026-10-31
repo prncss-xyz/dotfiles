@@ -8,10 +8,11 @@ Orchestrate a review of one pinned change scope. Never modify project files your
 
 ## Inputs
 
-Both optional:
+All optional:
 
 - **Fixed point**: a Git reference (commit SHA, branch, tag, `main`, `HEAD~5`), resolved once to a commit SHA.
 - **Intent**: a spec path, ticket URL, or task description stating what the change is meant to do. If none is supplied, look for a relevant `plan.md` in the artifacts directory; if several are plausible, ask the user.
+- **Settled decisions**: a supplied `settled.md`, or one beside the task or plan supplied as intent. Treat its scoped decisions as binding, subject to the task and any approved contract; the calling implementation workflow owns updates to it.
 
 ## Pin the scope
 
@@ -33,12 +34,13 @@ Launch each reviewer as a fresh `reviewer` subagent. Give each subagent its own 
    - [conventions-reviewer.md](./conventions-reviewer.md)
    - [intention-reviewer.md](./intention-reviewer.md), only when an intent is available
 
-Give every reviewer the pinned scope commands, the untracked file list or commit list, and the intent if any. Pass the hook's validation results and coverage to the parallel reviewers. Tell each to inspect the repository at the pinned scope and follow these shared rules:
+Give every reviewer the pinned scope commands, the untracked file list or commit list, the intent if any, and the settled decisions if present. Pass the hook's validation results and coverage to the parallel reviewers. Tell each to inspect the repository at the pinned scope and follow these shared rules:
 
 - Review only the selected changes; inspect surrounding code as needed to establish their effects.
 - Do not modify project files, except through the hook in step 1.
 - Return an explicit completion status and evidence-backed findings, each citing `path:line` and suggesting a specific change. Validation failures may cite the command and output when no source location applies. Keep each report under 400 words.
 - Skip a tooling-enforced check only when it is confirmed to have passed for the reviewed contents and scope.
+- Do not reopen settled names or structures based on preference. A finding that reverses a settled item must identify that item and demonstrate a concrete defect with evidence.
 
 Wait for every reviewer to finish. A reviewer that failed, or was skipped, is reported as such, never as having no findings.
 
@@ -50,5 +52,7 @@ Deduplicate overlapping findings, reject scope expansion, and classify each as:
 - **needs user decision**: requires a product, API, architecture, or scope choice beyond existing approval.
 - **optional or deferred**: valid but nonessential or postponed under the calling workflow's rules; state why.
 - **rejected**: unsupported, inapplicable, or scope expansion; state why.
+
+Automatically classify a finding that reverses a settled item as **rejected** unless it demonstrates a concrete defect; cite the settled item and its reason. When a defect is demonstrated, use the ordinary classifications above, including **needs user decision** when the correction requires an unapproved decision.
 
 Present findings grouped by disposition, retaining reviewer attribution after deduplication. Include reviewer statuses and validation coverage separately. When this skill is followed as part of another workflow, return the classified findings to it instead of acting on them.
