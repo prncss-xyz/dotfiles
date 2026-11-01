@@ -4,7 +4,7 @@ Write a reviewer-oriented implementation report for the completed task.
 
 Use the originating plan supplied by the workflow when present. When the workflow supplies a standalone task without a plan, use that task as the implementation intent; a plan is not required.
 
-Inspect the final repository diff, the plan if supplied, the task file, the contract file if supplied, and the implementation and validation summary from the workflow. Write the implementation report at the path named by the workflow. Write no other file except the empty `small-change.txt` beside that report when the qualification below is established.
+Inspect the final repository diff, the plan if supplied, the task file, the contract file if supplied, and the implementation and validation summary from the workflow. Write the implementation report at the path named by the workflow. Write no other file except one deferred task per Deferred work item and the empty `small-change.txt` beside that report when the qualification below is established.
 
 When a contract is supplied, link it in the summary and don't re-describe it: the implementation report covers how the task implements it.
 
@@ -12,7 +12,7 @@ Use the implementation and validation summary, changed files, accumulated deferr
 
 Also use the workflow's final task-change scope, measured additions and deletions with their measurement evidence, and provisional success eligibility with validation and completion evidence. Missing evidence cannot establish qualification. Success requires an exit of `No new actionable findings`, `No new edits`, or `Post-style passed`, all required validation passing, no remaining "fix now" findings or open user decisions, no incomplete task requirements, and a successfully written report. Commit success is not required.
 
-Return only the written path and any unresolved risk that prevented a complete implementation report.
+Return only the written report path, the deferred task paths, and any unresolved risk that prevented a complete implementation report.
 
 Use this template for writing the implementation report:
 
@@ -27,6 +27,10 @@ Use this template for writing the implementation report:
 
 - **Before:** <screenshot/output/failing test run>
   **After:** <screenshot/output/passing test run>
+
+## Unverified
+
+- <Claim or behavior not verified> — <why it could not be verified; how it could be>
 
 ## Merge Danger
 
@@ -48,7 +52,7 @@ Use this template for writing the implementation report:
 
 ## Deferred work
 
-- <Work deliberately left out> — <location evidence and justification for leaving it out>
+- <Very brief description> — [task](../{slug}/task.md)
 
 ## Completion
 
@@ -189,7 +193,11 @@ Screenshots are S-tier - when the environment is set up for it and the change is
 
 Execution-based evidence is A-tier. Test results, console output. Show the exact test that now fails and passes, using pseudocode.
 
-In Evidence, preserve every reported validation command and result. If before evidence was not captured, state that limitation rather than inventing it.
+In Evidence, preserve every reported validation command and result. If before evidence was not captured, record that under Unverified rather than inventing it.
+
+### Unverified
+
+List what the change affects or claims but no evidence in Evidence demonstrates: untested behaviors, platforms, or environments; checks that were skipped, blocked, or unavailable; and assumptions taken on trust. For each, state why it could not be verified and, when known, how it could be. Never list an item here that Evidence already demonstrates. Write `None.` only when every task requirement and affected behavior is demonstrated.
 
 ### Merge Danger
 
@@ -211,4 +219,23 @@ Write and verify `implementation.md` successfully before creating a zero-byte `s
 
 ### Deferred work
 
-In Deferred work, retain the workflow's accumulated incomplete work and deferred or unresolved findings, with their location evidence and reasons. Remove an item only when later implementation or validation evidence shows it was resolved. Justify omissions using the plan, contract, approved scope decisions, or implementation and validation evidence. Write `None.` when there is nothing to report.
+Retain the workflow's accumulated incomplete work and deferred or unresolved findings. Remove an item only when later implementation or validation evidence shows it was resolved. Justify omissions using the plan, contract, approved scope decisions, or implementation and validation evidence. Write `None.` when there is nothing to report.
+
+Before writing the report, create one task per item at `../{slug}/task.md` relative to `implementation.md`, so its directory is a sibling of the current task's. `slug` is a short lowercase kebab-case name for the item and does not start with digits. In the report, each item gets only a very brief description and a link to its task; the location evidence and reasons live in the task.
+
+Use this template for each deferred task, with the backlink relative to the task file:
+
+```markdown
+---
+status: deferred
+implementation: ../{current-task-dir}/implementation.md
+---
+
+# <Outcome of the deferred work>
+
+<What remains, location evidence, and why it was left out>
+```
+
+Each task must be understandable from its contents and backlink, without relying on the implementation conversation.
+
+Never overwrite a `task.md` whose backlink names another report or whose status is no longer `deferred`; pick another slug. On a rerun, update the deferred tasks that link back to this report and delete those whose item was resolved. A failed task write counts as a failed report write.
