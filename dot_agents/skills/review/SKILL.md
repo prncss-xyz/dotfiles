@@ -30,15 +30,14 @@ Launch each reviewer as a fresh `reviewer` subagent. Give each subagent its own 
 1. [precommit-reviewer.md](./precommit-reviewer.md) — run it alone first. Only the hook may modify project files; the reviewer must not edit them directly. Then refresh the scope as described above.
 2. Launch one subagent per file in a single parallel run:
    - [correctness-reviewer.md](./correctness-reviewer.md)
-   - [design-reviewer.md](./design-reviewer.md)
-   - [conventions-reviewer.md](./conventions-reviewer.md)
+   - [maintainability-reviewer.md](./maintainability-reviewer.md)
    - [intention-reviewer.md](./intention-reviewer.md), only when an intent is available
 
 Give every reviewer the pinned scope commands, the untracked file list or commit list, the intent if any, and the settled decisions if present. Pass the hook's validation results and coverage to the parallel reviewers. Tell each to inspect the repository at the pinned scope and follow these shared rules:
 
 - Review only the selected changes; inspect surrounding code as needed to establish their effects.
 - Do not modify project files, except through the hook in step 1.
-- Return an explicit completion status and evidence-backed findings, each citing `path:line` and suggesting a specific change. Validation failures may cite the command and output when no source location applies. Keep each report under 400 words.
+- Return an explicit completion status and evidence-backed findings, each citing `path:line` and suggesting a specific change. Validation failures may cite the command and output when no source location applies. Aim for no more than 600 words per report; exceed this only to preserve actionable findings and their supporting evidence. Omit routine narration.
 - Skip a tooling-enforced check only when it is confirmed to have passed for the reviewed contents and scope.
 - Do not reopen settled names or structures based on preference. A finding that reverses a settled item must identify that item and demonstrate a concrete defect with evidence.
 
