@@ -44,7 +44,7 @@ Use this template for writing the implementation report:
 
 **Size:** <additions> + <deletions> = <total> lines; limit 1,000; <pass, fail, or unknown, with measurement evidence>
 
-**Review cycles:** <full review-round count>; limit 3; <pass, fail, or unknown, with evidence; exclude style passes and validation retries>
+**Review cycles:** <full review-round count>; limit 1; <pass, fail, or unknown, with evidence; exclude style passes and validation retries>
 
 **Implementation success:** <yes, no, or unknown, with validation, completion, exit, and report-write evidence>
 
@@ -211,7 +211,7 @@ Assess small-change qualification in every report, including unsuccessful and no
 - The door is two-way under the existing rollback guidance above.
 - Effects remain within one bounded behavior or component, with no shared-contract changes or required consumer coordination. Justify this judgment with evidence; a low line count alone cannot establish bounded impact.
 - The final task diff totals at most 1,000 additions plus deletions, including new files. Count the final net diff rather than intermediate edits or review fixes. Multiple files do not independently disqualify a change.
-- At most three full review rounds occurred under the workflow's existing count. The separate style pass and validation retries add no rounds. The round count is the sole review-related criterion; previously raised findings do not independently disqualify a change.
+- At most one full review round occurred under the workflow's existing count. The separate style pass and validation retries add no rounds. The round count is the sole review-related criterion; previously raised findings do not independently disqualify a change.
 
 Expose each criterion, its evidence, and the combined result in Merge Danger. Treat missing evidence as unproven and classify the change as not qualifying. Do not add reviewer severity labels or critical-finding history.
 
