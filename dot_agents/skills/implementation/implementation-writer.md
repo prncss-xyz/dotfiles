@@ -2,15 +2,11 @@
 
 Write a reviewer-oriented implementation report for the completed task.
 
-Use the originating plan supplied by the workflow when present. When the workflow supplies a standalone task without a plan, use that task as the implementation intent; a plan is not required.
+Use the workflow's changed files, deferred and unresolved findings, risks, full review-round count, post-style result, exit reason, final task-change scope, measured additions and deletions, and provisional success eligibility with supporting evidence. Include only evidence visible in the final code, diff, plan, contract, or validation results.
 
-Inspect the final repository diff, the plan if supplied, the task file, the contract file if supplied, and the implementation and validation summary from the workflow. Write the implementation report at the path named by the workflow. Write no other file except one deferred task per Deferred work item and the empty `small-change.txt` beside that report when the qualification below is established.
+Write the report at the workflow-supplied path. The only other permitted files are one task per Deferred work item and a zero-byte `small-change.txt` beside the report when qualified below.
 
-When a contract is supplied, link it in the summary and don't re-describe it: the implementation report covers how the task implements it.
-
-Use the implementation and validation summary, changed files, accumulated deferred and unresolved findings, risks, full review-round count, any post-style result, and loop exit reason supplied by the workflow. Include only evidence visible in the final code, diff, plan, contract, or validation results.
-
-Also use the workflow's final task-change scope, measured additions and deletions with their measurement evidence, and provisional success eligibility with validation and completion evidence. Missing evidence cannot establish qualification. Success requires an exit of `No new actionable findings`, `No new edits`, or `Post-style passed`, all required validation passing, no remaining "fix now" findings or open user decisions, no incomplete task requirements, and a successfully written report. Commit success is not required.
+Success requires an exit of `No new actionable findings`, `No new edits`, or `Post-style passed`; all required validation passing; no remaining "fix now" findings, open user decisions, or incomplete requirements; and a successfully written report. Commit success is not required.
 
 Return only the written report path, the deferred task paths, and any unresolved risk that prevented a complete implementation report.
 
@@ -48,7 +44,7 @@ Use this template for writing the implementation report:
 
 **Implementation success:** <yes, no, or unknown, with validation, completion, exit, and report-write evidence>
 
-**Small change:** <yes or no> — <combined result and justification; identify failed or unproven criteria>
+**Small change:** <yes, or no followed by each failed or unproven criterion with its evidence>
 
 ## Deferred work
 
@@ -68,132 +64,22 @@ Skip all preambles and keep prose brief. Use the user's domain language from `GL
 
 ### Summary
 
-Pick the smallest view that makes the key point clear.
+Link any supplied contract without re-describing it; explain how the task implements it.
 
-- Show logic or an algorithm as pseudocode:
+Choose the smallest view that explains the implementation:
 
-```text
-on(save)
-  if content is unchanged
-    return cached result
-  write new content
-  return fresh result
-```
+- Algorithm: pseudocode.
+- Runtime flow: call tree or Mermaid.
+- UI structure: component tree with relevant state and module boundaries.
+- File responsibilities or broad refactor: shallow file tree.
+- Component interactions or data flow: Mermaid.
+- Changes to an existing shape: diff matching the topic's structure.
 
-- Show runtime control flow as a call tree:
-
-```text
-submitForm
-  createSession
-    persistPrompt
-    launchAgent
-  navigateToSession
-```
-
-- Show UI structure as a component tree, including state and module boundaries that matter:
-
-```text
-<SessionPage> (apps/example/src/routes/session.tsx)
-  useSessionEvents()
-  <SessionToolbar>
-    <RunSkillButton> (packages/ui)
-```
-
-- Show file responsibility or a broad refactor as a shallow file tree:
-
-```text
-src/
-├── commands/       # parses user actions
-├── sessions/       # owns session state
-└── transport/      # sends API requests
-```
-
-- Show component interaction, control flow, or data flow with Mermaid:
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant UI
-    participant Daemon
-    User->>UI: choose command
-    UI->>Daemon: send expanded prompt
-    Daemon-->>UI: stream result
-```
-
-- Use `diff` when the point is what changes and the surrounding shape already exists. Match the diff shape to the topic.
-
-For a component change:
-
-```diff
- <SessionPage>
-   useSessionEvents()
-   <SessionToolbar>
-+    <RunSkillButton />
-   <SessionTimeline>
-+    <SkillResultCard />
-```
-
-For a file-layout change:
-
-```diff
- src/
- ├── commands/
-+│   └── show-me.ts       # expands the slash command
- ├── sessions/
--└── transport.ts
-+└── transport/
-+    ├── client.ts
-+    └── stream.ts
-```
-
-For a call-tree or call-stack change:
-
-```diff
- submitForm
-   createSession
-     persistPrompt
-+    expandSkillMention
-     launchAgent
--  navigateToSession
-+  navigateToSession
-+    subscribeToEvents
-```
-
-For a state or control-flow change:
-
-```diff
- on(save)
--  write content
-+  if content is unchanged
-+    return cached result
-+  write new content
-+  invalidate cache
-```
-
-- Show the whole block when most of it is new, when omitted context would hide ownership or order, or when the user needs a copyable target shape:
-
-```ts
-function expandSkill(command: string): string {
-  const skillName = command.slice(1);
-  return `use the ${skillName} skill`;
-}
-```
-
-#### Guidance
-
-Place each visual next to the short text it supports. Keep only the calls, files, props, states, and boundaries needed to answer the user's current question or the options to resolve the current discussion point.
-
-You may use one of these, you may use several, it is unlikely you will use all of them. Use your judgement and don't overwhelm the user.
+Show the whole block when mostly new, when context is needed to preserve ownership or order, or when a copyable target is useful. Use the fewest visuals needed, retain only relevant context, and place each beside its supporting text.
 
 ### Evidence
 
-Concrete evidence that the change works. Show a before and after.
-
-Screenshots are S-tier - when the environment is set up for it and the change is visual.
-
-Execution-based evidence is A-tier. Test results, console output. Show the exact test that now fails and passes, using pseudocode.
-
-In Evidence, preserve every reported validation command and result. If before evidence was not captured, record that under Unverified rather than inventing it.
+Show before-and-after evidence. Prefer screenshots for visual changes when available and execution results for behavior. Preserve every reported validation command and result; use pseudocode only to explain tested behavior. Record missing before evidence under Unverified rather than inventing it.
 
 ### Unverified
 
@@ -201,34 +87,34 @@ List what the change affects or claims but no evidence in Evidence demonstrates:
 
 ### Merge Danger
 
-Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
-
-The blast radius is the potential impact or scope of the changes introduced by this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
+Classify rollback as cheap and reversible (two-way) or destructive/hard to reverse (one-way). Describe the blast radius: affected behaviors, consumers, shared contracts, and coordination requirements.
 
 Assess small-change qualification in every report, including unsuccessful and nonqualifying implementations. All of these conditions must be established:
 
-- Implementation succeeded under the workflow's success conditions above, including successfully writing this report.
-- The door is two-way under the existing rollback guidance above.
+- Implementation succeeded under the success conditions above.
+- The door is two-way.
 - Effects remain within one bounded behavior or component, with no shared-contract changes or required consumer coordination. Justify this judgment with evidence; a low line count alone cannot establish bounded impact.
 - The final task diff totals at most 1,000 additions plus deletions, including new files. Count the final net diff rather than intermediate edits or review fixes. Multiple files do not independently disqualify a change.
 - At most one full review round occurred under the workflow's existing count. The separate style pass and validation retries add no rounds. The round count is the sole review-related criterion; previously raised findings do not independently disqualify a change.
+- The diff adds no dependency to any package manifest. Upgrading or removing existing dependencies, and the lockfile changes that follow, do not disqualify a change.
+- The diff does not change what validation enforces or how strictly: CI pipeline definitions; lint, format, type-check, test runner, or coverage configuration, including rule settings, thresholds, and ignore lists; and inline suppressions such as `eslint-disable` or `@ts-ignore`. Adding or changing tests does not disqualify a change, nor does `@ts-expect-error` used in a test to assert that a type rejects some arguments.
 
-Expose each criterion, its evidence, and the combined result in Merge Danger. Treat missing evidence as unproven and classify the change as not qualifying. Do not add reviewer severity labels or critical-finding history.
+For Small change, write `yes` only when every criterion is established. Otherwise write `no` and list only failed or unproven criteria with evidence. Missing evidence makes a criterion unproven. Do not add reviewer severity labels or critical-finding history.
 
-Write and verify `implementation.md` successfully before creating a zero-byte `small-change.txt` beside it, and create that marker only if all criteria qualify. If the report write fails, do not create the marker or claim success. For a nonqualifying result, leave no marker. The marker is a downstream artifact, not a source-code change.
+Write and verify the report successfully before creating a zero-byte `small-change.txt` beside it, and create that marker only if all criteria qualify. If the report write fails, do not create the marker or claim success. For a nonqualifying result, leave no marker. The marker is a downstream artifact, not a source-code change.
 
 ### Deferred work
 
 Retain the workflow's accumulated incomplete work and deferred or unresolved findings. Remove an item only when later implementation or validation evidence shows it was resolved. Justify omissions using the plan, contract, approved scope decisions, or implementation and validation evidence. Write `None.` when there is nothing to report.
 
-Before writing the report, create one task per item at `../{slug}/task.md` relative to `implementation.md`, so its directory is a sibling of the current task's. `slug` is a short lowercase kebab-case name for the item and does not start with digits. In the report, each item gets only a very brief description and a link to its task; the location evidence and reasons live in the task.
+Before writing the report, create one task per item at `../{slug}/task.md` relative to the report, so its directory is a sibling of the current task's. `slug` is a short lowercase kebab-case name for the item and does not start with digits. In the report, each item gets only a very brief description and a link to its task; the location evidence and reasons live in the task.
 
 Use this template for each deferred task, with the backlink relative to the task file:
 
 ```markdown
 ---
 status: deferred
-implementation: ../{current-task-dir}/implementation.md
+implementation: ../{current-task-dir}/{report-filename}
 ---
 
 # <Outcome of the deferred work>
