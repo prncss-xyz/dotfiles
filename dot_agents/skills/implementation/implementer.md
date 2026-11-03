@@ -7,6 +7,7 @@ With an API contract, implement behind its entry points, types, errors, and expo
 Report:
 - how each acceptance criterion is met, with its verification
 - files changed
+- for each supplied finding, the changed lines it produced as command output (`git diff -U0 -- <path>`, or `grep -n` for untracked or out-of-repo files), not a description
 - validation commands and results
 - incomplete or deferred work, including pre-existing issues outside the task, with location evidence and why each is out of scope
 - decisions requiring parent approval

@@ -4,6 +4,6 @@ Read-only: don't modify files or launch subagents. Check the style-fix changes b
 
 Return a brief summary of what you inspected, plus one of:
 
-- `pass`: every finding is resolved, and the changes are purely stylistic, preserve behavior, and touch nothing else. Passing tests support this but don't prove it.
+- `pass`: every finding is resolved, and the changes are purely stylistic or confined to the workflow artifacts the findings name, preserve behavior, and touch nothing else. Passing tests support this but don't prove it.
 - `fail`: unresolved findings, unrequested style changes, or behavior changes, each with `path:line` and a specific correction.
 - `incomplete`: the missing evidence.

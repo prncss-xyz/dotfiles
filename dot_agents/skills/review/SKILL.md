@@ -13,6 +13,7 @@ All optional:
 - **Fixed point**: a Git reference (commit SHA, branch, tag, `main`, `HEAD~5`), resolved once to a commit SHA.
 - **Intent**: a spec path, ticket URL, or task description stating what the change is meant to do. If none is supplied, look for a relevant `plan.md` in the artifacts directory; if several are plausible, ask the user.
 - **Settled decisions**: a supplied `settled.md`, or one beside the task or plan supplied as intent. Treat its scoped decisions as binding, subject to the task and any approved contract; the calling implementation workflow owns updates to it.
+- **Previous snapshot**: a tree SHA returned by an earlier round of this review over the same uncommitted scope.
 
 ## Pin the scope
 
@@ -21,7 +22,7 @@ Do this before launching any reviewer, and stop with a report on any error or em
 - **With a fixed point**: resolve it and `HEAD` to commit SHAs with `git rev-parse --verify <ref>^{commit}`. Record their merge-base SHA. The scope is `git diff <merge-base-sha> <head-sha>` and the commit list is `git log <fixed-point-sha>..<head-sha> --oneline`. Review the committed contents at these SHAs, not unrelated working-tree changes.
 - **Without one**: if `git status --porcelain --untracked-files=all` is non-empty, select uncommitted work. Resolve `HEAD` to a commit SHA; the scope is `git diff <head-sha>` plus the untracked files from `git ls-files --others --exclude-standard`, treated as additions. Otherwise select `main` as the fixed point.
 
-Retain the selected scope type and SHAs throughout the review. After the hook, refresh the diff and untracked file list for uncommitted work; stop if the scope is now empty or `HEAD` changed. Never rerun automatic scope selection. During parallel review, do not launch writers; if external edits change the reviewed contents, invalidate the affected results and refresh before reviewing again.
+Retain the selected scope type and SHAs throughout the review. After the hook, refresh the diff and untracked file list for uncommitted work; stop if the scope is now empty or `HEAD` changed. Then snapshot the reviewed contents as a tree SHA with a temporary index outside the repository (`GIT_INDEX_FILE=<tmp> git add -A`, then `GIT_INDEX_FILE=<tmp> git write-tree`); with a previous snapshot, the delta is `git diff <previous-tree> <current-tree>`. Never rerun automatic scope selection. During parallel review, do not launch writers; if external edits change the reviewed contents, invalidate the affected results and refresh before reviewing again.
 
 ## Run reviewers
 
@@ -33,7 +34,7 @@ Launch each reviewer as a fresh `reviewer` subagent. Give each subagent its own 
    - [maintainability-reviewer.md](./maintainability-reviewer.md)
    - [intention-reviewer.md](./intention-reviewer.md), only when an intent is available
 
-Give every reviewer the pinned scope commands, the untracked file list or commit list, the intent if any, and the settled decisions if present. Pass the hook's validation results and coverage to the parallel reviewers. Tell each to inspect the repository at the pinned scope and follow these shared rules:
+Give every reviewer the pinned scope commands, the untracked file list or commit list, the intent if any, and the settled decisions if present. Pass the hook's validation results and coverage to the parallel reviewers. With a delta, also give them its command and the previous round's findings, and tell them to review the delta, reading the rest of the scope only where the delta affects it. Tell each to inspect the repository at the pinned scope and follow these shared rules:
 
 - Review only the selected changes; inspect surrounding code as needed to establish their effects.
 - Do not modify project files, except through the hook in step 1.
@@ -54,4 +55,4 @@ Deduplicate overlapping findings, reject scope expansion, and classify each as:
 
 Automatically classify a finding that reverses a settled item as **rejected** unless it demonstrates a concrete defect; cite the settled item and its reason. When a defect is demonstrated, use the ordinary classifications above, including **needs user decision** when the correction requires an unapproved decision.
 
-Present findings grouped by disposition, retaining reviewer attribution after deduplication. Include reviewer statuses and validation coverage separately. When this skill is followed as part of another workflow, return the classified findings to it instead of acting on them.
+Present findings grouped by disposition, retaining reviewer attribution after deduplication. Include reviewer statuses and validation coverage separately. When this skill is followed as part of another workflow, return the classified findings and, for uncommitted work, the current snapshot tree SHA to it instead of acting on them.
