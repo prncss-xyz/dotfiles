@@ -33,6 +33,13 @@ for path in "$root" "$source"; do
     exit 1
   }
 done
+msgfile=$(mktemp)
+trap 'rm -f "$msgfile"' EXIT
+printf '%s\n' "$message" >"$msgfile"
+git -C "$root" hook run --ignore-missing commit-msg -- "$msgfile" || {
+  printf '%s\n' 'Commit message rejected by commit-msg hook' >&2
+  exit 1
+}
 original=$(git -C "$root" rev-parse HEAD)
 if git -C "$root" rebase "$branch"; then
   :
@@ -48,7 +55,6 @@ else
 fi
 [ "$(git -C "$root" symbolic-ref --short HEAD)" = "$current" ]
 git -C "$root" merge-base --is-ancestor "$branch" HEAD
-rebased=$(git -C "$root" rev-parse HEAD)
 git -C "$root" reset --soft "$original"
 if git -C "$root" diff --cached --quiet; then
   printf '%s\n' 'No changes to merge.'
@@ -57,7 +63,7 @@ fi
 if git -C "$root" commit -m "$message"; then
   :
 else
-  git -C "$root" reset --soft "$rebased"
+  git -C "$root" reset --hard "$original"
   exit 1
 fi
 if remote=$(git -C "$root" config --get "branch.$branch.remote"); then
