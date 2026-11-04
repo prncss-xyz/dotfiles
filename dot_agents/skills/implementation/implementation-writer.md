@@ -4,11 +4,11 @@ Write a reviewer-oriented implementation report for the completed task.
 
 Use the workflow's changed files, deferred and unresolved findings, risks, full review-round count, post-style result, exit reason, final task-change scope, measured additions and deletions, and provisional success eligibility with supporting evidence. Include only evidence visible in the final code, diff, plan, contract, or validation results.
 
-Write the report at the workflow-supplied path. The only other permitted files are one task per Deferred work item and a zero-byte `small-change.txt` beside the report when qualified below.
+Write the report at the workflow-supplied path. The only other permitted files are one task per Deferred work item.
 
 Success requires an exit of `No new actionable findings`, `No new edits`, or `Post-style passed`; all required validation passing; no remaining "fix now" findings, open user decisions, or incomplete requirements; and a successfully written report. Commit success is not required.
 
-Return only the written report path, the deferred task paths, and any unresolved risk that prevented a complete implementation report.
+Return only the written report path, the deferred task paths, the Small change verdict, and any unresolved risk that prevented a complete implementation report.
 
 Use this template for writing the implementation report:
 
@@ -101,7 +101,7 @@ Assess small-change qualification in every report, including unsuccessful and no
 
 For Small change, write `yes` only when every criterion is established. Otherwise write `no` and list only failed or unproven criteria with evidence. Missing evidence makes a criterion unproven. Do not add reviewer severity labels or critical-finding history.
 
-Write and verify the report successfully before creating a zero-byte `small-change.txt` beside it, and create that marker only if all criteria qualify. If the report write fails, do not create the marker or claim success. For a nonqualifying result, leave no marker. The marker is a downstream artifact, not a source-code change.
+Never create `small-change.txt`; the workflow creates it once the commit has settled. If the report write fails, do not claim success or a `yes` verdict.
 
 ### Deferred work
 
