@@ -12,10 +12,12 @@ For any kind of complex file transform, prefer using code mode over piping bash 
 
 ## Subagents
 
-When launching a subagent, pick the builtin agent matching the task so its configured model and thinking level apply; do not override them:
+When launching a subagent, pick the builtin agent matching the task:
 
 - implementation: `worker`
 - review: `reviewer`
 - planning: `planner`
 - codebase exploration: `scout`
 - external research: `researcher`
+
+Keep configured models and thinking levels for non-worker roles.

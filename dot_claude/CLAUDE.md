@@ -12,10 +12,12 @@ For any kind of complex file transform, use temporary JavaScript scripts. Prefer
 
 ## Subagents
 
-When launching a subagent, pick the agent matching the task so its configured model and effort apply; do not override them:
+When launching a subagent, pick the agent matching the task:
 
 - implementation: `worker`
 - review: `reviewer`
 - planning: `planner`
 - codebase exploration: `scout`
 - external research: `researcher`
+
+Keep configured models and effort for non-worker roles.

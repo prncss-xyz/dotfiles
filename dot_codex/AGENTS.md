@@ -12,10 +12,12 @@ For any kind of complex file transform, prefer using code mode over piping bash 
 
 ## Subagents
 
-When spawning a subagent, pick the agent role matching the task so its configured model and reasoning effort apply; do not override them:
+When spawning a subagent, pick the agent role matching the task:
 
 - implementation: `worker`
 - review: `reviewer`
 - planning: `planner`
 - codebase exploration: `scout`
 - external research: `researcher`
+
+Keep configured models and reasoning effort for non-worker roles.

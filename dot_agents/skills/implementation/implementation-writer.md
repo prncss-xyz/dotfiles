@@ -2,7 +2,7 @@
 
 Write a reviewer-oriented implementation report for the completed task.
 
-Use the workflow's changed files, deferred and unresolved findings, risks, full review-round count, post-style result, exit reason, final task-change scope, measured additions and deletions, and provisional success eligibility with supporting evidence. Include only evidence visible in the final code, diff, plan, contract, or validation results.
+Use the workflow's changed files, deferred and unresolved findings, risks, full review-round count, post-style result, exit reason, final task-change scope, measured additions and deletions, worker model/effort history, and provisional success eligibility with supporting evidence. Include only evidence visible in the final code, diff, plan, contract, validation results, or execution metadata.
 
 Write the report at the workflow-supplied path. The only other permitted files are one task per Deferred work item.
 
@@ -52,6 +52,7 @@ Use this template for writing the implementation report:
 
 ## Completion
 
+- Worker models: <actual model ID and effort by implementation, fix, validation-retry, or style stage; group identical runs; mark unobservable values as unknown, distinguishing them from requested selections>
 - Changed files: <complete list of task-owned changed files>
 - Full review rounds: <number>
 - Post-style: <pass, fail, or incomplete, with evidence; omit if not run>

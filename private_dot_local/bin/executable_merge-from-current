@@ -41,18 +41,10 @@ git -C "$root" hook run --ignore-missing commit-msg -- "$msgfile" || {
   exit 1
 }
 original=$(git -C "$root" rev-parse HEAD)
-if git -C "$root" rebase "$branch"; then
-  :
-else
-  [ -n "$(git -C "$root" diff --name-only --diff-filter=U)" ] || exit 1
-  printf '%s\n' 'Rebase conflicts detected. Calling headless Codex to resolve them; this may take a while.' >&2
-  git_dir=$(git -C "$root" rev-parse --absolute-git-dir)
-  common_dir=$(git -C "$root" rev-parse --path-format=absolute --git-common-dir)
-  codex exec --sandbox workspace-write --cd "$root" --add-dir "$git_dir" --add-dir "$common_dir" \
-    'Resolve all conflicts in the ongoing rebase, preserving the intended changes from both branches. Stage resolved files and run GIT_EDITOR=true git rebase --continue, resolving further conflicts until the rebase finishes. Do not abort or skip commits, merge, squash, push, or delete branches or worktrees. If you cannot resolve a conflict, stop and report failure.' || exit 1
-  [ ! -d "$git_dir/rebase-merge" ] && [ ! -d "$git_dir/rebase-apply" ] || exit 1
-  [ -z "$(git -C "$root" status --porcelain)" ] || exit 1
-fi
+(
+  cd "$root"
+  rebase-current "$branch"
+)
 [ "$(git -C "$root" symbolic-ref --short HEAD)" = "$current" ]
 git -C "$root" merge-base --is-ancestor "$branch" HEAD
 git -C "$root" reset --soft "$original"

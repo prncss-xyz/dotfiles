@@ -1,0 +1,45 @@
+#!/bin/sh
+set -eu
+
+[ "$#" -le 1 ] || {
+  printf '%s\n' 'Usage: rebase-current [target-branch]' >&2
+  exit 1
+}
+root=$(git rev-parse --show-toplevel)
+cd "$root"
+branch=$(git symbolic-ref --short HEAD)
+if [ "$#" -eq 1 ]; then
+  target=$1
+elif default_ref=$(git symbolic-ref --quiet refs/remotes/origin/HEAD); then
+  target=${default_ref#refs/remotes/origin/}
+  if ! git show-ref --verify --quiet "refs/heads/$target"; then
+    target=$default_ref
+  fi
+elif git show-ref --verify --quiet refs/heads/main; then
+  target=main
+elif git show-ref --verify --quiet refs/heads/master; then
+  target=master
+else
+  printf '%s\n' 'Cannot determine the default branch. Pass a target branch.' >&2
+  exit 1
+fi
+target_commit=$(git rev-parse --verify "$target^{commit}")
+[ -z "$(git status --porcelain)" ] || {
+  printf 'Worktree must be clean: %s\n' "$root" >&2
+  exit 1
+}
+git_dir=$(git rev-parse --absolute-git-dir)
+printf 'Rebasing %s onto %s\n' "$branch" "$target"
+if git rebase -- "$target"; then
+  :
+else
+  [ -n "$(git diff --name-only --diff-filter=U)" ] || exit 1
+  printf '%s\n' 'Rebase conflicts detected. Calling headless Codex to resolve them; this may take a while.' >&2
+  common_dir=$(git rev-parse --path-format=absolute --git-common-dir)
+  codex exec --sandbox workspace-write --cd "$root" --add-dir "$git_dir" --add-dir "$common_dir" \
+    'Resolve all conflicts in the ongoing rebase, preserving the intended changes from both branches. Stage resolved files and run GIT_EDITOR=true git rebase --continue, resolving further conflicts until the rebase finishes. Do not abort or skip commits, merge, squash, push, or delete branches or worktrees. If you cannot resolve a conflict, stop and report failure.' || exit 1
+fi
+[ ! -d "$git_dir/rebase-merge" ] && [ ! -d "$git_dir/rebase-apply" ]
+[ -z "$(git status --porcelain)" ]
+[ "$(git symbolic-ref --short HEAD)" = "$branch" ]
+git merge-base --is-ancestor "$target_commit" HEAD

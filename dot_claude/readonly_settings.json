@@ -15,9 +15,12 @@
       }
     ]
   },
-  "enabledPlugins": {},
+  "enabledPlugins": {
+    "lua-lsp@claude-plugins-official": true
+  },
   "skipDangerousModePermissionPrompt": true,
   "permissions": {
     "defaultMode": "auto"
-  }
+  },
+  "theme": "auto"
 }
