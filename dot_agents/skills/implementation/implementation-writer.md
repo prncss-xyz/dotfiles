@@ -2,13 +2,15 @@
 
 Write a reviewer-oriented implementation report for the completed task.
 
-Use the workflow's changed files, deferred and unresolved findings, risks, full review-round count, post-style result, exit reason, final task-change scope, measured additions and deletions, worker model/effort history, and provisional success eligibility with supporting evidence. Include only evidence visible in the final code, diff, plan, contract, validation results, or execution metadata.
+Assemble the report from the implementer's retained evidence handoff and updates, reviewer evidence, and orchestrator-owned workflow records. Use the handoff for the implementation explanation, acceptance-criterion verification, before/after results, unverified behavior, rollback and impact assessments, and dependency or validation-enforcement changes. Use workflow records for final changed files, accumulated deferred and unresolved findings, review outcomes, full review-round count, post-style result, exit reason, final task-change scope, measured additions and deletions, worker model/effort history, and provisional success eligibility. Derive completion and Small change verdicts from these inputs.
+
+Use only evidence grounded in the code, diff, plan, contract, validation results, or execution metadata. Source evidence reported by the implementer or reviewers is admissible without independently rereading the source when it covers the final task state. Preserve before evidence as historical; do not present superseded claims or validation of different contents as evidence for the final state. Reuse supplied explanations and visuals rather than reconstructing them. Return targeted requests for missing, stale, or contradictory evidence to its producer through the workflow; do not launch a new source investigation. Missing optional evidence belongs under Unverified or makes a Small change criterion unproven; missing required validation still blocks the validation gate.
 
 Write the report at the workflow-supplied path. The only other permitted files are one task per Deferred work item.
 
 Success requires an exit of `No new actionable findings`, `No new edits`, or `Post-style passed`; all required validation passing; no remaining "fix now" findings, open user decisions, or incomplete requirements; and a successfully written report. Commit success is not required.
 
-Return only the written report path, the deferred task paths, the Small change verdict, and any unresolved risk that prevented a complete implementation report.
+Return only the written report path, the deferred task paths, the Small change verdict, and any unresolved risk that prevented a complete implementation report. If evidence needed to complete the report is missing, stale, or contradictory, return targeted evidence requests instead.
 
 Use this template for writing the implementation report:
 
