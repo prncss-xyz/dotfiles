@@ -33,13 +33,22 @@ for path in "$root" "$source"; do
     exit 1
   }
 done
-msgfile=$(mktemp)
-trap 'rm -f "$msgfile"' EXIT
+scratch=$(mktemp -d)
+trap 'rm -rf "$scratch"' EXIT
+msgfile=$scratch/message
+hooklog=$scratch/hook.log
+git_dir=$(git -C "$root" rev-parse --absolute-git-dir)
+common_dir=$(git -C "$root" rev-parse --path-format=absolute --git-common-dir)
 printf '%s\n' "$message" >"$msgfile"
-git -C "$root" hook run --ignore-missing commit-msg -- "$msgfile" || {
-  printf '%s\n' 'Commit message rejected by commit-msg hook' >&2
-  exit 1
-}
+if git -C "$root" hook run --ignore-missing commit-msg -- "$msgfile" >"$hooklog" 2>&1; then
+  cat "$hooklog"
+else
+  cat "$hooklog" >&2
+  printf '%s\n' 'Commit message rejected. Calling headless Codex to fix it; this may take a while.' >&2
+  codex exec --sandbox workspace-write --cd "$root" --add-dir "$scratch" \
+    "The commit-msg hook rejected the proposed merge commit message. Read the hook output in $hooklog and fix the message in $msgfile so it passes the hook. Preserve its intent. Change only that message file; do not edit repository files or hooks, bypass checks, commit, push, or change branches or worktrees. If you cannot fix it, stop and report failure." || exit 1
+  git -C "$root" hook run --ignore-missing commit-msg -- "$msgfile" || exit 1
+fi
 original=$(git -C "$root" rev-parse HEAD)
 (
   cd "$root"
@@ -52,11 +61,21 @@ if git -C "$root" diff --cached --quiet; then
   printf '%s\n' 'No changes to merge.'
   exit 0
 fi
-if git -C "$root" commit -m "$message"; then
-  :
+if git -C "$root" commit -F "$msgfile" >"$hooklog" 2>&1; then
+  cat "$hooklog"
 else
-  git -C "$root" reset --hard "$original"
-  exit 1
+  cat "$hooklog" >&2
+  printf '%s\n' 'Commit failed. Calling headless Codex to fix hook errors; this may take a while.' >&2
+  if codex exec --sandbox workspace-write --cd "$root" --add-dir "$git_dir" --add-dir "$common_dir" --add-dir "$scratch" \
+    "The merge commit failed. Read the output in $hooklog and fix the reported hook errors. The proposed commit message is in $msgfile; edit it if needed. Make only the changes necessary to pass the hooks, preserve the staged changes, and stage any code fixes. Do not disable or bypass hooks or checks, commit, reset, rebase, push, or change branches or worktrees. The script will retry the commit. If you cannot fix the failure, stop and report failure." &&
+    [ "$(git -C "$root" symbolic-ref --short HEAD)" = "$current" ] &&
+    [ "$(git -C "$root" rev-parse HEAD)" = "$original" ] &&
+    git -C "$root" commit -F "$msgfile"; then
+    :
+  else
+    git -C "$root" reset --hard "$original"
+    exit 1
+  fi
 fi
 if remote=$(git -C "$root" config --get "branch.$branch.remote"); then
   remote_ref=$(git -C "$root" config --get "branch.$branch.merge")
