@@ -50,7 +50,7 @@ Use this template for writing the implementation report:
 
 ## Deferred work
 
-- <Very brief description> — [task](../{slug}/task.md)
+- <Very brief description> — [task](<relative-path-from-report-to-deferred-task>)
 
 ## Completion
 
@@ -110,14 +110,14 @@ Never create `small-change.txt`; the workflow creates it once the commit has set
 
 Retain the workflow's accumulated incomplete work and deferred or unresolved findings. Remove an item only when later implementation or validation evidence shows it was resolved. Justify omissions using the plan, contract, approved scope decisions, or implementation and validation evidence. Write `None.` when there is nothing to report.
 
-Before writing the report, create one task per item at `../{slug}/task.md` relative to the report, so its directory is a sibling of the current task's. `slug` is a short lowercase kebab-case name for the item and does not start with digits. In the report, each item gets only a very brief description and a link to its task; the location evidence and reasons live in the task.
+Before writing the report, resolve the current task directory from the supplied `task.md` path. Create one task per item at `{parent-of-current-task-dir}/{slug}/task.md`, so the current and deferred task directories share the same parent. Never create deferred tasks inside the current task directory or derive their location from the report directory. `slug` is a short lowercase kebab-case name for the item and does not start with digits. In the report, each item gets only a very brief description and a link calculated relative to the report file; the location evidence and reasons live in the task.
 
 Use this template for each deferred task, with the backlink relative to the task file:
 
 ```markdown
 ---
 status: deferred
-implementation: ../{current-task-dir}/{report-filename}
+implementation: <relative-path-from-deferred-task-to-report>
 ---
 
 # <Outcome of the deferred work>
