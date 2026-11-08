@@ -8,6 +8,7 @@ import tomlkit
 config = tomlkit.parse(sys.stdin.read())
 config["model"] = "gpt-6.1-sol"
 config.pop("service_tier", None)
+config.setdefault("agents", tomlkit.table())["max_concurrent_threads_per_session"] = 20
 servers = tomlkit.parse("""
 [mcp_servers.git]
 command = "uvx"

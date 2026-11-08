@@ -37,6 +37,7 @@ Give every reviewer the pinned scope commands, the untracked file list or commit
 
 - Review only the selected changes; inspect surrounding code as needed to establish their effects.
 - Do not modify project files, except through the hook in step 1.
+- You may launch subagents for read-only exploration, research, and review checks, using the role matching each task. Pass them the same pinned scope, intent, and settled decisions. Assess their evidence and own the final findings.
 - Return an explicit completion status and evidence-backed findings, each citing `path:line` and suggesting a specific change. Validation failures may cite the command and output when no source location applies. Aim for no more than 600 words per report; exceed this only to preserve actionable findings and their supporting evidence. Omit routine narration.
 - Skip a tooling-enforced check only when it is confirmed to have passed for the reviewed contents and scope.
 - Do not reopen settled names or structures based on preference. A finding that reverses a settled item must identify that item and demonstrate a concrete defect with evidence.

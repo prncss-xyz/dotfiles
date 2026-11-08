@@ -2,7 +2,7 @@
 
 Write a reviewer-oriented implementation report for the completed task.
 
-Assemble the report from the implementer's retained evidence handoff and updates, reviewer evidence, and orchestrator-owned workflow records. Use the handoff for the implementation explanation, acceptance-criterion verification, before/after results, unverified behavior, rollback and impact assessments, and dependency or validation-enforcement changes. Use workflow records for final changed files, accumulated deferred and unresolved findings, review outcomes, full review-round count, post-style result, exit reason, final task-change scope, measured additions and deletions, worker model/effort history, and provisional success eligibility. Derive completion and Small change verdicts from these inputs.
+Assemble the report from the implementer's retained evidence handoff and updates, reviewer evidence, and orchestrator-owned workflow records. Use the handoff for the implementation explanation, acceptance-criterion verification, before/after results, unverified behavior, rollback and impact assessments, and dependency or validation-enforcement changes. Use workflow records for final changed files, accumulated deferred and unresolved findings, review outcomes, full review-round count, post-style result, exit reason, final task-change scope, measured additions and deletions, worker model history (including effort levels only when known), and provisional success eligibility. Derive completion and Small change verdicts from these inputs.
 
 Use only evidence grounded in the code, diff, plan, contract, validation results, or execution metadata. Source evidence reported by the implementer or reviewers is admissible without independently rereading the source when it covers the final task state. Preserve before evidence as historical; do not present superseded claims or validation of different contents as evidence for the final state. Reuse supplied explanations and visuals rather than reconstructing them. Return targeted requests for missing, stale, or contradictory evidence to its producer through the workflow; do not launch a new source investigation. Missing optional evidence belongs under Unverified or makes a Small change criterion unproven; missing required validation still blocks the validation gate.
 
@@ -54,7 +54,7 @@ Use this template for writing the implementation report:
 
 ## Completion
 
-- Worker models: <actual model ID and effort by implementation, fix, validation-retry, or style stage; group identical runs; mark unobservable values as unknown, distinguishing them from requested selections>
+- Worker models: <actual model ID by implementation, fix, validation-retry, or style stage; include effort level only when known; group identical runs; mark unobservable model IDs as unknown, distinguishing actual values from requested selections>
 - Changed files: <complete list of task-owned changed files>
 - Full review rounds: <number>
 - Post-style: <pass, fail, or incomplete, with evidence; omit if not run>
@@ -100,7 +100,7 @@ Assess small-change qualification in every report, including unsuccessful and no
 - The final task diff totals at most 1,000 additions plus deletions, including new files. Count the final net diff rather than intermediate edits or review fixes. Multiple files do not independently disqualify a change.
 - At most one full review round occurred under the workflow's existing count. The separate style pass and validation retries add no rounds. The round count is the sole review-related criterion; previously raised findings do not independently disqualify a change.
 - The diff adds no dependency to any package manifest. Upgrading or removing existing dependencies, and the lockfile changes that follow, do not disqualify a change.
-- The diff does not change what validation enforces or how strictly: CI pipeline definitions; lint, format, type-check, test runner, or coverage configuration, including rule settings, thresholds, and ignore lists; and inline suppressions such as `eslint-disable` or `@ts-ignore`. Adding or changing tests does not disqualify a change, nor does `@ts-expect-error` used in a test to assert that a type rejects some arguments.
+- The diff does not change what validation enforces or how strictly: CI pipeline definitions; lint, format, type-check, test runner, or coverage configuration, including rule settings, thresholds, and ignore lists; and inline suppressions such as `eslint-disable` or `@ts-ignore`. Adding or changing tests does not disqualify a change, nor does `@ts-expect-error` used in a test to assert that a type rejects some arguments. When using mutation testing, comments that disable mutants do not disqualify a change.
 
 For Small change, write `yes` only when every criterion is established. Otherwise write `no` and list only failed or unproven criteria with evidence. Missing evidence makes a criterion unproven. Do not add reviewer severity labels or critical-finding history.
 

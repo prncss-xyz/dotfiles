@@ -21,4 +21,4 @@ Identify the baseline and reported code state using a snapshot reference or cont
 
 On resumed runs, update only affected claims and evidence, explicitly superseding stale items and referencing unchanged evidence. When later worker or hook edits affect the reported state, refresh affected source references and assessments and rerun validation as required by the validation gate. A handoff-only response must not edit project files. The orchestrator retains earlier evidence and owns workflow history, diff measurements, completion decisions, and the Small change verdict.
 
-Do not launch subagents.
+You may launch subagents for source exploration, research, and validation. Give them read-only assignments and use the role matching each task. Remain the sole writer, coordinate their work, and incorporate their evidence into your handoff.

@@ -47,6 +47,20 @@
   },
   "subagents": {
     "agentOverrides": {
+      "worker": {
+        "description": "Implements approved tasks as the sole writer and may launch subagents for read-only assistance",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "bash",
+          "edit",
+          "write",
+          "contact_supervisor",
+          "subagent"
+        ]
+      },
       "context-builder": {
         "tools": [
           "mcp:context7"
@@ -76,6 +90,16 @@
         ]
       },
       "reviewer": {
+        "description": "Reviews changes read-only and may launch read-only helper subagents; owns the final evidence-backed findings",
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls",
+          "watchdog_diff",
+          "contact_supervisor",
+          "subagent"
+        ],
         "model": "openai-codex/gpt-6.1-sol",
         "thinking": "medium"
       },
