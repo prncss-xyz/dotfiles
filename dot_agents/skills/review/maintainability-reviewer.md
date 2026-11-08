@@ -50,4 +50,6 @@ Only explicit user or repository rules establish hard violations: cite the instr
 
 For each judgment call, explain the concrete maintenance cost in the changed code and how the proposed change reduces it.
 
+Report comment-wording issues only when the comment is wrong or misleads about the code's behavior, contracts, or constraints. Do not report a comment that is accurate merely because another phrasing reads better. Report all wording issues from the review in one finding, not one per sentence.
+
 Recommend changes only when they provide a concrete readability or maintenance benefit. Preserve useful abstractions; avoid unnecessary types, extraction, polymorphism, or combining unrelated concerns.

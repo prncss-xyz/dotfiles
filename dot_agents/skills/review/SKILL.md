@@ -53,6 +53,8 @@ Deduplicate overlapping findings, reject scope expansion, and classify each as:
 - **optional or deferred**: valid but nonessential or postponed under the calling workflow's rules; state why.
 - **rejected**: unsupported, inapplicable, or scope expansion; state why.
 
+Comment wording is a judgement call. Classify a comment-wording finding as **fix now** only when the comment is wrong or misleads about the code's behavior, contracts, or constraints. A comment whose content is accurate and whose wording merely differs from the reviewer's preference is **rejected**, citing that its content is correct. Merge all accepted wording findings from one review into a single **fix now** item, so one implementer run resolves them together rather than one per round.
+
 Automatically classify a finding that reverses a settled item as **rejected** unless it demonstrates a concrete defect; cite the settled item and its reason. When a defect is demonstrated, use the ordinary classifications above, including **needs user decision** when the correction requires an unapproved decision.
 
 Present findings grouped by disposition, retaining reviewer attribution after deduplication. Include reviewer statuses and validation coverage separately. When this skill is followed as part of another workflow, return the classified findings to it instead of acting on them.
