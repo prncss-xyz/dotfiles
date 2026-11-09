@@ -11,6 +11,7 @@ Return an evidence handoff in your response from the first run. It supplies the 
 - a brief implementation explanation and the smallest useful diagram, diff sketch, or tree, with source references
 - each acceptance criterion mapped to its implementation and verification, including contract tests when present
 - before/after evidence, exact validation commands and results, and artifact paths where applicable; identify missing before evidence rather than reconstructing it
+- for each supplied finding, the changed lines it produced as command output (`git diff -U0 -- <path>`, or `grep -n` for untracked or out-of-repo files), not a description
 - changed files and unverified behavior, assumptions, platforms, or environments, with reasons and how they could be verified
 - rollback cost, affected behaviors and consumers, shared-contract effects, and required coordination, with location evidence supporting each assessment
 - whether the task diff adds dependencies or changes validation enforcement, with the inspected scope and evidence, including evidence when neither occurs
