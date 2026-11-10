@@ -28,6 +28,7 @@
   "mango/workspaces": {
     "current-only": false,
     "tooltip": false,
+    "tag-filter": [1, 2, 3, 4, 5],
     "on-click": "activate",
     "on-click-right": "toggle"
   },
