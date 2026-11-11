@@ -42,11 +42,15 @@ Use this template for writing the implementation report:
 
 **Size:** <additions> + <deletions> = <total> lines; limit 1,000; <pass, fail, or unknown, with measurement evidence>
 
-**Review cycles:** <full review-round count>; limit 1; <pass, fail, or unknown, with evidence; exclude style passes and validation retries>
+**Review cycles:** <full review-round count>; limit 2; <pass, fail, or unknown, with evidence; exclude style passes and validation retries>
 
 **Implementation success:** <yes, no, or unknown, with validation, completion, exit, and report-write evidence>
 
 **Small change:** <yes, or no followed by each failed or unproven criterion with its evidence>
+
+## Adjacent cleanups
+
+- <`path:line` — what changed, why it was adjacent, covering validation>
 
 ## Deferred work
 
@@ -98,13 +102,17 @@ Assess small-change qualification in every report, including unsuccessful and no
 - The door is two-way.
 - Effects remain within one bounded behavior or component, with no shared-contract changes or required consumer coordination. Justify this judgment with evidence; a low line count alone cannot establish bounded impact.
 - The final task diff totals at most 1,000 additions plus deletions, including new files. Count the final net diff rather than intermediate edits or review fixes. Multiple files do not independently disqualify a change.
-- At most one full review round occurred under the workflow's existing count. The separate style pass and validation retries add no rounds. The round count is the sole review-related criterion; previously raised findings do not independently disqualify a change.
+- At most two full review rounds occurred under the workflow's existing count. The separate style pass and validation retries add no rounds. The round count is the sole review-related criterion; previously raised findings do not independently disqualify a change.
 - The diff adds no dependency to any package manifest. Upgrading or removing existing dependencies, and the lockfile changes that follow, do not disqualify a change.
 - The diff does not change what validation enforces or how strictly: CI pipeline definitions; lint, format, type-check, test runner, or coverage configuration, including rule settings, thresholds, and ignore lists; and inline suppressions such as `eslint-disable` or `@ts-ignore`. Adding or changing tests does not disqualify a change, nor does `@ts-expect-error` used in a test to assert that a type rejects some arguments. When using mutation testing, comments that disable mutants do not disqualify a change.
 
 For Small change, write `yes` only when every criterion is established. Otherwise write `no` and list only failed or unproven criteria with evidence. Missing evidence makes a criterion unproven. Do not add reviewer severity labels or critical-finding history.
 
 Never create `small-change.txt`; the workflow creates it once the commit has settled. If the report write fails, do not claim success or a `yes` verdict.
+
+### Adjacent cleanups
+
+List each cleanup from the implementer's handoff with its location, reason, and covering validation. Its lines count toward Size and the Small change verdict. Write `None.` when there are none.
 
 ### Deferred work
 

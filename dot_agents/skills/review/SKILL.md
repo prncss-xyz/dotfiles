@@ -52,7 +52,7 @@ Deduplicate overlapping findings, reject scope expansion, and classify each as:
 - **fix now**: supported by evidence, worth addressing, and within the approved scope without requiring a new user decision.
 - **needs user decision**: requires a product, API, architecture, or scope choice beyond existing approval.
 - **optional or deferred**: valid but nonessential or postponed under the calling workflow's rules; state why.
-- **rejected**: unsupported, inapplicable, or scope expansion; state why.
+- **rejected**: unsupported, inapplicable, or scope expansion; state why. A supplied adjacent cleanup that meets the calling workflow's stated allowance is not scope expansion.
 
 Comment wording is a judgement call. Classify a comment-wording finding as **fix now** only when the comment is wrong or misleads about the code's behavior, contracts, or constraints. A comment whose content is accurate and whose wording merely differs from the reviewer's preference is **rejected**, citing that its content is correct. Merge all accepted wording findings from one review into a single **fix now** item, so one implementer run resolves them together rather than one per round.
 
