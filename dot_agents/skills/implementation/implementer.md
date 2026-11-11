@@ -21,6 +21,8 @@ Report each cleanup in the handoff as its own item, separate from the acceptance
 
 With an API contract, implement behind its entry points, types, errors, and exports, and turn its tests green without modifying, weakening, skipping, or deleting them. Report any needed contract change instead of making it.
 
+When rerouting a public callback, identify in the handoff who invokes it, which context supplies its arguments, and what public callers can substitute or reuse. Verify the affected compatibility through public entry points before review. When a test checks which context supplied a value, give the candidate contexts distinct values so the test fails if the wrong context supplies it.
+
 For documentation tasks, check each behavioral claim against the runtime before it goes into a JSDoc or other doc text, using an existing test or a throwaway probe test (kept in the scratchpad or `/tmp`, never committed). Treat claims supplied by the task text as unverified: a claim the runtime contradicts is not written; report it as a decision requiring user approval. The handoff lists each behavioral claim with its evidence (test name or probe command and result).
 
 Return an evidence handoff in your response from the first run. It supplies the implementation evidence for the final report; do not write a separate report file. Include:

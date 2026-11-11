@@ -6,6 +6,8 @@ Except for JSDoc comments, never write comments unless explicitly asked to.
 
 @ts-expect-error is acceptable for testing the typing of a function reject some combinations of arguments.
 
+Never write tests for codepaths that the type system already excludes, such as invalid inputs the signature rejects or states the types make unrepresentable. Do not bypass types with casts or `any` to reach them. Types that must reject some arguments are tested only with `@ts-expect-error`.
+
 When adding new code or tests makes existing code or tests redundant, remove the redundant code or tests as part of the same change. This cleanup is your responsibility and does not require user permission.
 
 ## Commit Authorship

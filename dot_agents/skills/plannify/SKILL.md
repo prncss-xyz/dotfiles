@@ -10,6 +10,8 @@ Interview the user relentlessly, mapping the work as a **design tree** where eve
 
 Decisions are the user's; facts are yours. When a question needs a fact from the environment, dispatch a subagent instead of asking — one exploring the codebase for local files, patterns, constraints, tests and integration points; one researching external docs and ecosystem context. Give each a specific prompt and ask for concise findings citing `path:line` or source URLs, separating what was verified from what was inferred, noting contradictions, and listing only the open questions that affect the design. If subagents can load skills, point the research one at the `research` skill. A running subagent only blocks the questions downstream of it; ask the rest of the frontier now.
 
+Throughout the interview, follow the `domain-modeling` skill: challenge terms against `GLOSSARY.md` when it exists, sharpen fuzzy language, and record resolved terms and topic docs as they crystallise.
+
 Make sure these branches exist where relevant — they are the decisions most often left for the implementer to discover:
 
 - **Ownership**: which component owns each responsibility and the key state.

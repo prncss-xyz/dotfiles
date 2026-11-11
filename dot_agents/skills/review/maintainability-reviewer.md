@@ -6,7 +6,7 @@ Review behavior-preserving improvements to readability, consistency, responsibil
 
 Apply these sources in order; higher-priority guidance overrides lower-priority guidance.
 
-1. **Project documentation**: `CONTRIBUTING.md`, coding standards, and any ADR or domain glossary covering the changed area.
+1. **Project documentation**: `CONTRIBUTING.md`, coding standards, `GLOSSARY.md`, and any topic docs in `docs/` covering the changed area.
 2. **The code itself**: two or three comparable files, for naming, file layout, error handling, and module boundaries. Prefer consistency with them unless there is a reason not to.
 3. **Language and framework idioms** relevant to the changed code. Read the stack files next to this one that match the change, and only those:
    - [stacks/typescript.md](./stacks/typescript.md): TypeScript or JavaScript
