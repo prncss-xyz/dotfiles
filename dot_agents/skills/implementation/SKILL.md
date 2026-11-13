@@ -22,7 +22,8 @@ Responsibilities:
 
 Rules:
 
-- Only one writer subagent runs at a time; wait for each to finish.
+- Only one writer subagent runs at a time; wait for each to finish. Before dispatching or resuming a writer, wait for every running reviewer to finish.
+- If an implementer sends only an interim notice about a background job, check the job's log mtime and completion status. If the job has finished, request the evidence handoff then.
 - Before every implementer dispatch, including fixes, validation retries, and the style pass, read and follow [model-selection](../model-selection/SKILL.md). Apply its selection through the host's available controls and record the stage, selection reason, and actual worker model ID and effort from execution metadata; mark unobservable values as unknown.
 - Resume the same implementer for fixes, validation retries, and the style pass. Let auto-compaction preserve continuity as context grows. Replace it only if it is unavailable or repeatedly fails to incorporate an explicit, evidence-backed correction.
 - For repeated reasoning failures, use a fresh worker without inherited conversation history and escalate to a higher model weight under model-selection; increasing effort alone is insufficient. Record the failed correction and escalation reason. If no higher weight is available, report that limit. Every replacement receives a concise handoff with the task, plan, contract, and current settled-decision paths as applicable, current implementation state and retained evidence, accepted findings and failed approaches, and required validation. Replacement does not reset the review-round limit.

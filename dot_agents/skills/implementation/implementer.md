@@ -25,6 +25,8 @@ When rerouting a public callback, identify in the handoff who invokes it, which 
 
 For documentation tasks, check each behavioral claim against the runtime before it goes into a JSDoc or other doc text, using an existing test or a throwaway probe test (kept in the scratchpad or `/tmp`, never committed). Treat claims supplied by the task text as unverified: a claim the runtime contradicts is not written; report it as a decision requiring user approval. The handoff lists each behavioral claim with its evidence (test name or probe command and result).
 
+Before returning any handoff, read and apply the repository's `CODING_STANDARDS.md` if it exists, including rules that require judgment rather than automated checks.
+
 Return an evidence handoff in your response from the first run. It supplies the implementation evidence for the final report; do not write a separate report file. Include:
 
 - a brief implementation explanation and the smallest useful diagram, diff sketch, or tree, with source references

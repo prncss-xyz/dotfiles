@@ -22,7 +22,7 @@ Do this before launching any reviewer, and stop with a report on any error or em
 - **With a fixed point**: resolve it and `HEAD` to commit SHAs with `git rev-parse --verify <ref>^{commit}`. Record their merge-base SHA. The scope is `git diff <merge-base-sha> <head-sha>` and the commit list is `git log <fixed-point-sha>..<head-sha> --oneline`. Review the committed contents at these SHAs, not unrelated working-tree changes.
 - **Without one**: if `git status --porcelain --untracked-files=all` is non-empty, select uncommitted work. Resolve `HEAD` to a commit SHA; the scope is `git diff <head-sha>` plus the untracked files from `git ls-files --others --exclude-standard`, treated as additions. Otherwise select `main` as the fixed point.
 
-Retain the selected scope type and SHAs throughout the review. After the hook, refresh the diff and untracked file list for uncommitted work; stop if the scope is now empty or `HEAD` changed. Then snapshot the reviewed contents as a tree SHA with a temporary index outside the repository (`GIT_INDEX_FILE=<tmp> git add -A`, then `GIT_INDEX_FILE=<tmp> git write-tree`); with a previous snapshot, the delta is `git diff <previous-tree> <current-tree>`. Never rerun automatic scope selection. During parallel review, do not launch writers; if external edits change the reviewed contents, invalidate the affected results and refresh before reviewing again.
+Retain the selected scope type and SHAs throudghout the review. After the hook, refresh the diff and untracked file list for uncommitted work; stop if the scope is now empty or `HEAD` changed. Then snapshot the reviewed contents as a tree SHA with a temporary index outside the repository (`GIT_INDEX_FILE=<tmp> git add -A`, then `GIT_INDEX_FILE=<tmp> git write-tree`); with a previous snapshot, the delta is `git diff <previous-tree> <current-tree>`. Never rerun automatic scope selection. During parallel review, do not launch writers; if external edits change the reviewed contents, invalidate the affected results and refresh before reviewing again.
 
 ## Run reviewers
 
@@ -37,6 +37,7 @@ Launch each reviewer as a fresh `reviewer` subagent. Give each subagent its own 
 Give every reviewer the pinned scope commands, the untracked file list or commit list, the intent if any, and the settled decisions if present. Pass the hook's validation results and coverage to the parallel reviewers. With a delta, also give them its command and the previous round's findings, and tell them to review the delta, reading the rest of the scope only where the delta affects it. Tell each to inspect the repository at the pinned scope and follow these shared rules:
 
 - Review only the selected changes; inspect surrounding code as needed to establish their effects.
+- Code assertions must never be tested. Flag tests of code assertions for removal, and never request such tests.
 - Do not modify project files, except through the hook in step 1.
 - You may launch subagents for read-only exploration, research, and review checks, using the role matching each task. Pass them the same pinned scope, intent, and settled decisions. Assess their evidence and own the final findings.
 - Return an explicit completion status and evidence-backed findings, each citing `path:line` and suggesting a specific change. Validation failures may cite the command and output when no source location applies. Aim for no more than 600 words per report; exceed this only to preserve actionable findings and their supporting evidence. Omit routine narration.
@@ -59,3 +60,19 @@ Comment wording is a judgement call. Classify a comment-wording finding as **fix
 Automatically classify a finding that reverses a settled item as **rejected** unless it demonstrates a concrete defect; cite the settled item and its reason. When a defect is demonstrated, use the ordinary classifications above, including **needs user decision** when the correction requires an unapproved decision.
 
 Present findings grouped by disposition, retaining reviewer attribution after deduplication. Include reviewer statuses and validation coverage separately. When this skill is followed as part of another workflow, return the classified findings and, for uncommitted work, the current snapshot tree SHA to it instead of acting on them.
+
+When recording review results in a Markdown file, include **Total subagent tokens consumed**. Sum runtime-reported token usage for all subagents used in the review, including the precommit reviewer, nested subagents, and failed or retried runs; count each agent's usage once and exclude the orchestrator's own usage. If any usage is unavailable, report the known subtotal as partial and identify the missing usage instead of estimating a total. Pass this accounting to the calling workflow when it owns the results file.
+
+## Capture an eval case
+
+Only on the first round, meaning no previous snapshot was supplied, and only when every parallel reviewer completed and returned at least one raw finding, counted before deduplication or rejection. A failed or skipped reviewer disqualifies the round. Otherwise skip this step silently.
+
+Write each parallel reviewer's raw report, the hook's validation results, the intent, the settled decisions and the synthesized classification to files under `/tmp`, then run:
+
+```
+review-eval-capture --repo <repo> --scope <committed|uncommitted> --base <base-sha> --head <head-sha> \
+  [--tree <snapshot-tree-sha>] [--intent <file>] [--settled <file>] [--hook <file>] [--synthesis <file>] \
+  --report <name> <raw-finding-count> <file> [--report ...]
+```
+
+For committed scope, `--base` is the merge-base SHA; for uncommitted work it is the `HEAD` SHA and `--tree` is the snapshot. The script creates the `review-eval-NNN` branch without touching the working tree and writes the case artifact. Report the branch and artifact paths it prints; if it fails, report the error without retrying.

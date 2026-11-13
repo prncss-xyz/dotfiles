@@ -1,0 +1,129 @@
+#!/bin/sh
+set -eu
+
+usage() {
+  cat >&2 <<'EOF'
+Usage: review-eval-capture --repo PATH --scope committed|uncommitted --base SHA --head SHA
+         [--tree SHA] [--intent FILE] [--settled FILE] [--hook FILE] [--synthesis FILE]
+         --report NAME COUNT FILE [--report NAME COUNT FILE ...]
+
+Requires at least two reports, each with an integer COUNT >= 1.
+--tree is required for uncommitted scope (snapshot tree SHA).
+For both scopes the reviewed diff is: git diff BASE review-eval-NNN
+EOF
+  exit 1
+}
+
+die() {
+  printf 'review-eval-capture: %s\n' "$*" >&2
+  exit 1
+}
+
+repo= scope= base= head= tree= intent= settled= hook= synthesis=
+reports=$(mktemp)
+trap 'rm -f "$reports"' EXIT
+
+while [ "$#" -gt 0 ]; do
+  case $1 in
+    --repo) [ "$#" -ge 2 ] || usage; repo=$2; shift 2 ;;
+    --scope) [ "$#" -ge 2 ] || usage; scope=$2; shift 2 ;;
+    --base) [ "$#" -ge 2 ] || usage; base=$2; shift 2 ;;
+    --head) [ "$#" -ge 2 ] || usage; head=$2; shift 2 ;;
+    --tree) [ "$#" -ge 2 ] || usage; tree=$2; shift 2 ;;
+    --intent) [ "$#" -ge 2 ] || usage; intent=$2; shift 2 ;;
+    --settled) [ "$#" -ge 2 ] || usage; settled=$2; shift 2 ;;
+    --hook) [ "$#" -ge 2 ] || usage; hook=$2; shift 2 ;;
+    --synthesis) [ "$#" -ge 2 ] || usage; synthesis=$2; shift 2 ;;
+    --report) [ "$#" -ge 4 ] || usage; printf '%s\t%s\t%s\n' "$2" "$3" "$4" >>"$reports"; shift 4 ;;
+    *) usage ;;
+  esac
+done
+
+[ -n "$repo" ] && [ -n "$scope" ] && [ -n "$base" ] && [ -n "$head" ] || usage
+case $scope in
+  committed) ;;
+  uncommitted) [ -n "$tree" ] || die '--tree is required for uncommitted scope' ;;
+  *) die "unknown scope: $scope" ;;
+esac
+
+[ "$(wc -l <"$reports")" -ge 2 ] || die 'at least two reports are required'
+while IFS='	' read -r name count file; do
+  case $count in
+    '' | *[!0-9]*) die "report $name: COUNT must be an integer" ;;
+  esac
+  [ "$count" -ge 1 ] || die "report $name has no findings; case does not qualify"
+  [ -f "$file" ] || die "report $name: missing file $file"
+done <"$reports"
+
+for f in "$intent" "$settled" "$hook" "$synthesis"; do
+  [ -z "$f" ] || [ -f "$f" ] || die "missing file $f"
+done
+
+toplevel=$(git -C "$repo" rev-parse --show-toplevel)
+name=$(basename "$toplevel")
+base=$(git -C "$toplevel" rev-parse --verify "$base^{commit}")
+head=$(git -C "$toplevel" rev-parse --verify "$head^{commit}")
+[ -z "$tree" ] || tree=$(git -C "$toplevel" rev-parse --verify "$tree^{tree}")
+
+outdir=$HOME/projects/notes/main/dev/artifacts/review-evals/$name
+mkdir -p "$outdir"
+
+last=$(
+  {
+    git -C "$toplevel" for-each-ref --format='%(refname:short)' 'refs/heads/review-eval-*'
+    ls "$outdir"
+  } | sed -n 's/^review-eval-\([0-9][0-9]*\)\(\.md\)\{0,1\}$/\1/p' | sort -n | tail -n 1
+)
+next=$(printf '%03d' $((${last:-0} + 1)))
+branch=review-eval-$next
+artifact=$outdir/$branch.md
+
+if [ "$scope" = committed ]; then
+  tip=$head
+else
+  tip=$(git -C "$toplevel" commit-tree "$tree" -p "$head" -m 'review-eval snapshot')
+fi
+git -C "$toplevel" branch "$branch" "$tip"
+
+skill_rev=unknown
+if source=$(chezmoi source-path 2>/dev/null); then
+  skill_rev=$(git -C "$source" rev-parse HEAD 2>/dev/null || printf unknown)
+fi
+
+include() {
+  heading=$1
+  file=$2
+  [ -n "$file" ] || return 0
+  printf '\n## %s\n\n' "$heading"
+  cat "$file"
+  printf '\n'
+}
+
+set -C
+{
+  printf '# %s\n\n' "$branch"
+  printf -- '- repo: %s\n' "$toplevel"
+  printf -- '- branch: %s\n' "$branch"
+  printf -- '- scope: %s\n' "$scope"
+  printf -- '- base: %s\n' "$base"
+  printf -- '- head: %s\n' "$head"
+  printf -- '- tip: %s\n' "$tip"
+  printf -- '- reviewed diff: `git diff %s %s`\n' "$base" "$branch"
+  printf -- '- review skill revision: %s\n' "$skill_rev"
+  printf -- '- captured: %s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  printf -- '- raw findings per reviewer:'
+  while IFS='	' read -r rname count _; do
+    printf ' %s=%s' "$rname" "$count"
+  done <"$reports"
+  printf '\n'
+  include Intent "$intent"
+  include 'Settled decisions' "$settled"
+  include 'Hook validation' "$hook"
+  while IFS='	' read -r rname _ rfile; do
+    include "Reviewer: $rname" "$rfile"
+  done <"$reports"
+  include Synthesis "$synthesis"
+  printf '\n## Verdict\n\n'
+} >"$artifact"
+
+printf '%s\n%s\n' "$branch" "$artifact"
