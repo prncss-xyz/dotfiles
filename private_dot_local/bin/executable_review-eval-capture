@@ -4,6 +4,7 @@ set -eu
 usage() {
   cat >&2 <<'EOF'
 Usage: review-eval-capture --repo PATH --scope committed|uncommitted --base SHA --head SHA
+         --harness NAME --reviewer NAME
          [--tree SHA] [--intent FILE] [--settled FILE] [--hook FILE] [--synthesis FILE]
          --report NAME COUNT FILE [--report NAME COUNT FILE ...]
 
@@ -19,7 +20,7 @@ die() {
   exit 1
 }
 
-repo= scope= base= head= tree= intent= settled= hook= synthesis=
+repo= scope= base= head= tree= intent= settled= hook= synthesis= harness= reviewer=
 reports=$(mktemp)
 trap 'rm -f "$reports"' EXIT
 
@@ -29,6 +30,8 @@ while [ "$#" -gt 0 ]; do
     --scope) [ "$#" -ge 2 ] || usage; scope=$2; shift 2 ;;
     --base) [ "$#" -ge 2 ] || usage; base=$2; shift 2 ;;
     --head) [ "$#" -ge 2 ] || usage; head=$2; shift 2 ;;
+    --harness) [ "$#" -ge 2 ] || usage; harness=$2; shift 2 ;;
+    --reviewer) [ "$#" -ge 2 ] || usage; reviewer=$2; shift 2 ;;
     --tree) [ "$#" -ge 2 ] || usage; tree=$2; shift 2 ;;
     --intent) [ "$#" -ge 2 ] || usage; intent=$2; shift 2 ;;
     --settled) [ "$#" -ge 2 ] || usage; settled=$2; shift 2 ;;
@@ -40,6 +43,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 [ -n "$repo" ] && [ -n "$scope" ] && [ -n "$base" ] && [ -n "$head" ] || usage
+[ -n "$harness" ] && [ -n "$reviewer" ] || usage
 case $scope in
   committed) ;;
   uncommitted) [ -n "$tree" ] || die '--tree is required for uncommitted scope' ;;
@@ -101,6 +105,11 @@ include() {
 
 set -C
 {
+  printf -- '---\nharness: '
+  printf "'%s'\n" "$(printf '%s' "$harness" | sed "s/'/''/g")"
+  printf 'reviewer: '
+  printf "'%s'\n" "$(printf '%s' "$reviewer" | sed "s/'/''/g")"
+  printf -- '---\n\n'
   printf '# %s\n\n' "$branch"
   printf -- '- repo: %s\n' "$toplevel"
   printf -- '- branch: %s\n' "$branch"

@@ -71,8 +71,9 @@ Write each parallel reviewer's raw report, the hook's validation results, the in
 
 ```
 review-eval-capture --repo <repo> --scope <committed|uncommitted> --base <base-sha> --head <head-sha> \
+  --harness <harness-name> --reviewer <reviewer-model-name> \
   [--tree <snapshot-tree-sha>] [--intent <file>] [--settled <file>] [--hook <file>] [--synthesis <file>] \
   --report <name> <raw-finding-count> <file> [--report ...]
 ```
 
-For committed scope, `--base` is the merge-base SHA; for uncommitted work it is the `HEAD` SHA and `--tree` is the snapshot. The script creates the `review-eval-NNN` branch without touching the working tree and writes the case artifact. Report the branch and artifact paths it prints; if it fails, report the error without retrying.
+For committed scope, `--base` is the merge-base SHA; for uncommitted work it is the `HEAD` SHA and `--tree` is the snapshot. Pass the current harness name (for example, `codex` or `claude-code`) and the reviewer model name. The script creates the `review-eval-NNN` branch without touching the working tree and writes the `review-eval-NNN.md` case artifact with `harness` and `reviewer` in its YAML frontmatter. Report the branch and artifact paths it prints; if it fails, report the error without retrying.
